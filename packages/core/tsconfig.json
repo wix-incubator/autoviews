@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "esnext",
+    "outDir": "./dist/esm",
+    "declarationDir": "dist/types",
+    "moduleResolution": "node",
+    "lib": ["dom", "es2018"],
+    "jsx": "react",
+    "declaration": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "inlineSources": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  }
+}
