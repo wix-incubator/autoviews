@@ -1,0 +1,13 @@
+{
+    "$id": "car-schema-id",
+    "type": "object",
+    "properties": {
+      "model": {
+        "type": "string"
+      },
+      "owner": {
+        "$ref": "user-schema-id"
+      }
+    }
+  }
+  
