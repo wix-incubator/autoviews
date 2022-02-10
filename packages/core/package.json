@@ -13,7 +13,7 @@
   "homepage": "https://github.com/wix-incubator/autoviews/tree/master/packages/core#readme",
   "scripts": {
     "clear": "rimraf ./dist",
-    "build": "run-s clean build:ts",
+    "build": "run-s clear build:ts",
     "build:ts": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
     "lint": "eslint \"**/*.{js,ts}?(x)\"",
     "test": "run-s lint test:jest",
