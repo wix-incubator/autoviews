@@ -1,6 +1,6 @@
 import React from 'react';
 import {Sandpack, SandpackFiles, SandpackProps} from '@codesandbox/sandpack-react';
-import useThemeContext from '@theme/hooks/useThemeContext';
+import {useColorMode} from '@docusaurus/theme-common';
 
 import {AutoViewsCore, AutoViewsDeps} from '../../utils/auto-views-core';
 
@@ -15,7 +15,7 @@ export interface DemoProps {
 }
 
 export function Demo(props: DemoProps) {
-    const {isDarkTheme} = useThemeContext();
+    const {isDarkTheme} = useColorMode();
 
     return (
         <Sandpack
