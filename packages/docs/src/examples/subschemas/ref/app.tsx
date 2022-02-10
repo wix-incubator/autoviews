@@ -1,25 +1,38 @@
 import React from 'react';
-import {AutoView, RepositoryProvider, CoreSchemaMetaSchema} from '@autoviews/core';
+import {
+    AutoView, RepositoryProvider, CoreSchemaMetaSchema, createUISchema
+} from '@autoviews/core';
+import {Box} from '@mui/material';
 
-import userSchema from './userSchema.json';
-import carSchema from './carSchema.json';
+import userSchema from './UserSchema.json';
+import bookSchema from './BookSchema.json';
 import data from './data.json';
 import {repo} from './repo';
 
-export const App = () => {
-    const [value, setValue] = React.useState(data);
-    const onChange = React.useCallback(e => setValue(e.target.value), []);
+const uiSchema = createUISchema({
+    [repo.name]: {
+        '/properties/name': {
+            name: 'title'
+        }
+    }
+});
 
+const App = () => {
     return (
-        <RepositoryProvider
-            components={repo}
-            schemas={[userSchema, carSchema] as CoreSchemaMetaSchema[]}
-        >
-            <AutoView
-                schema={carSchema as CoreSchemaMetaSchema}
-                data={value}
-                onChange={onChange}
-            />
-        </RepositoryProvider>
+        <Box>
+            <RepositoryProvider
+                components={repo}
+                schemas={[userSchema, bookSchema] as CoreSchemaMetaSchema[]}
+            >
+                <AutoView
+                    uiSchema={uiSchema}
+                    schema={bookSchema as CoreSchemaMetaSchema}
+                    data={data}
+                    metadata={{'The Fellowship of the Ring': 'tfotr.jpg'}}
+                />
+            </RepositoryProvider>
+        </Box>
     );
 };
+
+export default App;

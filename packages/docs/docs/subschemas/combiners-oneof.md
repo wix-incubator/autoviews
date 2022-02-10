@@ -26,6 +26,6 @@ This examples have two different oneOf components, one the same as in previous e
 Note, here <CustomOneOfComponent /> contains some JSON Schema generation, which could passed to AutoView to automatically render dropdown with registered in repo component.
 :::
 
-import * as insideObjectFiles from '../src/examples/subschemas/oneof/inside-object';
+import * as insideObjectFiles from '../../src/examples/subschemas/oneof/inside-object';
 
 <Demo {...insideObjectFiles} />

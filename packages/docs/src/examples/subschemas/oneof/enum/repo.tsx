@@ -1,5 +1,8 @@
 import React from 'react';
 import {ComponentsRepo, changeEventHandler, AutoFields} from '@autoviews/core';
+import {
+    FormControl, InputLabel, Select, MenuItem
+} from '@mui/material';
 
 export const repo = new ComponentsRepo('enum-repo', node => {
     if ('type' in node) {
@@ -26,33 +29,28 @@ repo.register(
     {
         name: 'oneOfAsEnum',
         component: props => (
-            <select
-                value={props.data}
-                onChange={changeEventHandler(
-                    props,
-                    e => e.currentTarget.value
-                )}
-            >
-                {props.schema.oneOf!.map(item => (
-                    <option
-                        key={item.const}
-                        value={item.const}
-                    >
-                        {item.title}
-                    </option>
-                ))}
-            </select>
+            <FormControl fullWidth>
+                <InputLabel id={props.schema.title}>{props.schema.title}</InputLabel>
+                <Select
+                    labelId={props.schema.title}
+                    id="select"
+                    value={props.data}
+                    label={props.schema.title}
+                    onChange={changeEventHandler(
+                        props,
+                        e => e.target.value
+                    )}
+                >
+                    {props.schema.oneOf!.map(item => (
+                        <MenuItem
+                            key={item.const}
+                            value={item.const}
+                        >
+                            {item.title}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
         )
     }
-)
-    .addWrapper(
-        (item, props) => (
-            <div>
-                <label>
-                    {props.schema.title}
-                :
-                </label>
-                {item}
-            </div>
-        )
-    );
+);

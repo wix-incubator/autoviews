@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "required": ["cats"],
+  "properties": {
+      "cats": {
+          "title": "Do you have cats?",
+          "oneOf": [
+              {
+                  "const": true,
+                  "title": "Yes"
+              },
+              {
+                  "const": false,
+                  "title": "No"
+              }
+          ]
+      }
+  },
+  "if": {
+      "properties": {
+          "cats": {
+              "const": true
+          }
+      }
+  },
+  "then": {
+      "properties": {
+          "numberOfCats": {
+              "title": "Enter number of cats",
+              "type": "number"
+          }
+      },
+      "required": ["cats", "numberOfCats"]
+  }
+}

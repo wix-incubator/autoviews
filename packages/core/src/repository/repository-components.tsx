@@ -1,8 +1,9 @@
 import React from 'react';
 
-import {AutoViewProps} from '../auto-view';
+import {CoreSchemaMetaSchema} from '../models/JSONSchema';
+import {AutoViewProps, AutoView} from '../auto-view';
 
-import {RepositoryConsumer} from './repository';
+import {useRepositoryContext, RepositoryConsumer} from './repository';
 
 export interface RepositoryComponentByTypeProps {
     type: string | symbol;
@@ -39,3 +40,21 @@ export const RepositoryComponentByRecordName: React.FC<RepositoryComponentByReco
             }}
         </RepositoryConsumer>
     );
+
+export const RefComponent: React.FC<AutoViewProps> = ({schema, ...otherProps}) => {
+    const {validator} = useRepositoryContext();
+
+    if (!schema.$ref) {
+        throw new Error('RefComponent cannot be invoked without `$ref` property in schema');
+    }
+
+    const referredSchema = validator.getSchema(schema.$ref);
+
+    return referredSchema ? (
+        <AutoView
+            {...otherProps}
+            schema={referredSchema.schema as CoreSchemaMetaSchema}
+            validation={false}
+        />
+    ) : null;
+};
