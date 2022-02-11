@@ -2,7 +2,7 @@ import React from 'react';
 import {Sandpack, SandpackFiles, SandpackProps} from '@codesandbox/sandpack-react';
 import {useColorMode} from '@docusaurus/theme-common';
 
-import {AutoViewsCore, AutoViewsDeps} from '../../utils/auto-views-core';
+import {CoreFiles, CoreDeps} from '../../utils/core';
 
 export type DemoFiles = SandpackFiles;
 export type DemoDependencies = Record<string, string>;
@@ -23,11 +23,11 @@ export function Demo(props: DemoProps) {
             template="react-ts"
             customSetup={{
                 files: {
-                    ...AutoViewsCore,
+                    ...CoreFiles,
                     ...props.files
                 },
                 dependencies: {
-                    ...AutoViewsDeps,
+                    ...CoreDeps,
                     ...props.dependencies
                 }
             }}

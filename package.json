@@ -29,6 +29,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-testing-library": "^5.0.5",
+    "fast-glob": "^3.2.9",
     "husky": "^7.0.4",
     "is-ci": "^3.0.1",
     "jest": "^27.5.0",
