@@ -1,12 +1,12 @@
 {
-    "$id": "car-schema-id",
+    "$id": "BookSchemaId",
     "type": "object",
     "properties": {
-      "model": {
+      "name": {
         "type": "string"
       },
-      "owner": {
-        "$ref": "user-schema-id"
+      "author": {
+        "$ref": "UserSchemaId"
       }
     }
   }

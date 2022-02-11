@@ -23,21 +23,39 @@ module.exports = {
             type: 'category',
             label: 'Getting Started',
             collapsed: false,
-            items: ['autoview', 'quickstart']
+            items: [
+                'basic/autoview',
+                'basic/quickstart'
+            ]
         },
         {
             type: 'category',
             label: 'Autoviews Entities',
             collapsed: false,
-            items: ['repository-context', 'components-repo', 'repository-components', 'ui-schema', 'events']
+            items: [
+                'entities/repository-context',
+                'entities/components-repo',
+                'entities/repository-components',
+                'entities/ui-schema',
+                'entities/events'
+            ]
         }
     ],
     examples: [
         {
+            type: 'doc',
+            id: 'examples'
+        },
+        {
             type: 'category',
             label: 'Subschemas',
             collapsed: false,
-            items: ['subschemas', 'conditions', 'combiners-oneof', 'combiners-ref']
+            items: [
+                'subschemas/subschemas',
+                'subschemas/conditions',
+                'subschemas/combiners-oneof',
+                'subschemas/combiners-ref'
+            ]
         }
     ]
 };

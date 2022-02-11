@@ -1,4 +1,6 @@
 import React from 'react';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 import {
     changeEventHandler,
     ComponentsRepo,
@@ -10,8 +12,19 @@ export const repo = new ComponentsRepo('MyRepo')
         'object',
         {
             name: 'MyObject',
-            // `AutoFields` renders `<AutoView />` for each field
-            component: AutoFields
+            component: props => (
+                <Box
+                    component="form"
+                    sx={{
+                        '& .MuiTextField-root': {m: 1, width: '25ch'}
+                    }}
+                    noValidate
+                    autoComplete="off"
+                >
+                    {/* `AutoFields` renders `<AutoView />` for each field */}
+                    <AutoFields {...props} />
+                </Box>
+            )
         }
     )
     .register(
@@ -19,13 +32,14 @@ export const repo = new ComponentsRepo('MyRepo')
         {
             name: 'MyStringComponent',
             component: props => (
-                <input
+                <TextField
+                    variant="outlined"
+                    label={props.field}
                     value={props.data}
                     onChange={changeEventHandler(
                         props,
                         e => e.target.value
                     )}
-                    placeholder={props.field}
                 />
             )
         }
@@ -35,14 +49,15 @@ export const repo = new ComponentsRepo('MyRepo')
         {
             name: 'MyNumberComponent',
             component: props => (
-                <input
-                    type='number'
+                <TextField
+                    type="number"
+                    variant="outlined"
+                    label={props.field}
                     value={props.data}
                     onChange={changeEventHandler(
                         props,
                         e => e.target.value
                     )}
-                    placeholder={props.field}
                 />
             )
         }

@@ -7,58 +7,70 @@ import {
     RepositoryComponentByType,
     changeEventHandler
 } from '@autoviews/core';
+import {
+    TextField,
+    FormControl,
+    FormLabel,
+    RadioGroup,
+    FormControlLabel,
+    Radio
+} from '@mui/material';
 
 const StringComponent: React.FC<AutoViewProps> = props => (
-    <input
-        type="text"
-        onChange={changeEventHandler(
-            props,
-            e => e.currentTarget.value
-        )}
-        value={props.data}
-    />
-);
-
-const NumberComponent: React.FC<AutoViewProps> = props => (
-    <input
-        type="number"
-        onChange={changeEventHandler(
-            props,
-            e => e.currentTarget.value
-        )}
-        value={props.data}
-    />
+    <FormControl
+        fullWidth
+        margin="normal"
+    >
+        <TextField
+            variant="outlined"
+            label={props.schema.title}
+            value={props.data}
+            onChange={changeEventHandler(
+                props,
+                e => e.target.value
+            )}
+        />
+    </FormControl>
 );
 
 const ObjectComponent: React.FC<AutoViewProps> = props => (
-    <fieldset>
-        <AutoFields {...props} />
+    <>
         {props.schema.oneOf && (
             <RepositoryComponentByType
                 type={customOneOfType}
                 {...props}
             />
         )}
-    </fieldset>
+        <AutoFields {...props} />
+    </>
 );
 
 const OneOfAsEnumComponent: React.FC<AutoViewProps> = props => (
-    <select
-        value={props.data}
-        onChange={changeEventHandler(
-            props,
-            e => e.currentTarget.value
-        )}
+    <FormControl
+        fullWidth
+        margin="normal"
     >
-        {props.schema.oneOf!.map(item => (
-            <option
-                key={item.const}
-                value={item.const}
-            >
-                {item.title}
-            </option>
-        ))}
-    </select>
+
+        <FormLabel id={props.schema.title}>{props.schema.title}</FormLabel>
+        <RadioGroup
+            row
+            name={props.schema.title}
+            onChange={changeEventHandler(
+                props,
+                e => e.target.value
+            )}
+            defaultValue={props.schema.oneOf[0].const}
+        >
+            {props.schema.oneOf!.map(item => (
+                <FormControlLabel
+                    key={item.const}
+                    value={item.const}
+                    control={<Radio />}
+                    label={item.title}
+                />
+            ))}
+        </RadioGroup>
+    </FormControl>
 );
 
 const customOneOfType = Symbol('customOneOf');
@@ -108,7 +120,7 @@ export const repo = new ComponentsRepo('oneof-inside-object-repo', node => {
     })
     .register('number', {
         name: 'number',
-        component: NumberComponent
+        component: StringComponent
     })
     .register('object', {
         name: 'object',
@@ -121,15 +133,4 @@ export const repo = new ComponentsRepo('oneof-inside-object-repo', node => {
     .register(customOneOfType, {
         name: 'oneOf',
         component: CustomOneOfComponent
-    })
-    .addWrapper(
-        (item, props) => (
-            <div>
-                <label>
-                    {props.schema.title}
-                :
-                </label>
-                {item}
-            </div>
-        )
-    );
+    });

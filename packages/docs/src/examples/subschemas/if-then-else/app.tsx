@@ -2,11 +2,14 @@ import React from 'react';
 import {AutoView, RepositoryProvider, CoreSchemaMetaSchema} from '@autoviews/core';
 
 import schema from './schema.json';
+import data from './data.json';
 import {repo} from './repo';
 
-export const App = () => {
-    const [value, setValue] = React.useState({});
-    const onChange = React.useCallback(e => setValue(e.target.value), []);
+const App = () => {
+    const [value, setValue] = React.useState(data);
+    const onChange = React.useCallback(e => {
+        setValue({cats: e.target.value});
+    }, []);
 
     return (
         <RepositoryProvider components={repo}>

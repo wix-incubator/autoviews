@@ -11,7 +11,10 @@ export const files: DemoFiles = {
 };
 
 export const dependencies: DemoDependencies = {
-    'fast-json-patch': '^3.1.0'
+    'fast-json-patch': '^3.1.0',
+    '@mui/material': '^5.3.1',
+    '@emotion/react': '^11.7.1',
+    '@emotion/styled': '^11.6.0'
 };
 
 export const options: DemoOptions = {

@@ -35,7 +35,8 @@ const isDev = process.env.NODE_ENV !== 'production';
                 theme: {
                     customCss: [
                         require.resolve('./src/css/custom.css'),
-                        require.resolve('@codesandbox/sandpack-react/dist/index.css')
+                        require.resolve('@codesandbox/sandpack-react/dist/index.css'),
+                        'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
                     ]
                 }
             })
@@ -58,77 +59,82 @@ const isDev = process.env.NODE_ENV !== 'production';
     themes: ['@docusaurus/theme-live-codeblock'],
 
     themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-        navbar: {
-            title: 'AutoViews',
-            logo: {
-                alt: 'auto-views',
-                src: 'img/logo.svg'
-            },
-            items: [
-                {
-                    type: 'doc',
-                    docId: 'index',
-                    position: 'left',
-                    label: 'Docs'
+        /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+        ({
+            navbar: {
+                title: 'AutoViews',
+                logo: {
+                    alt: 'auto-views',
+                    src: 'img/logo.svg'
                 },
-                // {to: '/blog', label: 'Blog', position: 'left'},
-                {
-                    href: 'https://github.com/wix-incubator/autoviews/tree/master/packages/core',
-                    label: 'GitHub',
-                    position: 'right'
-                }
-            ]
-        },
-        footer: {
-            style: 'dark',
-            links: [
-                // {
-                //   title: 'Docs',
-                //   items: [
-                //     {
-                //       label: 'Tutorial',
-                //       to: '/docs/intro',
-                //     },
-                //   ],
-                // },
-                // {
-                //   title: 'Community',
-                //   items: [
-                //     {
-                //       label: 'Stack Overflow',
-                //       href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-                //     },
-                //     {
-                //       label: 'Discord',
-                //       href: 'https://discordapp.com/invite/docusaurus',
-                //     },
-                //     {
-                //       label: 'Twitter',
-                //       href: 'https://twitter.com/docusaurus',
-                //     },
-                //   ],
-                // },
-                {
-                    title: 'More',
-                    items: [
-                        // {
-                        //   label: 'Blog',
-                        //   to: '/blog',
-                        // },
-                        {
-                            label: 'GitHub',
-                            href: 'https://github.com/wix-incubator/autoviews/tree/master/packages/core'
-                        }
-                    ]
-                }
-            ],
-            copyright: `Copyright © ${new Date().getFullYear()} Wix, Inc. Built with Docusaurus.`
-        },
-        prism: {
-            theme: lightCodeTheme,
-            darkTheme: darkCodeTheme
-        }
-    })
+                items: [
+                    {
+                        type: 'doc',
+                        docId: 'index',
+                        position: 'left',
+                        label: 'Docs'
+                    },
+                    {
+                        type: 'doc',
+                        docId: 'examples',
+                        position: 'left',
+                        label: 'Examples'
+                    },
+                    {
+                        href: 'https://github.com/wix-incubator/autoviews/tree/master/packages/core',
+                        label: 'GitHub',
+                        position: 'right'
+                    }
+                ]
+            },
+            footer: {
+                style: 'dark',
+                links: [
+                    // {
+                    //   title: 'Docs',
+                    //   items: [
+                    //     {
+                    //       label: 'Tutorial',
+                    //       to: '/docs/intro',
+                    //     },
+                    //   ],
+                    // },
+                    // {
+                    //   title: 'Community',
+                    //   items: [
+                    //     {
+                    //       label: 'Stack Overflow',
+                    //       href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                    //     },
+                    //     {
+                    //       label: 'Discord',
+                    //       href: 'https://discordapp.com/invite/docusaurus',
+                    //     },
+                    //     {
+                    //       label: 'Twitter',
+                    //       href: 'https://twitter.com/docusaurus',
+                    //     },
+                    //   ],
+                    // },
+                    {
+                        title: 'More',
+                        items: [
+                            // {
+                            //   label: 'Blog',
+                            //   to: '/blog',
+                            // },
+                            {
+                                label: 'GitHub',
+                                href: 'https://github.com/wix-incubator/autoviews/tree/master/packages/core'
+                            }
+                        ]
+                    }
+                ],
+                copyright: `Copyright © ${new Date().getFullYear()} Wix, Inc. Built with Docusaurus.`
+            },
+            prism: {
+                theme: lightCodeTheme,
+                darkTheme: darkCodeTheme
+            }
+        })
 });
