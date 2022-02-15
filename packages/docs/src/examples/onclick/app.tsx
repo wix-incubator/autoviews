@@ -31,7 +31,7 @@ export default function App() {
 
     return (
         <>
-            <Box sx={{margin: '20px'}}>Click on status to change it:</Box>
+            <Box sx={{margin: '20px 16px'}}>Click on the status to change it:</Box>
             <RepositoryProvider components={repo}>
                 <AutoView
                     schema={schema as CoreSchemaMetaSchema}
