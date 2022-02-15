@@ -39,12 +39,6 @@ module.exports = {
                 'entities/ui-schema',
                 'entities/events'
             ]
-        }
-    ],
-    examples: [
-        {
-            type: 'doc',
-            id: 'examples'
         },
         {
             type: 'category',
@@ -55,6 +49,21 @@ module.exports = {
                 'subschemas/conditions',
                 'subschemas/combiners-oneof',
                 'subschemas/combiners-ref'
+            ]
+        }
+    ],
+    examples: [
+        {
+            type: 'doc',
+            id: 'examples'
+        },
+        {
+            type: 'category',
+            label: 'Examples',
+            collapsed: false,
+            items: [
+                'examples/basic',
+                'examples/onclick'
             ]
         }
     ]
