@@ -6,7 +6,7 @@ module.exports = function() {
         configureWebpack(config) {
             // NOTE: For injecting inside sandpack
             Object.assign(config.resolve.alias, {
-                '@auto-views-core': path.resolve(__dirname, '../../core')
+                '@core': path.resolve(__dirname, '../../core')
             });
 
             return {
