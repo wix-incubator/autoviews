@@ -63,7 +63,8 @@ module.exports = {
             collapsed: false,
             items: [
                 'examples/basic',
-                'examples/onclick'
+                'examples/onclick',
+                'examples/switch-repo'
             ]
         }
     ]
