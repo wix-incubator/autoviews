@@ -138,12 +138,6 @@ module.exports = {
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'error',
         'react/jsx-boolean-value': 'error',
-        'react/jsx-no-bind': [
-            'error',
-            {
-                ignoreRefs: true
-            }
-        ],
         'react/jsx-first-prop-new-line': 'error',
         'react/jsx-indent-props': [
             'error',

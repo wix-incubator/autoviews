@@ -35,6 +35,9 @@ export function Demo(props: DemoProps) {
                 openPaths: Object.keys(props.files),
                 showNavigator: true,
                 editorHeight: 500,
+                externalResources: [
+                    'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
+                ],
                 ...props.options
             }}
         />
