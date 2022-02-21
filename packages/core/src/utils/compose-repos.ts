@@ -177,7 +177,7 @@ export class ReposComposer {
     /**
      * Set new `getNodeType` for composed Repository
      *
-     * @param getNodeType new `getNodeType` for composed Reposiutory
+     * @param getNodeType new `getNodeType` for composed Repository
      * @returns Self
      */
     setNodeTypeGetter(getNodeType: GetNode) {
