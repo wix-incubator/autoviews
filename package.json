@@ -5,7 +5,6 @@
     "packages/*"
   ],
   "scripts": {
-    "commit": "cz",
     "prepare": "husky install",
     "build": "lerna run build --stream --parallel",
     "test": "lerna run test --stream --parallel",
