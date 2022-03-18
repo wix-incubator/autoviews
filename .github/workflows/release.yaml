@@ -1,0 +1,30 @@
+name: Release
+on:
+  push:
+    - master
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: ⬢ Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "*"
+          cache: yarn
+
+      - name: 📦 Install Packages
+        run: yarn install --frozen-lockfile
+
+      - name: 🚀 Release
+        run: yarn release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
