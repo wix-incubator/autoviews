@@ -33,7 +33,7 @@
     "react-dom": "^16.14.0"
   },
   "publishConfig": {
-    "versionBumpStrategy": "patch"
+    "access": "public"
   },
   "files": [
     "dist",
