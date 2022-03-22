@@ -36,8 +36,7 @@
     "access": "public"
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "author": "AutoViews Team (https://github.com/wix-incubator/autoviews)",
   "license": "MIT"
