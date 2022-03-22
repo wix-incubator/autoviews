@@ -12,6 +12,8 @@
     "release": "lerna run release --stream"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@regru/eslint-plugin-prefer-early-return": "^1.0.0",
     "@semantic-release/git": "^10.0.1",
     "@testing-library/jest-dom": "^5.16.2",
@@ -69,5 +71,10 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }
