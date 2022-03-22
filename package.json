@@ -56,7 +56,7 @@
         "@semantic-release/git",
         {
           "assets": [
-            "package.json",
+            "packages/**/package.json",
             "yarn.lock"
           ]
         }
