@@ -24,6 +24,10 @@ jobs:
       - name: 📦 Install Packages
         run: yarn install --frozen-lockfile
 
+      # FIXME: Build all package after publishing to npm
+      - name: ⚙️ Build Packages
+        run: yarn workspace @autoviews/core build
+
       - name: 🚀 Release
         run: yarn release
         env:
