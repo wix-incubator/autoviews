@@ -19,7 +19,7 @@
     "@codesandbox/sandpack-react": "^0.12.0",
     "@docusaurus/core": "2.0.0-beta.15",
     "@docusaurus/module-type-aliases": "2.0.0-beta.15",
-    "@docusaurus/preset-classic": "2.0.0-beta.15",
+    "@docusaurus/preset-classic": "2.0.0-beta.17",
     "@docusaurus/theme-live-codeblock": "2.0.0-beta.15",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
