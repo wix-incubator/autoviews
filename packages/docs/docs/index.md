@@ -9,4 +9,4 @@
 - build with TypeScript
 
 [GitHub](https://github.com/wix-incubator/autoviews/)
-[Get Started](quickstart.md)
+[Get Started](/basic/quickstart.md)

@@ -6,7 +6,7 @@ Each component in `ComponentsRepo` could emit special events: `AutoChangeEvent` 
 
 When component emits `AutoChangeEvent` it adds [JSONPatch](https://tools.ietf.org/html/rfc6902) to it. With it is super easy to handle the state.
 
-Check out the [Quick Start example](quickstart.md#get-everything-together).
+Check out the [Quick Start example](/basic/quickstart.md#get-everything-together).
 
 ## AutoClickEvent
 
