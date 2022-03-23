@@ -2,8 +2,6 @@ import React from 'react';
 import {Sandpack, SandpackFiles, SandpackProps} from '@codesandbox/sandpack-react';
 import {useColorMode} from '@docusaurus/theme-common';
 
-import {CoreFiles, CoreDeps} from '../../utils/core';
-
 export type DemoFiles = SandpackFiles;
 export type DemoDependencies = Record<string, string>;
 export type DemoOptions = SandpackProps['options'];
@@ -14,6 +12,11 @@ export interface DemoProps {
     options?: DemoOptions;
 }
 
+const initialDeps = {
+    '@autoviews/core': '^1.0.0',
+    'lodash': '^4.17.4'
+};
+
 export function Demo(props: DemoProps) {
     const {isDarkTheme} = useColorMode();
 
@@ -22,17 +25,13 @@ export function Demo(props: DemoProps) {
             theme={isDarkTheme ? 'dark' : 'light'}
             template="react-ts"
             customSetup={{
-                files: {
-                    ...CoreFiles,
-                    ...props.files
-                },
+                files: props.files,
                 dependencies: {
-                    ...CoreDeps,
+                    ...initialDeps,
                     ...props.dependencies
                 }
             }}
             options={{
-                openPaths: Object.keys(props.files),
                 showNavigator: true,
                 editorHeight: 500,
                 externalResources: [
