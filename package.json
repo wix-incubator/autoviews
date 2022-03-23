@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "commit": "cz",
     "prepare": "husky install",
     "build": "lerna run build --stream --parallel",
     "test": "lerna run test --stream --parallel",
@@ -12,6 +13,8 @@
     "release": "lerna run release --stream"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@regru/eslint-plugin-prefer-early-return": "^1.0.0",
     "@semantic-release/git": "^10.0.1",
     "@testing-library/jest-dom": "^5.16.2",
@@ -68,6 +71,14 @@
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "subject-case": [2, "always", ["lower-case", "sentence-case"]]
     }
   }
 }

@@ -2,6 +2,28 @@
 
 If you plan to contribute back to this repo, please fork & open a PR.
 
+## Commit Conventions
+
+We use [conventional-changelog](https://github.com/conventional-changelog) for commit messages. For committing changes, we recommend using a wizard:
+
+```sh
+yarn commit
+```
+
+If you prefer using `git`, try installing `commitizen` utility:
+
+```sh
+npm install commitizen -g
+```
+
+Then you can use a simple alias for generating commit messages:
+
+```sh
+git cz
+```
+
+If you prefer using VSCode, try using [VSCode Commitizen extension](https://github.com/KnisterPeter/vscode-commitizen).
+
 ## Development
 
 1. Clone this repo to wherever you want:
