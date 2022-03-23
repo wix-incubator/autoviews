@@ -1,8 +1,6 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
-const isDev = process.env.NODE_ENV !== 'production';
-
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (module.exports = {
@@ -35,8 +33,7 @@ const isDev = process.env.NODE_ENV !== 'production';
                 theme: {
                     customCss: [
                         require.resolve('./src/css/custom.css'),
-                        require.resolve('@codesandbox/sandpack-react/dist/index.css'),
-                        'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
+                        require.resolve('@codesandbox/sandpack-react/dist/index.css')
                     ]
                 }
             })
@@ -44,16 +41,7 @@ const isDev = process.env.NODE_ENV !== 'production';
     ],
 
     plugins: [
-        require.resolve('./docusaurus-plugins/custom-webpack-plugin.ts'),
-
-        isDev && [
-            'docusaurus-plugin-module-alias',
-            {
-                alias: {
-                    '@autoviews/core': require.resolve('../core/src/index.tsx')
-                }
-            }
-        ]
+        require.resolve('./docusaurus-plugins/custom-webpack-plugin.ts')
     ],
 
     themes: ['@docusaurus/theme-live-codeblock'],
