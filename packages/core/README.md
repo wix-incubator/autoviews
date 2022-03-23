@@ -1,5 +1,5 @@
 # Active documentation:
-* [Source](https://github.com/wix-incubator/auto-views/tree/master/packages/auto-views-docs)
+* [Source](https://github.com/wix-incubator/autoviews/tree/master/packages/docs)
 * [Website](https://fuzzy-succotash-c88bb0c6.pages.github.io/)
 
 

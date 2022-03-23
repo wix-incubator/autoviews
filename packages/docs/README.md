@@ -3,7 +3,7 @@
 ```shell
 $ yarn       # install
 $ yarn start # starts a local development server
-$ yarn build # generates static content into the `auto-views/docs/` directory
+$ yarn build # generates static content
 
 ```
 
