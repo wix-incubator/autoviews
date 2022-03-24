@@ -17,7 +17,7 @@
     "build:ts": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
     "lint": "eslint \"**/*.{js,ts}?(x)\"",
     "test": "run-s lint test:jest",
-    "test:jest": "is-ci && jest --maxWorkers=7 || jest --maxWorkers=50%",
+    "test:jest": "jest --maxWorkers=50%",
     "test:watch": "jest --watch --runInBand",
     "test:clear": "jest --clearCache",
     "release": "semantic-release -e semantic-release-monorepo"

@@ -8,9 +8,9 @@
     "commit": "cz",
     "prepare": "husky install",
     "build": "yarn workspaces foreach -pti --exclude @autoviews/docs run build",
-    "test": "yarn workspaces foreach -pi run test",
     "clear": "yarn workspaces foreach -pi run clear",
-    "release": "yarn workspaces foreach -i run release"
+    "release": "yarn workspaces foreach -i run release",
+    "test": "is-ci && jest --maxWorkers=7 || jest --maxWorkers=50%"
   },
   "packageManager": "yarn@3.2.0",
   "devDependencies": {
