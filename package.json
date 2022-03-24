@@ -7,11 +7,12 @@
   "scripts": {
     "commit": "cz",
     "prepare": "husky install",
-    "build": "lerna run build --stream --parallel",
-    "test": "lerna run test --stream --parallel",
-    "clear": "lerna run clear --stream --parallel",
-    "release": "lerna run release --stream"
+    "build": "yarn workspaces foreach -pti --exclude @autoviews/docs run build",
+    "test": "yarn workspaces foreach -pi run test",
+    "clear": "yarn workspaces foreach -pi run clear",
+    "release": "yarn workspaces foreach -i run release"
   },
+  "packageManager": "yarn@3.2.0",
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
