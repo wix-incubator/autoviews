@@ -1,3 +1,5 @@
+import cloneDeep from 'lodash/cloneDeep';
+
 import {ComponentOptions, UIHints, UISchema} from '../..';
 
 export interface BaseAccessorInterface {
@@ -22,7 +24,7 @@ export class BaseAccessor implements BaseAccessorInterface {
     protected uiSchemaClone: UISchema;
 
     constructor(protected uiSchema: UISchema, protected path: string) {
-        this.uiSchemaClone = JSON.parse(JSON.stringify(uiSchema));
+        this.uiSchemaClone = cloneDeep(uiSchema);
     }
 
     public get() {

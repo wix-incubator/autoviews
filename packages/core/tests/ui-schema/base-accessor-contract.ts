@@ -263,5 +263,66 @@ export function runBaseAccessorContract(
                 ).not.toBeUndefined();
             });
         });
+
+        describe('immutability', () => {
+            const uiSchema: UISchema = {
+                hints: {
+                    [DEFAULT_PATH]: {
+                        uiGroups: [
+                            {
+                                name: GROUP_NAMES.A,
+                                title: TITLE_PLACEHOLDER,
+                                fields: [
+                                    FIELD_NAME_PLACEHOLDER,
+                                    FIELD_NAME_PLACEHOLDER + 1
+                                ]
+                            }
+                        ],
+                        order: [
+                            FIELD_NAME_PLACEHOLDER,
+                            FIELD_NAME_PLACEHOLDER + 1
+                        ]
+                    }
+                },
+                components: {
+                    [REPO_NAME_PLACEHOLDER]: {
+                        [DEFAULT_PATH]: {
+                            name: COMPONENT_NAME_PLACEHOLDER,
+                            options: {foo: 'bar', baz: () => ({abc: 'xyz'})}
+                        }
+                    }
+                }
+            };
+
+            beforeEach(() => {
+                uiSchemaEntity = getAccessor(uiSchema);
+            });
+
+            it('should preserve non-json types', () => {
+                const {options} = uiSchemaEntity.getComponentOptions(
+                    REPO_NAME_PLACEHOLDER
+                )!;
+
+                expect(typeof options.baz).toBe('function');
+                expect(options.baz()).toEqual({abc: 'xyz'});
+            });
+
+            it('constructor clones uiSchema', () => {
+                uiSchemaEntity.setComponentOptions(
+                    REPO_NAME_PLACEHOLDER,
+                    () => ({
+                        name: COMPONENT_NAME_PLACEHOLDER,
+                        options: {foo: 'baz'}
+                    })
+                );
+
+                const {options} = uiSchemaEntity.getComponentOptions(
+                    REPO_NAME_PLACEHOLDER
+                )!;
+
+                expect(options.foo).toEqual('baz');
+                expect(uiSchema.components[REPO_NAME_PLACEHOLDER][DEFAULT_PATH].options.foo).toEqual('bar');
+            });
+        });
     });
 }
