@@ -73,7 +73,8 @@ describe('createUISchemaAccessor', () => {
 
             beforeEach(() => {
                 uiSchemaEntity = createUISchemaAccessor(
-                    emptyUISchema,
+                    // create empty UISchema for each test
+                    JSON.parse(JSON.stringify(emptyUISchema)),
                     DEFAULT_PATH,
                     ACCESSOR_TYPES.object
                 );
