@@ -307,5 +307,42 @@ export function runBaseAccessorContract(
                 expect(options.baz()).toEqual({abc: 'xyz'});
             });
         });
+
+        describe('mutability', () => {
+            const uiSchema: UISchema = {
+                hints: {},
+                components: {
+                    [REPO_NAME_PLACEHOLDER]: {
+                        [DEFAULT_PATH]: {
+                            name: COMPONENT_NAME_PLACEHOLDER,
+                            options: {
+                                foo: 'bar'
+                            }
+                        }
+                    }
+                }
+            };
+
+            beforeEach(() => {
+                uiSchemaEntity = getAccessor(uiSchema);
+            });
+
+            it('should mutate uiSchema object', () => {
+                uiSchemaEntity.setComponentOptions(
+                    REPO_NAME_PLACEHOLDER,
+                    () => ({
+                        name: COMPONENT_NAME_PLACEHOLDER,
+                        options: {foo: 'abc'}
+                    })
+                );
+
+                const {options} = uiSchemaEntity.getComponentOptions(
+                    REPO_NAME_PLACEHOLDER
+                )!;
+
+                expect(options.foo).toBe('abc');
+                expect(uiSchema.components[REPO_NAME_PLACEHOLDER][DEFAULT_PATH].options.foo).toBe('abc');
+            });
+        });
     });
 }
