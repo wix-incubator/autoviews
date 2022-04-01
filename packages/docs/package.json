@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@autoviews/core": "^1.0.0",
-    "@codesandbox/sandpack-react": "^0.15.2",
+    "@codesandbox/sandpack-react": "^0.18.0",
     "@docusaurus/core": "^2.0.0-beta.17",
     "@docusaurus/module-type-aliases": "^2.0.0-beta.17",
     "@docusaurus/preset-classic": "^2.0.0-beta.17",
