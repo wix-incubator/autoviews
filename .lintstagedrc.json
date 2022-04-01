@@ -1,0 +1,4 @@
+{
+  "**/*.{js,ts}?(x)": "eslint --fix --quiet",
+  "**/*": "prettier --write --ignore-unknown"
+}
