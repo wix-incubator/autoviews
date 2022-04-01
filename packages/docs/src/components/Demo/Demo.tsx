@@ -13,8 +13,7 @@ export interface DemoProps {
 }
 
 const initialDeps = {
-    '@autoviews/core': '^1.0.0',
-    'lodash': '^4.17.4'
+    '@autoviews/core': '^1.0.0'
 };
 
 export function Demo(props: DemoProps) {
