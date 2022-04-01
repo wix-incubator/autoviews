@@ -51,25 +51,6 @@
     "ts-jest": "^27.1.3",
     "typescript": "^4.5.5"
   },
-  "release": {
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/npm",
-      "@semantic-release/github",
-      [
-        "@semantic-release/git",
-        {
-          "message": "chore(release): ${nextRelease.gitTag} [skip ci]\n\n${nextRelease.notes}",
-          "assets": [
-            "package.json",
-            "packages/**/package.json",
-            "yarn.lock"
-          ]
-        }
-      ]
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
