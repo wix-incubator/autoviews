@@ -10,7 +10,9 @@
     "build": "lerna run build --stream --parallel",
     "test": "lerna run test --stream --parallel",
     "clear": "lerna run clear --stream --parallel",
-    "release": "lerna run release --stream"
+    "release": "lerna run release --stream",
+    "lint": "lerna run lint --stream --parallel",
+    "format": "prettier --write --ignore-unknown ."
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
@@ -30,6 +32,7 @@
     "confusing-browser-globals": "^1.0.11",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.8.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jest": "^26.1.0",
     "eslint-plugin-jest-dom": "^4.0.1",
