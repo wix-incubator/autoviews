@@ -3,16 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve",
-    "test": "#",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "docusaurus": "yarn run -T docusaurus",
+    "start": "yarn run -T docusaurus start",
+    "build": "yarn run -T docusaurus build",
+    "swizzle": "yarn run -T docusaurus swizzle",
+    "clear": "yarn run -T docusaurus clear",
+    "serve": "yarn run -T docusaurus serve",
+    "write-translations": "yarn run -T docusaurus write-translations",
+    "write-heading-ids": "yarn run -T docusaurus write-heading-ids",
+    "typecheck": "yarn run -T tsc"
   },
   "dependencies": {
     "@autoviews/core": "^1.0.0",

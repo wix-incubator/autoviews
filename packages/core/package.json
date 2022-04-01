@@ -12,15 +12,15 @@
   },
   "homepage": "https://github.com/wix-incubator/autoviews/tree/master/packages/core#readme",
   "scripts": {
-    "clear": "rimraf ./dist",
-    "build": "run-s clear build:ts",
-    "build:ts": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
-    "lint": "eslint \"**/*.{js,ts}?(x)\"",
-    "test": "run-s lint test:jest",
-    "test:jest": "jest --maxWorkers=50%",
-    "test:watch": "jest --watch --runInBand",
-    "test:clear": "jest --clearCache",
-    "release": "semantic-release -e semantic-release-monorepo"
+    "clear": "yarn run -T rimraf ./dist",
+    "build": "yarn run -T run-s clear build:ts",
+    "build:ts": "yarn run -T tsc -p tsconfig.cjs.json && yarn run -T tsc -p tsconfig.esm.json",
+    "lint": "yarn run -T eslint \"**/*.{js,ts}?(x)\"",
+    "test": "yarn run -T run-s lint test:jest",
+    "test:jest": "yarn run -T jest --maxWorkers=50%",
+    "test:watch": "yarn run -T jest --watch --runInBand",
+    "test:clear": "yarn run -T jest --clearCache",
+    "release": "yarn run -T semantic-release -e semantic-release-monorepo"
   },
   "dependencies": {
     "ajv": "6.12.6",
