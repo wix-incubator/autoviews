@@ -1,0 +1,6 @@
+# Packages
+dist
+
+# Docs
+packages/docs/.docusaurus
+packages/docs/build
