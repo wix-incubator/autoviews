@@ -22,7 +22,7 @@ jobs:
           cache: yarn
 
       - name: 📦 Install Packages
-        run: yarn install --frozen-lockfile
+        run: yarn install
 
       - name: ⚙️ Build Packages
         run: yarn build
