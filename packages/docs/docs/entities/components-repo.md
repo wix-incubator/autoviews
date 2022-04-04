@@ -133,7 +133,7 @@ export type Predicate = (node: CoreSchemaMetaSchema) => boolean;
 Where
 * node: is the JSONSchema node the component is considered for
 
-### Example - selecting slider component for numbers with min & max constraints
+### Example — selecting Slider component for numbers with min & max constraints
 
 ```
 myRepo.register(
