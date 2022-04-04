@@ -19,7 +19,7 @@ React.ComponentType<AutoViewProps>
 The `ComponentsRepo` is the main implementation of the Component Repository.
 It takes two parameters
 * `name`: Repository name
-* `getType`: the getType callback (more on the callback below)
+* `getNodeType`: the callback that resolves the `type` from the `JSONSchema` leaf (more on the callback below)
 
 ### Example - A simple repository example
 
