@@ -21,3 +21,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.article {
+    padding: 2rem 4rem;
+}
