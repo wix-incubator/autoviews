@@ -121,7 +121,7 @@ Multiple components can be registered for the same data type. When registering m
 
 Registering multiple components allows selecting components using predicates or [UISchema](/docs/entities/ui-schema).
 Predicates are used when the condition is computed on the JSONSchema, such as `maxLength`, `maximum` or `required`. A concrete example is selecting the Slider component when a number has `maximum` and `minimum` constraints.
-UI Schema is used when we want to select a specific component or pass properties to the component on a specific JSON schema path.
+`UISchema` is used when we want to select a specific component or pass properties to the component on a specific JSONSchema path (`JSONPointer`).
 
 ## Predicates
 Predicates are functions defined when registering a component, defining when to use the component based on the JSONSchema.
