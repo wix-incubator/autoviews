@@ -99,7 +99,7 @@ myRepo.register(
 ```
 
 
-### Example - Using custom JSON Schema types
+### Example — Using custom JSONSchema types
 Let’s assume we have a custom type name on the JSONSchema called `myCustomType`. We can support it like the below example
 
 ```typescript
