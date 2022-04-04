@@ -64,7 +64,7 @@ Where
   * `defaultOptions`: option to pass to the component as props. **TBD**
 
 
-## The getType constructor parameter
+## The getNodeType constructor parameter
 The `getNodeType` callback allows defining how to calculate data type for the JSONSchema nodes. The return value of the callback is used to match with registered component record types.
 
 ```typescript
