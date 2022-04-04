@@ -119,7 +119,7 @@ myRepo.register(
 ## Registering multiple components per JSONSchema data type
 Multiple components can be registered for the same data type. When registering multiple components, by default, the last registered component will be selected.
 
-Registering multiple components allows selecting components using predicates or UI Schema (link).
+Registering multiple components allows selecting components using predicates or [UISchema](/docs/entities/ui-schema).
 Predicates are used when the condition is computed on the JSONSchema, such as `maxLength`, `maximum` or `required`. A concrete example is selecting the Slider component when a number has `maximum` and `minimum` constraints.
 UI Schema is used when we want to select a specific component or pass properties to the component on a specific JSON schema path.
 
