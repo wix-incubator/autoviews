@@ -151,9 +151,9 @@ The `node` in the example above is the current JSONSchema node for the Slider co
 ## Using Multiple Repositories
 In many applications we want to have multiple component repositories.
 
-The best example is when we want to render different layouts (such as card, table, grid or different form layouts) at which each we want to have different sets of components. In such a case it makes sense to use multiple component repositories, which gives us a few features
-Change layout by changing repository
-Partial loading - loading one repository at a time
+The best example is when we want to render different layouts (such as card, table, grid or different form layouts) at which each we want to have different sets of components. In such a case it makes sense to use multiple component repositories, which gives us a few features:
+* Change layout by changing repository. 
+* Partial loading — loading one repository at a time.
 
 ## Clone
 The clone function allows to deep copy a repo including all the components. Repository cloning is useful when in need of multiple repositories, for creating a base repository which is cloned and extended, by adding more components, replacing components or adding wrappers.
