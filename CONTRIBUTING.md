@@ -54,7 +54,7 @@ Write tests and add new functionality.
 To start development server in for docs, run:
 
 ```sh
-yarn workspace @autoviews/core start
+yarn workspace @autoviews/docs start
 ```
 
 Note: the website is dependent on the core package and requires a build of the 

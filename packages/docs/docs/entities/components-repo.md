@@ -44,7 +44,7 @@ export const myRepo = new ComponentsRepo("displayRepo")
 ## The register function
 The repository register function adds a new component to the repository per data type.
 ```typescript
-public register(type: string | symbol, 
+register(type: string | symbol, 
   record: ComponentRepoRecord<AutoViewProps>)
 
 export interface ComponentRepoRecord<P> {
@@ -56,7 +56,7 @@ export interface ComponentRepoRecord<P> {
 ```
 
 Where
-* `type`: the name of the `JSONSchema`'s type, such as `string`, `object`, `number`
+* `type`: the name of the `JSONSchema`'s type, such as `"string"`, `"object"`, `"number"`, or a `Symbol`
 * `record`: the repository record, which provides information on the registered component
   * `name`: the name of component within the repository, for later reference
   * `component`: the actual component
@@ -164,7 +164,7 @@ Once cloning a repository, any additional action on the cloned repository do not
 clone(name: string, getNodeType?: GetNode)
 ```
 
-### Example  - cloning a repo
+### Example - cloning a repo
 Cloning the `myRepo` defined above
 ```
 const myRepoClone = myRepo.clone('myRepoClone');
@@ -298,4 +298,29 @@ repo.replaceAll(
     }
 );
 ```
+
+## composeRepos
+The `composeRepos` utility creates a new repository by composing multiple repositories into one.
+The utility is not a member of the `ComponentsRepo`, rather it is imported independently.
+
+```typescript
+declare function composeRepos(
+        config: {
+          name: string,
+          getNodeType?: GetNode
+        },
+        ...repos: [ComponentsRepo, ...ComponentsRepo[]]
+): ComponentsRepo
+```
       
+### Example - creating a new component repo from 2 repos
+
+With this example we assume we have two component repos, `formLayoutRepo` for our form layout components and 
+`inputsRepo` for input components. We create a new repo by
+
+```typescript
+import {composeRepos} from '@autoviews/core'
+
+const newRepo = composeRepos(
+    {name: 'RepoToRenderForms'}, formLayoutRepo, inputsRepo)
+```
