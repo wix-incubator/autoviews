@@ -83,7 +83,7 @@ The JSONSchema enum is defined as
 }
 ```
 
-The following Defining the `getType` maps the enum JSON node into enum type name
+The following defining the `getNodeType` maps the enum JSON node into enum type name
 ```typescript
 const myRepo = new ComponentsRepo(
     'myRepo',
