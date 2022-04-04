@@ -71,7 +71,7 @@ The `getNodeType` callback allows defining how to calculate data type for the JS
 getNodeType: (node: CoreSchemaMetaSchema) => string = node => node.type
 ```
 
-The default `getType` implementation returns the type field of the JSONSchema node. `getType` can return any string value, which can be used to extract any mapping of JSON Schema nodes to type name.
+The default `getNodeType` implementation returns the type field of the JSONSchema node. `getNodeType` can return any string value, which can be used to extract any mapping of JSON Schema nodes to type name.
 
 ### Example - using `getType` with JSONSchema enum
 One example of when `getType` is useful is with JSONSchema enums. JSONSchema does not define an Enum type, rather it considers enum as a constraint on a string type.
