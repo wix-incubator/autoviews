@@ -56,7 +56,7 @@ export interface ComponentRepoRecord<P> {
 ```
 
 Where
-* `type`: the name of the type, such as string, object, number
+* `type`: the name of the `JSONSchema`'s type, such as `string`, `object`, `number`
 * `record`: the repository record, which provides information on the registered component
   * `name`: the name of component within the repository, for later reference
   * `component`: the actual component
