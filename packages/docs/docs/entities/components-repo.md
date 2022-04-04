@@ -212,7 +212,7 @@ myRepoClone.addWrapper(
 );
 ```
 
-### Example - wrapping only number components
+### Example — wrapping only 'number-input' component
 ```
 myRepo.addWrapper(
     (item, props) => (
