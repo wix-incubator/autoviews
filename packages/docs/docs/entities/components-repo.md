@@ -189,11 +189,11 @@ export interface IncludeExcludeRules {
 }
 ```
 Where
-* Fn - the wrapper function, which accepts
-  * Item - the original React component
-  * Props - the `AutoViewProps` at the schema location
-  * Returns - the wrapped component
-* Rules - include and exclude rules for what types to wrap, by the component name as defined when registering the component
+* `fn`:  the wrapper function, which accepts
+  * `item`:  the original React component
+  * `props`:  the `AutoViewProps` at the schema location
+  * Returns: the wrapped component
+* `rules`: `include` and `exclude` rules for what types to wrap, by the component name as defined when registering the component
 
 ### Example - wrapping all components with adding a title
 ```
