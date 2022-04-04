@@ -146,7 +146,7 @@ myRepo.register(
     }
 );
 ```
-The `node` in the example above is the current JSONSchema node for the Slider component. In this example the predicate applies the slider component only for JSONSchema nodes who have defined the minimum and maximum constraints.
+The `node` in the example above is the current JSONSchema node for the Slider component. In this example the predicate applies the Slider component only for number type JSONSchema nodes that have defined the minimum and maximum constraints.
 
 ## Using Multiple Repositories
 In many applications we want to have multiple component repositories.
