@@ -65,7 +65,7 @@ Where
 
 
 ## The getType constructor parameter
-The `getType` callback allows defining how to calculate data type for the JSONSchema nodes. The return value of the callback is used to match with registered component record types.
+The `getNodeType` callback allows defining how to calculate data type for the JSONSchema nodes. The return value of the callback is used to match with registered component record types.
 
 ```typescript
 getNodeType: (node: CoreSchemaMetaSchema) => string = node => node.type
