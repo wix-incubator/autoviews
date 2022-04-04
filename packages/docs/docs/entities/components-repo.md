@@ -224,7 +224,7 @@ myRepo.addWrapper(
     }
 );
 ```
-### Example - wrapping all components except number-input
+### Example — wrapping all components except 'number-input'
 ```
 myRepo.addWrapper(
     (item, props) => (
