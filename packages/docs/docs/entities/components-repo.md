@@ -76,7 +76,7 @@ The default `getNodeType` implementation returns the type field of the JSONSchem
 ### Example - using `getNodeType` with JSONSchema enum
 One example of when `getNodeType` is useful is with JSONSchema enums. JSONSchema does not define an Enum type, rather it considers enum as a constraint on other types.
 
-The JSON Schema enum is defined as
+The JSONSchema enum is defined as
 ```typescript
 {
   "enum": ["red", "amber", "green"]
