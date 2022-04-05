@@ -34,6 +34,7 @@ module.exports = {
             collapsed: false,
             items: [
                 'entities/components-repo',
+                'entities/array-components',
                 'entities/repository-context',
                 'entities/repository-components',
                 'entities/ui-schema',
