@@ -30,11 +30,11 @@ module.exports = {
         },
         {
             type: 'category',
-            label: 'Autoviews Entities',
+            label: 'Autoviews Elements',
             collapsed: false,
             items: [
-                'entities/repository-context',
                 'entities/components-repo',
+                'entities/repository-context',
                 'entities/repository-components',
                 'entities/ui-schema',
                 'entities/events'

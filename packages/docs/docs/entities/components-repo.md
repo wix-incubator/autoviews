@@ -1,30 +1,90 @@
-# ComponentsRepo
+# The Components Repository
 
-`ComponentsRepo` is class which accepts string `name` and optional `getType` function as constructor parameter.
+The component repository is a map of data type to AutoView React components used to render a field of that data type.
 
-`ComponentsRepo` instance should be provided to the `AutoView` context.
-
-```js
-import {
-  RepositoryProvider,
-  AutoView
-} from '@autoviews/core';
-
-//...
-return (
-    <RepositoryProvider components={myRepo}>
-        <AutoView {...props} />
-    </RepositoryProvider>
-)
+In essence, the component repository is a map of
+```
+Map<type => React.ComponentType<AutoViewProps>>
 ```
 
-### Using `getType`
+An AutoView React Component has the signature
+```
+React.ComponentType<AutoViewProps>
+```
 
-`getType` allows you to define how to calculate data type for the `JSONSchema` nodes. Return value is `string`. This string used to register component records.
+`AutoViewProps` has a lot of properties, but the most important is the `data` prop which is the field data the component has to render.
+     
+## The ComponentsRepo Class
+                             
+The `ComponentsRepo` is the main implementation of the Component Repository.
+It takes two parameters
+* `name`: Repository name
+* `getNodeType`: the callback that resolves the `type` from the `JSONSchema` leaf (more on the callback below)
 
-By default it is `type` field. However you might find it useful for `enum`, because in `JSONSchema` enum type is `string`. This example resolves this problem:
+### Example - A simple repository example
 
-```js
+```typescript
+import { ComponentsRepo } from "@autoviews/core";
+
+export const myRepo = new ComponentsRepo("displayRepo")
+  .register("string", {
+    name: "textComponent",
+    component: (props) => <span>{props.data}</span>
+  })
+  .register("number", {
+    name: "numberComponent",
+    component: (props) => <span>{props.data}</span>
+  })
+  .register("boolean", {
+    name: "booleanComponent",
+    component: (props) => <span>{props.data ? "+" : "-"}</span>
+  });
+```
+
+## The register function
+The repository register function adds a new component to the repository per data type.
+```typescript
+register(type: string | symbol, 
+  record: ComponentRepoRecord<AutoViewProps>)
+
+export interface ComponentRepoRecord<P> {
+    name: string;
+    component: React.ComponentType<P>;
+    predicate?: Predicate;
+    defaultOptions?: any;
+}
+```
+
+Where
+* `type`: the name of the `JSONSchema`'s type, such as `"string"`, `"object"`, `"number"`, or a `Symbol`
+* `record`: the repository record, which provides information on the registered component
+  * `name`: the name of component within the repository, for later reference
+  * `component`: the actual component
+  * `predicate`: a predicate computed on the schema field, if to use the component for that schema member
+  * `defaultOptions`: option to pass to the component as props. **TBD**
+
+
+## The getNodeType constructor parameter
+The `getNodeType` callback allows defining how to calculate data type for the JSONSchema nodes. The return value of the callback is used to match with registered component record types.
+
+```typescript
+getNodeType: (node: CoreSchemaMetaSchema) => string = node => node.type
+```
+
+The default `getNodeType` implementation returns the type field of the JSONSchema node. `getNodeType` can return any string value, which can be used to extract any mapping of JSON Schema nodes to type name.
+
+### Example - using `getNodeType` with JSONSchema enum
+One example of when `getNodeType` is useful is with JSONSchema enums. JSONSchema does not define an Enum type, rather it considers enum as a constraint on other types.
+
+The JSONSchema enum is defined as
+```typescript
+{
+  "enum": ["red", "amber", "green"]
+}
+```
+
+The following defining the `getNodeType` maps the enum JSON node into enum type name
+```typescript
 const myRepo = new ComponentsRepo(
     'myRepo',
     node => 'enum' in node ? 'enum' : node.type
@@ -38,10 +98,11 @@ myRepo.register(
 );
 ```
 
-However, as mentioned, you can return any `string` value.
-For example, if your `JSONSchema` has own type system, you can return somethings like
 
-```js
+### Example — Using custom JSONSchema types
+Let’s assume we have a custom type name on the JSONSchema called `myCustomType`. We can support it like the below example
+
+```typescript
 const myRepo = new ComponentsRepo(
     'myRepo',
     node => node.myCustomType
@@ -55,30 +116,26 @@ myRepo.register(
 );
 ```
 
-### register
+## Registering multiple components per JSONSchema data type
+Multiple components can be registered for the same data type. When registering multiple components, by default, the last registered component will be selected.
 
-Once you did instance, you can assign component records to data types
+Registering multiple components allows selecting components using predicates or [UISchema](/docs/entities/ui-schema).
+Predicates are used when the condition is computed on the JSONSchema, such as `maxLength`, `maximum` or `required`. A concrete example is selecting the Slider component when a number has `maximum` and `minimum` constraints.
+`UISchema` is used when we want to select a specific component or pass properties to the component on a specific JSONSchema path (`JSONPointer`).
 
-```js
-const myRepo = new ComponentsRepo('myRepo');
-myRepo.register(
-    'number',
-    {
-        name: 'number-input',
-        component: NumberInput
-    }
-);
+## Predicates
+Predicates are functions defined when registering a component, defining when to use the component based on the JSONSchema.
+
+The Predicate signature is
 ```
+export type Predicate = (node: CoreSchemaMetaSchema) => boolean;
+```
+Where
+* node: is the JSONSchema node the component is considered for
 
-_Note:_ it is not possible to `register()` component record with existing `name` value, `.register()` will throw an error in this case.
+### Example — selecting Slider component for numbers with min & max constraints
 
-#### predicate
-
-You can have as many component records assigned to certain data type as you want.
-
-If you need more then one, you may want to add `predicate` function during registering:
-
-```js
+```
 myRepo.register(
     'number',
     {
@@ -89,70 +146,58 @@ myRepo.register(
     }
 );
 ```
-`node` in example above is the current `JSONSchema` node for `Slider` component. In this example it is any node with `number` type.
+The `node` in the example above is the current JSONSchema node for the Slider component. In this example the predicate applies the Slider component only for number type JSONSchema nodes that have defined the minimum and maximum constraints.
 
-By default `AutoView` will pick last registered component record, unless there is other component specified in `UISchema`.
+## Using Multiple Repositories
+In many applications we want to have multiple component repositories.
 
-### clone
+The best example is when we want to render different layouts (such as card, table, grid or different form layouts) at which each we want to have different sets of components. In such a case it makes sense to use multiple component repositories, which gives us a few features:
+* Change layout by changing repository. 
+* Partial loading — loading one repository at a time.
 
-It is possible to clone repository with all records with `clone` method.
+## Clone
+The clone function allows to deep copy a repo including all the components. Repository cloning is useful when in need of multiple repositories, for creating a base repository which is cloned and extended, by adding more components, replacing components or adding wrappers.
 
-```js
-const myRepo = new ComponentsRepo('myRepo');
-myRepo.register(
-    'number',
-    {
-        name: 'number-input',
-        component: NumberInput
-    }
-);
+Once cloning a repository, any additional action on the cloned repository do not affect the base repository, including adding wrappers (`addWrapper`), removing components (`remove`) or replacing components (`replace` and `replaceAll`).
 
+```
+clone(name: string, getNodeType?: GetNode)
+```
+
+### Example - cloning a repo
+Cloning the `myRepo` defined above
+```
 const myRepoClone = myRepo.clone('myRepoClone');
-myRepoClone.register(
-    'object',
-    {
-        name: 'myForm',
-        component: Form
-    }
-);
 ```
 
-`clone` also allows to override `getType`
+## addWrapper
+`addWrapper` allows wrapping all or some of the components of a repository with another React component.
 
-```js
-const myRepo = new ComponentsRepo(
-    'myRepo',
-    node => node.myType
-);
-const myRepoClone = myRepo.clone(
-    'myRepoClone',
-    node => node.otherField
-);
+`addWrapper` is very useful when combined with `clone` as it allows extending a base repository
+
 ```
+addWrapper(fn: WrapperFunction, rules?: IncludeExcludeRules)
 
-### addWrapper
+export type WrapperFunction = (
+    item: JSX.Element,
+    props: AutoViewProps
+) => JSX.Element;
 
-You can wrap all or some components into the wrappers
+export interface IncludeExcludeRules {
+    include?: string[];
+    exclude?: string[];
+}
+```
+Where
+* `fn`:  the wrapper function, which accepts
+  * `item`:  the original React component
+  * `props`:  the `AutoViewProps` at the schema location
+  * Returns: the wrapped component
+* `rules`: `include` and `exclude` rules for what types to wrap, by the component name as defined when registering the component
 
-```js
-const myRepo = new ComponentsRepo('myRepo');
-myRepo.register(
-    'number',
-    {
-        name: 'number-input',
-        component: NumberInput
-    }
-);
-
-myRepo.register(
-    'string',
-    {
-        name: 'text-input',
-        component: TextInput
-    }
-);
-
-myRepo.addWrapper((item, props) => (
+### Example — wrapping all components with adding a title
+```
+myRepoClone.addWrapper((item: JSX.Element, props: AutoViewProps): JSX.Element => (
     <>
         <h3>{props.schema.title}</h3>
         {item}
@@ -160,13 +205,15 @@ myRepo.addWrapper((item, props) => (
 ));
 ```
 
-example above will wrap all components in repository, however it is possible to specify which components you want to wrap with `include` and `exclude` rules.
+### Example — wrapping all components with a table cell
+```
+myRepoClone.addWrapper(
+  (item: JSX.Element, props: AutoViewProps): JSX.Element => <td>{item}<td/>
+);
+```
 
-Both `include` and `exclude` are optional arrays of components names, used in `register` function.
-
-This will wrap  only `number-input` component.
-
-```js
+### Example — wrapping only 'number-input' component
+```
 myRepo.addWrapper(
     (item, props) => (
         <>
@@ -179,10 +226,8 @@ myRepo.addWrapper(
     }
 );
 ```
-
-This will wrap all components except `number-input`
-
-```js
+### Example — wrapping all components except 'number-input'
+```
 myRepo.addWrapper(
     (item, props) => (
         <>
@@ -196,10 +241,11 @@ myRepo.addWrapper(
 );
 ```
 
-### remove
-You can remove previously registered component record by calling `.remove(componentName)`.
+## remove
+Removes previously registered component from the component repository by component name.
 
-```js
+### Example - remove a component from the repo
+```
 myRepo.register(
     'string',
     {
@@ -210,12 +256,12 @@ myRepo.register(
 //...
 myRepo.remove('string-component');
 ```
+## replace
+Replace a previously registered component by component name.
 
-### replace
-
-You can replace component record with another one:
-
-```js
+`replace` ensures that the new component will have the same index (order) as the old one. It is important because by default `<AutoView />` picks the last registered component in `ComponentsRepo`.
+### Example — replacing a single component
+```
 myRepo.register(
     'number',
     {
@@ -232,18 +278,13 @@ repo.replace(
     })
 );
 ```
+## replaceAll
+Replace all enables replacing multiple existing components with a given component. It is useful for replacing original components with higher order components.
 
-`.replace()` ensures that the new component record will have same index (order) as old one. It is important because by default `<AutoView />` picks the last registered component in `ComponentsRepo`.
+Similar to `addWrapper`, `replaceAll` method allows defining `include` and `exclude` options (array of component names).
 
-### replaceAll
-
-You can replace many existing component records with another one. It might be useful if you want to replace original components with higher order component.
-
-Same as `addWrapper` this method allows you to define `include` and `exclude` options.
-
-Both `include` and `exclude` are optional arrays of components names, used in `register` function.
-
-```js
+### Example — replacing multiple components
+```
 repo.replaceAll(
     record => {
         const OriginalComponent = record.component;
@@ -256,6 +297,30 @@ repo.replaceAll(
         include: ['number-input', 'text-input']
     }
 );
-
 ```
 
+## composeRepos
+The `composeRepos` utility creates a new repository by composing multiple repositories into one.
+The utility is not a member of the `ComponentsRepo`, rather it is imported independently.
+
+```typescript
+declare function composeRepos(
+        config: {
+          name: string,
+          getNodeType?: GetNode
+        },
+        ...repos: [ComponentsRepo, ...ComponentsRepo[]]
+): ComponentsRepo
+```
+      
+### Example - creating a new component repo from 2 repos
+
+With this example we assume we have two component repos, `formLayoutRepo` for our form layout components and 
+`inputsRepo` for input components. We create a new repo by
+
+```typescript
+import {composeRepos} from '@autoviews/core'
+
+const newRepo = composeRepos(
+    {name: 'RepoToRenderForms'}, formLayoutRepo, inputsRepo)
+```

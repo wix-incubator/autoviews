@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
+import PartialHome from '../../docs/README.md';
+
 import styles from './index.module.css';
 
 function HomepageHeader() {
@@ -24,6 +26,9 @@ export default function Home(): JSX.Element {
             description="Description will go into a meta tag in <head />"
         >
             <HomepageHeader />
+            <div className={clsx('container', styles.article)}>
+                <PartialHome/>
+            </div>
         </Layout>
     );
 }
