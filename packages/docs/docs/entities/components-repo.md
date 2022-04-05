@@ -205,7 +205,7 @@ myRepoClone.addWrapper((item: JSX.Element, props: AutoViewProps): JSX.Element =>
 ));
 ```
 
-### Example - wrapping all components with a table cell
+### Example — wrapping all components with a table cell
 ```
 myRepoClone.addWrapper(
   (item: JSX.Element, props: AutoViewProps): JSX.Element => <td>{item}<td/>
