@@ -195,7 +195,7 @@ Where
   * Returns: the wrapped component
 * `rules`: `include` and `exclude` rules for what types to wrap, by the component name as defined when registering the component
 
-### Example - wrapping all components with adding a title
+### Example — wrapping all components with adding a title
 ```
 myRepoClone.addWrapper((item: JSX.Element, props: AutoViewProps): JSX.Element => (
     <>
