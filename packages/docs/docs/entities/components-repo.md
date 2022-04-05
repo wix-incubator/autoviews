@@ -260,7 +260,7 @@ myRepo.remove('string-component');
 Replace a previously registered component by component name.
 
 `replace` ensures that the new component will have the same index (order) as the old one. It is important because by default `<AutoView />` picks the last registered component in `ComponentsRepo`.
-### Example - replacing a single component
+### Example — replacing a single component
 ```
 myRepo.register(
     'number',
