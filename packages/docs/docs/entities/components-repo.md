@@ -283,7 +283,7 @@ Replace all enables replacing multiple existing components with a given componen
 
 Similar to `addWrapper`, `replaceAll` method allows defining `include` and `exclude` options (array of component names).
 
-### Example - replacing multiple components
+### Example — replacing multiple components
 ```
 repo.replaceAll(
     record => {
