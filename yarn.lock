@@ -4341,11 +4341,6 @@
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/lodash@^4.14.178":
-  version "4.14.180"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.180.tgz#4ab7c9ddfc92ec4a887886483bc14c79fb380670"
-  integrity sha512-XOKXa1KIxtNXgASAnwj7cnttJxS4fksBRywK/9LzRV5YxrF80BXZIGeQSuoESQ/VkUj30Ae0+YcuHc15wJCB2g==
-
 "@types/mdast@^3.0.0":
   version "3.0.10"
   resolved "https://registry.npmjs.org/@types/mdast/-/mdast-3.0.10.tgz"
@@ -7958,9 +7953,9 @@ eslint-plugin-react@^7.28.0:
     string.prototype.matchall "^4.0.6"
 
 eslint-plugin-testing-library@^5.0.5:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-5.1.0.tgz#6ad539a53d4e897d3045902f8e534e07cebd4e8b"
-  integrity sha512-YSNzasJUbyhOTe14ZPygeOBvcPvcaNkwHwrj4vdf+uirr2D32JTDaKi6CP5Os2aWtOcvt4uBSPXp9h5xGoqvWQ==
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-5.2.1.tgz#3f89cd28ade81329a11584e0bbea129bede01619"
+  integrity sha512-88qJv6uzYALtiYJDzhelP3ov0Px/GLgnu+UekjjDxL2nMyvgdTyboKqcDBsvFPmAeizlCoSWOjeBN4DxO0BxaA==
   dependencies:
     "@typescript-eslint/utils" "^5.13.0"
 
