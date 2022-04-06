@@ -3,12 +3,12 @@
 The component repository is a map of data type to AutoView React components used to render a field of that data type.
 
 In essence, the component repository is a map of
-```
+```typescript
 Map<type => React.ComponentType<AutoViewProps>>
 ```
 
 An AutoView React Component has the signature
-```
+```typescript
 React.ComponentType<AutoViewProps>
 ```
 
@@ -127,7 +127,7 @@ Predicates are used when the condition is computed on the JSONSchema, such as `m
 Predicates are functions defined when registering a component, defining when to use the component based on the JSONSchema.
 
 The Predicate signature is
-```
+```typescript
 export type Predicate = (node: CoreSchemaMetaSchema) => boolean;
 ```
 Where
@@ -135,7 +135,7 @@ Where
 
 ### Example — selecting Slider component for numbers with min & max constraints
 
-```
+```typescript
 myRepo.register(
     'number',
     {
@@ -160,13 +160,13 @@ The clone function allows to deep copy a repo including all the components. Repo
 
 Once cloning a repository, any additional action on the cloned repository do not affect the base repository, including adding wrappers (`addWrapper`), removing components (`remove`) or replacing components (`replace` and `replaceAll`).
 
-```
+```typescript
 clone(name: string, getNodeType?: GetNode)
 ```
 
 ### Example - cloning a repo
 Cloning the `myRepo` defined above
-```
+```typescript
 const myRepoClone = myRepo.clone('myRepoClone');
 ```
 
@@ -175,7 +175,7 @@ const myRepoClone = myRepo.clone('myRepoClone');
 
 `addWrapper` is very useful when combined with `clone` as it allows extending a base repository
 
-```
+```typescript
 addWrapper(fn: WrapperFunction, rules?: IncludeExcludeRules)
 
 export type WrapperFunction = (
@@ -196,7 +196,7 @@ Where
 * `rules`: `include` and `exclude` rules for what types to wrap, by the component name as defined when registering the component
 
 ### Example - wrapping all components with adding a title
-```
+```jsx
 myRepoClone.addWrapper((item: JSX.Element, props: AutoViewProps): JSX.Element => (
     <>
         <h3>{props.schema.title}</h3>
@@ -206,14 +206,14 @@ myRepoClone.addWrapper((item: JSX.Element, props: AutoViewProps): JSX.Element =>
 ```
 
 ### Example - wrapping all components with a table cell
-```
+```jsx
 myRepoClone.addWrapper(
   (item: JSX.Element, props: AutoViewProps): JSX.Element => <td>{item}<td/>
 );
 ```
 
 ### Example — wrapping only 'number-input' component
-```
+```jsx
 myRepo.addWrapper(
     (item, props) => (
         <>
@@ -227,7 +227,7 @@ myRepo.addWrapper(
 );
 ```
 ### Example — wrapping all components except 'number-input'
-```
+```jsx
 myRepo.addWrapper(
     (item, props) => (
         <>
@@ -245,7 +245,7 @@ myRepo.addWrapper(
 Removes previously registered component from the component repository by component name.
 
 ### Example - remove a component from the repo
-```
+```typescript
 myRepo.register(
     'string',
     {
@@ -261,7 +261,7 @@ Replace a previously registered component by component name.
 
 `replace` ensures that the new component will have the same index (order) as the old one. It is important because by default `<AutoView />` picks the last registered component in `ComponentsRepo`.
 ### Example - replacing a single component
-```
+```typescript
 myRepo.register(
     'number',
     {
@@ -284,7 +284,7 @@ Replace all enables replacing multiple existing components with a given componen
 Similar to `addWrapper`, `replaceAll` method allows defining `include` and `exclude` options (array of component names).
 
 ### Example - replacing multiple components
-```
+```typescript
 repo.replaceAll(
     record => {
         const OriginalComponent = record.component;

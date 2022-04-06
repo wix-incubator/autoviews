@@ -5,7 +5,7 @@ using your own components). However, AutoViews provides utilities and APIs to cr
 to render arrays. 
 
 The simplest array component will be
-```typescript jsx
+```jsx
 new ComponentsRepo("ArrayRepo")
     .register("array", {
         name: "tableComponent",
@@ -27,7 +27,7 @@ to `AutoViews` to render the actual item.
 2. `render` - optional function to apply to each of the rendered array elements
 
 ### Example - rendering a plain list
-```typescript jsx
+```jsx
 new ComponentsRepo("ArrayRepo")
     .register("array", {
         name: "tableComponent",
@@ -41,7 +41,7 @@ new ComponentsRepo("ArrayRepo")
 This example renders an HTML list. 
 The example is using `AutoItems.render` to wrap the per item element (`node` below) with the list `<li>` element.
 
-```typescript jsx
+```jsx
 new ComponentsRepo("ArrayRepo")
     .register("array", {
         name: "tableComponent",
@@ -64,7 +64,7 @@ the `object`. AutoViews will then use the `tablrRowComponent`, which renders the
 and is using the `AutoFields` to render the members of the object. 
 the example is also using the `AutoFields.render` property to wrap the fields controls with `<td>` elements. 
 
-```typescript jsx
+```jsx
 new ComponentsRepo("ArrayRepo")
     .register("array", {
         name: "tableComponent",
@@ -101,7 +101,7 @@ This involves a bit of low level `AutoViews` apis -
 
 once we have the ordered headers `string[]`, we render the headers as `thead`. 
 
-```typescript jsx
+```jsx
 import {
     AutoViewProps,
     AutoItems,
