@@ -38,6 +38,9 @@ new ComponentsRepo("ArrayRepo")
 ```
 
 ### Example - rendering an HTML list
+This example renders an HTML list. 
+The example is using `AutoItems.render` to wrap the per item element (`node` below) with the list `<li>` element.
+
 ```typescript jsx
 new ComponentsRepo("ArrayRepo")
     .register("array", {
@@ -54,7 +57,12 @@ new ComponentsRepo("ArrayRepo")
 ```
 
 ### Example - rending an HTML table
-with this example, we combine `AutoItems` with `AutoFields` to render the actual table rows.
+
+Assuming out data has the form `Array<object>`, 
+This example renders the table using `AutoItems` which delegates to `AutoViews` to render 
+the `object`. AutoViews will then use the `tablrRowComponent`, which renders the `<tr>` element 
+and is using the `AutoFields` to render the members of the object. 
+the example is also using the `AutoFields.render` property to wrap the fields controls with `<td>` elements. 
 
 ```typescript jsx
 new ComponentsRepo("ArrayRepo")
@@ -81,6 +89,68 @@ new ComponentsRepo("ArrayRepo")
 ```
 
 ### Example - rending an HTML Table with headers
+
+To render a table with headers, we need to extend the example above with logic to extract
+the field titles from the `JSONSchema`, filter and order the fields as specified in the `UISchema`. 
+
+This involves a bit of low level `AutoViews` apis - 
+* `extractItemUISchema` - extracts the `UISchama` for the items of an array
+* `createUISchema` - creates a default `UISchama`
+* `getHints` - returns the `hints` from the `UISchema`
+* `orderFields` - orders the field names from the `JSONSchema.items` using the `order` hint
+
+once we have the ordered headers `string[]`, we render the headers as `thead`. 
+
+```typescript jsx
+import {
+    AutoViewProps,
+    AutoItems,
+    AutoFields,
+    orderFields,
+    getHints,
+    extractItemUISchema,
+    createUISchema
+} from "@autoviews/core";
+
+new ComponentsRepo("ArrayRepo")
+    .register("array", {
+        name: "tableComponent",
+        component: (props) => {
+            const headers = orderFields(
+                Object.keys((props.schema.items as any).properties),
+                getHints(extractItemUISchema(props.uiSchema ?? createUISchema()), "").order
+            ).map(
+                (field) => (props.schema?.items as any).properties[field].title
+            ) as string[];
+
+            return (
+                <table>
+                    <thead>
+                        <tr>
+                            {headers.map((header, i) => (
+                                <td key={i}>{header}</td>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <AutoItems {...props}/>
+                    </tbody>
+                </table>
+            )
+        }
+    })
+    .register("object", {
+        name: "tableRowComponent",
+        component: props => (
+            <tr>
+                <AutoFields {...props} render={
+                    (node) => <td>node</td>
+                }/>
+            </tr>
+        )
+    })
+```
+
 
 
 
