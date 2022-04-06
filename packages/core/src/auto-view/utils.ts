@@ -1,6 +1,3 @@
-import difference from 'lodash/difference';
-import intersection from 'lodash/intersection';
-
 import {
     ComponentOptions, getDefaultHints, UIHints, UISchema
 } from '../models';
@@ -37,8 +34,8 @@ export function orderFields(source: string[], rules?: string[]): string[] {
     if (!rules || !rules.length) {
         return source;
     }
-    const orderedByRules = intersection(rules, source);
-    const orderedByDefault = difference(source, rules);
+    const orderedByRules = rules.filter(rule => source.includes(rule));
+    const orderedByDefault = source.filter(field => !rules.includes(field));
     return orderedByRules.concat(orderedByDefault);
 }
 
@@ -49,15 +46,15 @@ export function filter(
     hidden?: string[]
 ): string[] {
     if (properties && toPick) {
-        return properties.filter(prop => toPick.indexOf(prop) >= 0);
+        return properties.filter(prop => toPick.includes(prop));
     }
 
     if (properties && toOmit) {
-        return properties.filter(prop => toOmit.indexOf(prop) === -1);
+        return properties.filter(prop => !toOmit.includes(prop));
     }
 
     if (properties && hidden) {
-        return properties.filter(prop => hidden.indexOf(prop) === -1);
+        return properties.filter(prop => !hidden.includes(prop));
     }
 
     return properties;

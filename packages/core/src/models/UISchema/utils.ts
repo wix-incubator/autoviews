@@ -1,9 +1,3 @@
-
-import difference from 'lodash/difference';
-import find from 'lodash/find';
-import flatten from 'lodash/flatten';
-import transform from 'lodash/transform';
-
 import {
     OTHER_PROPERTIES,
     RepoPointersCollection,
@@ -19,7 +13,7 @@ export function getGroupTitleByName(
     name: string,
     groups: UIGroup[]
 ): string | undefined {
-    const group = find(groups, {name});
+    const group = groups.find(group => group.name === name);
 
     if (!group) {
         return;
@@ -36,15 +30,13 @@ export function getPropertiesByGroupName(
         case UNGROUPED:
             return getUngroupedProperties(groups, properties);
         default: {
-            const uiGroup = groups.find(({name}) => name === groupName);
+            const uiGroup = groups.find(group => group.name === groupName);
 
             if (uiGroup) {
-                return flatten(
-                    uiGroup.fields.map(field =>
-                        field === OTHER_PROPERTIES ?
-                            getOtherProperties(groups, properties) :
-                            field
-                    )
+                return uiGroup.fields.flatMap(field =>
+                    field === OTHER_PROPERTIES ?
+                        getOtherProperties(groups, properties) :
+                        field
                 );
             }
             return [];
@@ -54,22 +46,20 @@ export function getPropertiesByGroupName(
 
 export function extractItemUISchema({components, hints}: UISchema): UISchema {
     return createUISchema(
-        transform<RepoPointers, RepoPointersCollection>(
-            components,
-            (acc, repoPointers, repoName) => {
-                acc[repoName] = transform(repoPointers, accumulateItemsPointer);
+        Object.entries<RepoPointers>(components).reduce<RepoPointersCollection>(
+            (acc, [repoName, repoPointers]) => {
+                acc[repoName] = Object.entries(repoPointers).reduce(accumulateItemsPointer, {});
                 return acc;
             },
             {}
         ),
-        transform<UIHints, UIHintsOverrides>(hints, accumulateItemsPointer, {})
+        Object.entries<UIHints>(hints).reduce<UIHintsOverrides>(accumulateItemsPointer, {})
     );
 }
 
 function accumulateItemsPointer<T>(
     acc: {[key: string]: T},
-    val: T,
-    key: string
+    [key, val]: [string, T]
 ) {
     return accumulatePrefixedPointers('/items', acc, val, key);
 }
@@ -87,14 +77,12 @@ function accumulatePrefixedPointers<T = any>(
 }
 
 function getOtherProperties(groups: UIGroup[], properties: string[]): string[] {
-    return difference(
-        properties,
-        flattenGroups(groups).filter(property => property !== OTHER_PROPERTIES)
-    );
+    const notOtherProperties = flattenGroups(groups).filter(property => property !== OTHER_PROPERTIES);
+    return properties.filter(prop => !notOtherProperties.includes(prop));
 }
 
 function flattenGroups(groups: UIGroup[]): string[] {
-    return flatten(groups.map(({fields}) => fields));
+    return groups.flatMap(({fields}) => fields);
 }
 
 function groupsHasOtherProperties(groups: UIGroup[]) {
@@ -111,7 +99,7 @@ function getUngroupedProperties(
         return [];
     }
 
-    return difference(properties, flattenGroups(groups));
+    return properties.filter(prop => !flattenGroups(groups).includes(prop));
 }
 
 export function createUISchema(
