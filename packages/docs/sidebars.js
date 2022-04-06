@@ -35,6 +35,7 @@ module.exports = {
             items: [
                 'entities/components-repo',
                 'entities/array-components',
+                'entities/object-components',
                 'entities/repository-context',
                 'entities/repository-components',
                 'entities/ui-schema',

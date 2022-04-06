@@ -24,7 +24,22 @@ to `AutoViews` to render the actual item.
 ### `AutoItems` props
 
 1. extending `AutoViewProps` - getting the same properties as `AutoViews`
-2. `render` - optional function to apply to each of the rendered array elements
+2. `render` - optional callback to apply to each of the rendered array elements
+
+### the render function
+
+```typescript
+declare function render(
+    item: React.ReactNode,
+    props: AutoViewProps,
+    index: number
+): React.ReactNode
+```
+
+The render callback parameters
+* `item` - the rendered item, rendered using `AutoViews`.
+* `props` - the `AutoViewProps` used to render the item.
+* `index` - the index of the item in the array
 
 ### Example - rendering a plain list
 ```jsx
