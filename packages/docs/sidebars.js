@@ -32,9 +32,17 @@ module.exports = {
                 'entities/array-components',
                 'entities/object-components',
                 'entities/repository-provider',
-                'entities/repository-components',
+                'entities/the-json-schema',
                 'entities/ui-schema',
                 'entities/events'
+            ]
+        },
+        {
+            type: 'category',
+            label: 'utilities',
+            collapsed: false,
+            items: [
+                'entities/repository-components'
             ]
         },
         {

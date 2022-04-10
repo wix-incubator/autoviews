@@ -1,43 +1,24 @@
 # The Repository Provider
 
+export const REQUIRED = () => <span style={{backgroundColor:"#00a4db",color:"white", borderRadius:"10px", padding: "0 10px"}}>Required</span>;
 
-## Context value
-React Context is used to store current repository in render scope.
+The Repository Provider provides `AutoView` with [The Component Repository](/docs/entities/components-repo)
+and the [AJV schema validator](https://www.npmjs.com/package/ajv).
 
-### API
+The `AutoView` component requires a repository provider to function.
 
-```ts
-interface Context {
-    get components(): ComponentsRepo
-    get validator(): Ajv.Ajv
-}
-```
+Note that repository providers can be nested, allowing the usage of one at the root level of the application
+while using nested repository providers for internal `object` or `array` components.
+
+## Properties of Repository Provider
+Name | Type | Default Value | Description
+----|-----|-----|-----
+`components` | `ComponentsRepo`| | <REQUIRED/> The component repository to use with `AutoView`.
+`schemas` | `CoreSchemaMetaSchema[]`| | `JSONSchema`s to use with the AJV validator.
 
 ### Example
-```js
+```tsx
 import {RepositoryConsumer} from '@autoviews/core';
-```
-
-:::note
-Only consumer is exposed, context value must be given via `<RepositoryProvider />`
-:::
-
-## `<RepositoryProvider />`
-
-It's mandatory wrapper, to which [repository](./components-repo.md) should be passed.
-
-### API
-```ts
-interface RepositoryProps {
-    components: ComponentsRepo;
-    children: React.ReactNode;
-}
-type RepositoryProvider = React.FC<RepositoryProps>: JSX.Element<Context>
-```
-
-### Example
-```js
-import {RepositoryProvider} from '@autoviews/core';
 
 <RepositoryProvider components={repo}>
     // ...
@@ -46,10 +27,10 @@ import {RepositoryProvider} from '@autoviews/core';
 
 ## useRepositoryContext
 
-React custom hook, gets value from the repository context.
+React custom hook, to get the repo and validator from the current context.
 
 ### Example
-```js
+```tsx
 import {useRepositoryContext} from '@autoviews/core';
 
 const MyComponent = () => {
