@@ -14,6 +14,16 @@ React.ComponentType<AutoViewProps>
 
 `AutoViewProps` has a lot of properties, but the most important is the `data` prop which is the field data the component has to render.
      
+## Usage of the Component Repository
+
+The main use of the component repository to provide `AutoView` a set of component to render for different 
+data types. 
+
+One common pattern is to replace views by replacing the Component Repository with another, for instance
+shifting from a single column layout to a dual column layout, or from a Card layout to a Table layout. 
+
+The `ComponentsRepo` class provides function to create, clone, modify or apply aspects (wrap) on the Components Repository.
+
 ## The ComponentsRepo Class
                              
 The `ComponentsRepo` is the main implementation of the Component Repository.

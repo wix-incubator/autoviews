@@ -34,18 +34,18 @@ Additional Resources: [GitHub](https://github.com/wix-incubator/autoviews/),
    JSON Schema that describes your data.
    The schema provides nested structure, field types, titles and descriptions as well as constraints such as min, max, required.
 
-   More about Data Schema here
+   More about [the Data JSONSchema](/docs/entities/the-json-schema)
 
 3. **Your Data**
 
    AutoViews interact with data using two properties - the `data` property and the `onChange` event, which provide a unified data and events model regardless of the nesting level, data type or control used.
 
-   More about the Data and the Events model here
+   More about the [AutoView Data property](/docs/basic/autoview) and the [Events model](/docs/entities/events)
 
 4. **Your UI Schema**
    
    The UI Schema adds another layer of hints that can be used by components to fine tune the rendered UI. UI Schema includes field ordering, grouping, component selection, field hiding and auto focus hints.
 
-   More about the UI Schema here
+   More about [the UI Schema](/docs/entities/ui-schema)
 
    

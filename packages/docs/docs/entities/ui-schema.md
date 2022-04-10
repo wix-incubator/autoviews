@@ -1,16 +1,41 @@
 # UISchema
 
-`UISchema` is an object that contains information about how to render your data with `<AutoView />`.
+The optional `UISchema` represents additional instructions for how `AutoView` is to render the data. 
+It is used to modify the rendered components, by selecting a specific component for a specific property, 
+ordering object properties or grouping properties. 
+                                                         
+## Usage of `UISchema`
+The best practice is to use `UISchema` allowing users to order or group fields or change which component to use for a field. 
+It can be used as a base for saving user setting views or as a way for applications to fine tune forms.
 
-`UISchema` is optional property of the `<AutoView />` component. However it is quite powerful, so let's learn it.
+The `UISchema` is not the best tool to switch layouts (from gallery to cards to table) as it assumes all the components are available 
+for rendering. To switch layouts, [replacing a component repository](/docs/entities/components-repo#using-multiple-repositories) is a better solution.
 
-`UISchema` object contains two fields: `hints` and `components`.
+## Properties of `UISchema`
+
+Name | Type | Default Value | Description
+----|-----|-----|-----
+`hints` | `UIHintsOverrides`| `{}` | Hints to modify
+`hints[pointer:string]` | `UIHints`| | Hints to modify
+`hints[pointer:string] .order` | `string[]`| | Defines the desired order of the fields to be rendered for an `object`. It is up to [the object component](/docs/entities/object-components) to use the order hints.
+`hints[pointer:string] .hidden` | `string[]`| | Defines which fields should be hidden. It is up to [the object component](/docs/entities/object-components) to use the hidden hints. 
+`hints[pointer:string] .uiGroups` | `UIGroup[]`| | Defines field groups. It is up to [the object component](/docs/entities/object-components) to support field groups. 
+`hints[pointer:string] .uiGroups.name` | `string`| | Defines the name of a fields group.
+`hints[pointer:string] .uiGroups.title` | `string`| | Defines the title of a fields group.
+`hints[pointer:string] .uiGroups.fields` | `string[]`| | Defines which `object` fields are included in the group.
+`hints[pointer:string] .autoFocus` | `JSONPointer`| | Defines which component should be focused when first rendering the form. It is up to the components to implement support for Autofocus.
+`components` | `RepoPointersCollection` | `{}` | Defines component overrides and component options 
+`components[name: string]` | `RepoPointers` | | The name of the Components Repository to apply the component hints to.   
+`compoennts[name: string] [pointer: string]` | `ComponentOptions` | | The location in the JSONSchema using JSONPointer to apply the component override
+`compoennts[name: string] [pointer: string].name` | `string` | | The name of the component to use at the above location, which has to be available in the above component repository
+`compoennts[name: string] [pointer: string].options` | `any` | | Options to pass to the component at the above location
 
 ## components
 
 `components` field in `UISchema` is responsible for overrides. With this object you can define which component `<AutoView/>` should choose and what `options` this component should get.
 
-As you might know, `<AutoView/>` picks last component record registered in `ComponentsRepo` for each type. If you registered two components for `string` type, the last one will chosen by default. With `UIHints.components` object you can define that for specific [JSONPointer](https://tools.ietf.org/html/rfc6901) in `JSONSchema` component record with specific `name` should be chosen.
+As you might know, `<AutoView/>` picks last component record registered in `ComponentsRepo` for each type. If you registered two components for `string` type, the last one will chosen by default. 
+With `UIHints.components` object you can define that for specific [JSONPointer](https://tools.ietf.org/html/rfc6901) in `JSONSchema` component record with specific `name` should be chosen.
 
 Here is complex example, you can use with Create React App:
 

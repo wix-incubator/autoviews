@@ -29,7 +29,7 @@ For reference, the properties of the `AutoView` are defined as the interface `Au
 
 Name | Type | Default Value | Description
 ----|-----|-----|-----
-`schema` | `CoreSchemaMetaSchema`| | <REQUIRED/> The `JSONSchema` representing the data that should be rendered. 
+`schema` | `CoreSchemaMetaSchema`| | <REQUIRED/> The `JSONSchema` representing the data that should be rendered. See also [the Data JSONSchema](/docs/entities/the-json-schema).
 `data` | `any` | | The `data` property is the input to be rendered by `AutoViews`. `data` is optional, and if present should be valid against `JSONSchema`. If not valid and if the `validation` property is `true`, the `onError` callback will be called with a validation error.  
 `uiSchema` | `UISchema` | | The [UISchema](/docs/entities/ui-schema) used to modify how the data is rendered.
 `validation` | `boolean` | `false` | Defined if to validate the `data` against the `schema`. If the validation fails, the `onError` callback will be called with a validation error. 
@@ -37,11 +37,11 @@ Name | Type | Default Value | Description
 `schemaPointer` | `string` | `''` | `schemaPointer` is a [JSONPointer](https://tools.ietf.org/html/rfc6901) `string` that defines what `schema` part `AutoView` should use for data rendering. By default the 'schema' root is used for rendering.
 `pick` | `string[]` | `[]` | Specifies an array of field names **to render** for `object` types.
 `omit` | `string[]` | `[]` | Specifies an array of field names **to not render** for `object` types.
-`onChange` | `AutoEventHandler <AutoChangeEvent>` | | A data change event handler that components in the `ComponentsRepo` can invoke with `JSONPatch` over the `data`. Read more in [Events](/docs/entities/events).  
-`onClick` | `AutoEventHandler <AutoClickEvent>` | | A click event handler that components in the `ComponentsRepo` can invoke with any `data` payload. Read more in [Events](/docs/entities/events). 
-`onError` | `(error:ValidationError) => void` | | Called when `validation` is set and the `data` does not conform to the `schema`.
-`onRenderError` | `(error:ValidationError) => void` | | Called if any child component throws an error during rendering. 
-`onCustomEvent` | `AutoEventHandler<AutoCustomEvent> `| | A Custom event with payload of `data` and `name` for custom usage by components and applications.
+`onChange` | `AutoEventHandler <AutoChangeEvent>` | | A data change event handler that components in the `ComponentsRepo` can invoke with `JSONPatch` over the `data`. See also [Events](/docs/entities/events).  
+`onClick` | `AutoEventHandler <AutoClickEvent>` | | A click event handler that components in the `ComponentsRepo` can invoke with any `data` payload. See also [Events](/docs/entities/events). 
+`onError` | `(error:ValidationError) => void` | | Called when `validation` is set and the `data` does not conform to the `schema`. See also [Events](/docs/entities/events).
+`onRenderError` | `(error:ValidationError) => void` | | Called if any child component throws an error during rendering. See also [Events](/docs/entities/events). 
+`onCustomEvent` | `AutoEventHandler<AutoCustomEvent> `| | A Custom event with payload of `data` and `name` for custom usage by components and applications. See also [Events](/docs/entities/events).
 `metadata` | `Metadata` | | A Map of JSONShema pointer to `any` payload that is passed to components. The utility `getComponentMetadata` can be used to extract the metadata by the schema pointer.
 `repositoryName` | `string`| | Passed to the components - The repository name is the component is registered with.
 `field` | `string` | | Passed to the components - the field to be rendered.
