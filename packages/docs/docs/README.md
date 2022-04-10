@@ -1,9 +1,20 @@
-# AutoViews
+# AutoViews 
+
 
 `AutoViews` is a utility to render generic data forms given a 
 set of components and data schema.
 
 ![intro 1](../static/auto-views-intro-1.png)
+
+- no coupling with any components
+- based on standarts, like JSONSchema, JSONPatch and JSONPointer
+- build with TypeScript
+
+![logo](../static/img/logo.svg)
+
+Additional Resources: [GitHub](https://github.com/wix-incubator/autoviews/), 
+[Get Started](/docs/)
+
 
 ## AutoViews showcase
 

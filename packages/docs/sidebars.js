@@ -20,13 +20,8 @@ module.exports = {
             id: 'index'
         },
         {
-            type: 'category',
-            label: 'Getting Started',
-            collapsed: false,
-            items: [
-                'basic/autoview',
-                'basic/quickstart'
-            ]
+            type: 'doc',
+            id: 'basic/autoview'
         },
         {
             type: 'category',
@@ -36,7 +31,7 @@ module.exports = {
                 'entities/components-repo',
                 'entities/array-components',
                 'entities/object-components',
-                'entities/repository-context',
+                'entities/repository-provider',
                 'entities/repository-components',
                 'entities/ui-schema',
                 'entities/events'
