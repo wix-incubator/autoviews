@@ -16,7 +16,8 @@ export const dependencies: DemoDependencies = {
     'json-pointer': '^0.6.1',
     '@mui/material': '^5.3.1',
     '@emotion/react': '^11.7.1',
-    '@emotion/styled': '^11.6.0'
+    '@emotion/styled': '^11.6.0',
+    'lodash': '^4.17.21'
 };
 
 export const options: DemoOptions = {

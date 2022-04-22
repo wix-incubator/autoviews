@@ -15,7 +15,8 @@ export const files: DemoFiles = {
 export const dependencies: DemoDependencies = {
     '@mui/material': '^5.3.1',
     '@emotion/react': '^11.7.1',
-    '@emotion/styled': '^11.6.0'
+    '@emotion/styled': '^11.6.0',
+    'lodash': '^4.17.21'
 };
 
 export const options: DemoOptions = {
