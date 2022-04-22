@@ -693,7 +693,7 @@ describe('AutoView', () => {
 
     describe.skip('if-then-else', () => {
         const defaultComponents = getRepoWithDefaults('test', node =>
-            'enum' in node ? 'enum' : node.type
+            'enum' in node ? 'enum' : node.type as string
         );
 
         describe('basic logic', () => {

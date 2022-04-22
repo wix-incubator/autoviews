@@ -28,7 +28,7 @@ export type WrapperFunction = (
     props: AutoViewProps
 ) => JSX.Element;
 
-export type GetNode = (node: any) => string;
+export type GetNode = (node: CoreSchemaMetaSchema) => string;
 
 export interface ComponentRepoRecord<P> {
     name: string;
@@ -59,7 +59,7 @@ export class ComponentsRepo {
 
     constructor(
         public name: string,
-        public getNodeType: GetNode = node => node.type
+        public getNodeType: GetNode = node => node.type as string
     ) {}
 
     private forGivenNameInByTypeStorage(
@@ -173,7 +173,9 @@ export class ComponentsRepo {
             return [];
         }
         const registered = this.getByType(type)|| [];
-        return registered.filter(({predicate = () => true}) => predicate(node));
+        // noinspection JSUnusedLocalSymbols
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        return registered.filter(({predicate = (n) => true}) => predicate(node));
     }
 
     public registerCollection(
