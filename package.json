@@ -12,7 +12,7 @@
     "clear": "lerna run clear --stream --parallel",
     "release": "lerna run release --stream",
     "lint": "lerna run lint --stream --parallel",
-    "format": "prettier --write --ignore-unknown ."
+    "format": "prettier --write --ignore-path .gitignore ."
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
