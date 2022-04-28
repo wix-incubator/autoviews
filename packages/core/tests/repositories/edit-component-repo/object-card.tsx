@@ -32,9 +32,9 @@ export default class ObjectCard extends React.Component<
                 data-automation-id={getAutomationId(this.props.pointer, 'CARD')}
                 onClick={this.switchToEdit}
             >
-                {this.state.viewMode === ViewModes.DISPLAY ?
-                    this.renderDisplayMode() :
-                    this.renderEditMode()}
+                {this.state.viewMode === ViewModes.DISPLAY
+                    ? this.renderDisplayMode()
+                    : this.renderEditMode()}
             </div>
         );
     }
@@ -46,15 +46,10 @@ export default class ObjectCard extends React.Component<
 
     private renderDisplayMode() {
         const displayRepo = getRepoWithDefaults(ViewModes.DISPLAY);
-        const {
-            data, schema, pointer, schemaPointer, ...rest
-        } = this.props;
+        const {data, schema, pointer, schemaPointer, ...rest} = this.props;
 
-        const {
-            primitiveData,
-            primitiveSchema,
-            primitiveProp
-        } = this.getPrimitives(schema, data);
+        const {primitiveData, primitiveSchema, primitiveProp} =
+            this.getPrimitives(schema, data);
 
         if (!primitiveProp || !primitiveSchema) {
             return <div>Can&apos;t display</div>;

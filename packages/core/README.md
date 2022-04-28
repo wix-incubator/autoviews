@@ -1,7 +1,7 @@
 # Active documentation:
-* [Source](https://github.com/wix-incubator/autoviews/tree/master/packages/docs)
-* [Website](https://fuzzy-succotash-c88bb0c6.pages.github.io/)
 
+- [Source](https://github.com/wix-incubator/autoviews/tree/master/packages/docs)
+- [Website](https://fuzzy-succotash-c88bb0c6.pages.github.io/)
 
 # **FOLLOWING DOC IS DEPRECATED:**
 
@@ -11,12 +11,12 @@
 
 To build UI automatically `AutoViews` uses some abstractions:
 
--   **AutoView** — React component, which gets `JSONSchema`, `data`, optional `UISchema` as prop and `ComponentsRepo` as `components` property in `context` and renders accordingly
--   **ComponentsRepo** — class that keeps all components, grouped by data types (`string`, `object` and others, even custom data types) and optionally with theirs `predicate`'s, which are boolean returning functions that defines ability of this component to render this `JSONSchema` node.
--   **UISchema** — is `JSON` that describes specific rules to render that specific `JSONSchema` node:
-    -   what component and its settings to use,
-    -   which `ComponentsRepo` should be chosen to get component,
-    -   what `UIHints` to apply
+- **AutoView** — React component, which gets `JSONSchema`, `data`, optional `UISchema` as prop and `ComponentsRepo` as `components` property in `context` and renders accordingly
+- **ComponentsRepo** — class that keeps all components, grouped by data types (`string`, `object` and others, even custom data types) and optionally with theirs `predicate`'s, which are boolean returning functions that defines ability of this component to render this `JSONSchema` node.
+- **UISchema** — is `JSON` that describes specific rules to render that specific `JSONSchema` node:
+  - what component and its settings to use,
+  - which `ComponentsRepo` should be chosen to get component,
+  - what `UIHints` to apply
 
 Each component which is depends on state or other variables could decide which `UISchema` to use for render or return custom render result.
 
@@ -39,14 +39,13 @@ import {
   RepositoryProvider,
   AutoView,
   CoreSchemaMetaSchema,
-  UISchema,
+  UISchema
 } from '@autoviews/core';
 
 <RepositoryProvider components={repoInstance}>
-    <AutoView {...props} />
-</RepositoryProvider>
+  <AutoView {...props} />
+</RepositoryProvider>;
 ```
-
 
 ### Using `getType`
 
@@ -55,7 +54,9 @@ import {
 By default it is `type` field. However you might find it useful for `enum`, because in `JSONSchema` enum type is `string`. This example resolves this problem:
 
 ```ts
-const repo = new ComponentsRepo('myRepo', node => 'enum' in node ? 'enum' : node.type);
+const repo = new ComponentsRepo('myRepo', node =>
+  'enum' in node ? 'enum' : node.type
+);
 repo.register('enum', {name: 'select', component: SelectComponent});
 ```
 
@@ -65,9 +66,7 @@ For example, if your `JSONSchema` has own type system, you can return somethings
 ```ts
 const repo = new ComponentsRepo('myRepo', node => node.myCustomType);
 repo.register('user', {name: 'user-card', component: UserCardComponent});
-
 ```
-
 
 ### register
 
@@ -88,11 +87,11 @@ If you need more then one, you may want to add `predicate` function during regis
 
 ```ts
 const hasMinMax = node =>
-    node.hasOwnProperty('minimum') && node.hasOwnProperty('maximum');
+  node.hasOwnProperty('minimum') && node.hasOwnProperty('maximum');
 repo.register('number', {
-    name: 'slider',
-    component: Slider,
-    predicate: hasMinMax
+  name: 'slider',
+  component: Slider,
+  predicate: hasMinMax
 });
 
 repo.getMatched({type: 'number', minimum: 0, maximum: 10});
@@ -102,8 +101,8 @@ Will return array of available component records in registration order
 
 ```ts
 [
-    {name: 'number-input', component: NumberInput},
-    {name: 'slider', predicate: hasMinMax, component: SliderInput}
+  {name: 'number-input', component: NumberInput},
+  {name: 'slider', predicate: hasMinMax, component: SliderInput}
 ];
 ```
 
@@ -139,10 +138,10 @@ repo.register('number', {name: 'number-input', component: NumberInput});
 repo.register('string', {name: 'text-input', component: TextInput});
 
 repo.addWrapper((item, props) => (
-    <div data-automation-id={`${props.pointer}#TEST`}>
-        <h3>{props.schema.title}</h3>
-        {item}
-    </div>
+  <div data-automation-id={`${props.pointer}#TEST`}>
+    <h3>{props.schema.title}</h3>
+    {item}
+  </div>
 ));
 ```
 
@@ -150,19 +149,19 @@ example above will wrap all components in repository, however it is possible to 
 
 Both `include` and `exclude` are optional arrays of components names, used in `register` function.
 
-This will wrap  only `number-input` component.
+This will wrap only `number-input` component.
 
 ```tsx
 repo.addWrapper(
-    (item, props) => (
-        <div data-automation-id={`${props.pointer}#TEST`}>
-            <h3>{props.schema.title}</h3>
-            {item}
-        </div>
-    ),
-    {
-        include: ['number-input']
-    }
+  (item, props) => (
+    <div data-automation-id={`${props.pointer}#TEST`}>
+      <h3>{props.schema.title}</h3>
+      {item}
+    </div>
+  ),
+  {
+    include: ['number-input']
+  }
 );
 ```
 
@@ -170,19 +169,20 @@ This will wrap all components except `number-input`
 
 ```tsx
 repo.addWrapper(
-    (item, props) => (
-        <div data-automation-id={`${props.pointer}#TEST`}>
-            <h3>{props.schema.title}</h3>
-            {item}
-        </div>
-    ),
-    {
-        exclude: ['number-input']
-    }
+  (item, props) => (
+    <div data-automation-id={`${props.pointer}#TEST`}>
+      <h3>{props.schema.title}</h3>
+      {item}
+    </div>
+  ),
+  {
+    exclude: ['number-input']
+  }
 );
 ```
 
 ### remove
+
 You can remove previously registered component record by calling `.remove(componentName)`
 
 ```ts
@@ -193,28 +193,21 @@ repo.remove('string-component');
 
 ### replace
 
-
 You can replace component record with another one:
 
 ```ts
-repo.register(
-    'number',
-    {
-        name: 'number-input',
-        component: OldComponent
-    }
-);
+repo.register('number', {
+  name: 'number-input',
+  component: OldComponent
+});
 
-repo.replace(
-    'MyNumberComponent',
-    oldRecord => ({
-        ...oldRecord,
-        name: 'new-number-input',
-        component: NewComponent
-    })
-);
-
+repo.replace('MyNumberComponent', oldRecord => ({
+  ...oldRecord,
+  name: 'new-number-input',
+  component: NewComponent
+}));
 ```
+
 Yes, you're right, name could be changed as well.
 Basically that means that the new component record will have same index (order) as old one.
 
@@ -228,18 +221,17 @@ Both `include` and `exclude` are optional arrays of components names, used in `r
 
 ```ts
 repo.replaceAll(
-    record => {
-        const OriginalComponent = record.component;
-        return {
-            ...record,
-            component: (props) => <OriginalComponent {...doSomethingWithProps(props)} />
-        };
-    },
-    {
-        include: ['number-input', 'text-input']
-    }
+  record => {
+    const OriginalComponent = record.component;
+    return {
+      ...record,
+      component: props => <OriginalComponent {...doSomethingWithProps(props)} />
+    };
+  },
+  {
+    include: ['number-input', 'text-input']
+  }
 );
-
 ```
 
 ### Events
@@ -250,8 +242,8 @@ Components in `ComponentsRepo` may have `AutoViewProps` props interface which ha
 
 ```ts
 type AutoEventHandler = (
-    e: React.SyntheticEvent<HTMLElement>,
-    autoEvent: AutoEvent
+  e: React.SyntheticEvent<HTMLElement>,
+  autoEvent: AutoEvent
 ) => void;
 ```
 
@@ -259,16 +251,15 @@ where `AutoEvent` is something very special:
 
 ```ts
 interface AutoEvent {
-    schemaPointer: string;
-    pointer: string;
-    patch?: Operation[];
+  schemaPointer: string;
+  pointer: string;
+  patch?: Operation[];
 }
 ```
 
 This events may have [JSONPatch](https://tools.ietf.org/html/rfc6902) operations on given data, which should be handled by application that uses `AutoView`.
 
 This library provides handy [event handlers creators](src/events.ts) for each `JSONPatch` operation.
-
 
 ## UISchema
 
@@ -307,15 +298,19 @@ When choosing specific component to render certain data type in `UISchema` you m
 
 ```tsx
 const overrides = createUISchema({
-    viewComponents: {
-        '': {name: 'uppercasable', options: {uppercase: true}}
-    }
+  viewComponents: {
+    '': {name: 'uppercasable', options: {uppercase: true}}
+  }
 });
 
 const {select} = clientRenderer.render(
-    <RepositoryProvider components={repo}>
-        <AutoView schema={schema} data="foo" uiSchema={overrides} />
-    </RepositoryProvider>
+  <RepositoryProvider components={repo}>
+    <AutoView
+      schema={schema}
+      data="foo"
+      uiSchema={overrides}
+    />
+  </RepositoryProvider>
 );
 ```
 
@@ -389,9 +384,9 @@ Adding/changing `UIHints`:
 ```ts
 const emptyUISchema = createUISchema();
 const uiSchemaWithHints = setUIHints(
-    '/path/in/data',
-    {order: ['second', 'third', 'first']},
-    emptyUISchema
+  '/path/in/data',
+  {order: ['second', 'third', 'first']},
+  emptyUISchema
 );
 ```
 
@@ -412,10 +407,10 @@ Adding/changing component options:
 ```ts
 const emptyUISchema = createUISchema();
 const uiSchemaWithComponent = setComponent(
-    'repositoryName',
-    '/path/in/data',
-    {name: 'uppercasable', options: {uppercase: true}},
-    original
+  'repositoryName',
+  '/path/in/data',
+  {name: 'uppercasable', options: {uppercase: true}},
+  original
 );
 ```
 
@@ -423,9 +418,9 @@ Retrieving component options;
 
 ```ts
 const componentOptions = getComponent(
-    'repositoryName',
-    '/path/in/data',
-    uiSchemaWithComponent
+  'repositoryName',
+  '/path/in/data',
+  uiSchemaWithComponent
 );
 ```
 
@@ -433,9 +428,8 @@ Removing component:
 
 ```ts
 const uiSchemaWithoutComponent = unsetComponent(
-    'repositoryName',
-    '/path/in/data',
-    uiSchemaWithComponent
+  'repositoryName',
+  '/path/in/data',
+  uiSchemaWithComponent
 );
 ```
-

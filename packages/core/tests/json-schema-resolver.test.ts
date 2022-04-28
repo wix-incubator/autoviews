@@ -37,8 +37,8 @@ describe('Resolving json schema', () => {
             mountSchema,
             resolveMockById
         );
-        const resolvedProductSchema = resolvedMountSchema.properties!.storage
-            .oneOf![0];
+        const resolvedProductSchema =
+            resolvedMountSchema.properties!.storage.oneOf![0];
 
         const items: CoreSchemaMetaSchema = resolvedProductSchema.items!;
         expect(items.properties!.warehouseLocation.properties).toEqual(
@@ -47,8 +47,8 @@ describe('Resolving json schema', () => {
     });
 
     it('should throw on recursive dependencies', () => {
-        return expect(jsonSchemaResolver(recursiveProductSchema, resolveMockById)).rejects.toThrow(
-            'recursive schemas are not allowed'
-        );
+        return expect(
+            jsonSchemaResolver(recursiveProductSchema, resolveMockById)
+        ).rejects.toThrow('recursive schemas are not allowed');
     });
 });

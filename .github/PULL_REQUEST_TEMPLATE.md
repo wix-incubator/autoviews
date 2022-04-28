@@ -18,7 +18,7 @@
 
 <!--
   Demonstrate the code is solid.
-  
+
   Example: Commands output, screenshots, videos or demos displaying the change.
 
   How did you verify that your PR solves the issue?

@@ -1,38 +1,34 @@
 {
-    "title": "Some form",
-    "type": "object",
-    "properties": {
-      "firstName": {
-        "type": "string",
-        "title": "First name"
-      },
-      "lastName": {
-        "type": "string",
-        "title": "Last name"
-      }
+  "title": "Some form",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "title": "First name"
     },
-    "oneOf": [
-      {
-        "properties": {
-          "homePhone": {
-            "type": "number",
-            "title": "Home phone"
-          }
-        },
-        "required": [
-          "homePhone"
-        ]
+    "lastName": {
+      "type": "string",
+      "title": "Last name"
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "homePhone": {
+          "type": "number",
+          "title": "Home phone"
+        }
       },
-      {
-        "properties": {
-          "mobilePhone": {
-            "type": "number",
-            "title": "Mobile phone"
-          }
-        },
-        "required": [
-          "mobilePhone"
-        ]
-      }
-    ]
-  }
+      "required": ["homePhone"]
+    },
+    {
+      "properties": {
+        "mobilePhone": {
+          "type": "number",
+          "title": "Mobile phone"
+        }
+      },
+      "required": ["mobilePhone"]
+    }
+  ]
+}

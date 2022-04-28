@@ -1,5 +1,8 @@
 import {
-    ComponentsRepo, composeRepos, reposComposer, ReposComposer
+    ComponentsRepo,
+    composeRepos,
+    reposComposer,
+    ReposComposer
 } from '../src';
 
 describe('Compose repos', () => {
@@ -17,20 +20,14 @@ describe('Compose repos', () => {
             component: () => null
         });
 
-        defaultRepo.addWrapper(
-            item => (item),
-            {exclude: ['number']}
-        );
+        defaultRepo.addWrapper(item => item, {exclude: ['number']});
 
         anotherRepo.register('boolean', {
             name: 'AnotherBoolean',
             component: () => null
         });
 
-        anotherRepo.addWrapper(
-            item => (item),
-            {include: ['boolean']}
-        );
+        anotherRepo.addWrapper(item => item, {include: ['boolean']});
     });
 
     it('should exist', () => {
@@ -47,30 +44,53 @@ describe('Compose repos', () => {
 
         it('result repo should have provided getNodeType', () => {
             const getNodeType = () => 'nodeType';
-            const result = composeRepos({name: 'TestRepo', getNodeType}, defaultRepo);
+            const result = composeRepos(
+                {name: 'TestRepo', getNodeType},
+                defaultRepo
+            );
 
             expect(result.getNodeType).toEqual(getNodeType);
         });
 
         it('result repo should have getNodeType from last repo if getNodeType not provided in config', () => {
-            const result = composeRepos({name: 'TestRepo'}, defaultRepo, anotherRepo);
+            const result = composeRepos(
+                {name: 'TestRepo'},
+                defaultRepo,
+                anotherRepo
+            );
 
             expect(result.getNodeType).toEqual(anotherRepo.getNodeType);
         });
 
         it('result repo should have all components registered in each repo', () => {
-            const result = composeRepos({name: 'TestRepo'}, defaultRepo, anotherRepo);
+            const result = composeRepos(
+                {name: 'TestRepo'},
+                defaultRepo,
+                anotherRepo
+            );
 
-            expect(result.getMatched({type: 'string'})).toEqual(defaultRepo.getMatched({type: 'string'}));
-            expect(result.getMatched({type: 'number'})).toEqual(defaultRepo.getMatched({type: 'number'}));
-            expect(result.getMatched({type: 'boolean'})).toEqual(anotherRepo.getMatched({type: 'boolean'}));
+            expect(result.getMatched({type: 'string'})).toEqual(
+                defaultRepo.getMatched({type: 'string'})
+            );
+            expect(result.getMatched({type: 'number'})).toEqual(
+                defaultRepo.getMatched({type: 'number'})
+            );
+            expect(result.getMatched({type: 'boolean'})).toEqual(
+                anotherRepo.getMatched({type: 'boolean'})
+            );
         });
 
         it('result repo should have all wrappers from each repo', () => {
-            const result = composeRepos({name: 'TestRepo'}, defaultRepo, anotherRepo);
+            const result = composeRepos(
+                {name: 'TestRepo'},
+                defaultRepo,
+                anotherRepo
+            );
 
             expect(result.getRawWrappers()).toEqual(
-                defaultRepo.getRawWrappers().concat(anotherRepo.getRawWrappers())
+                defaultRepo
+                    .getRawWrappers()
+                    .concat(anotherRepo.getRawWrappers())
             );
         });
     });
@@ -90,24 +110,35 @@ describe('Compose repos', () => {
         });
 
         it('result repo should have getNodeType from last repo if getNodeType not provided', () => {
-            const result = reposComposer('TestRepo')(defaultRepo)(anotherRepo)();
+            const result =
+                reposComposer('TestRepo')(defaultRepo)(anotherRepo)();
 
             expect(result.getNodeType).toEqual(anotherRepo.getNodeType);
         });
 
         it('result repo should have all components registered in each repo', () => {
-            const result = reposComposer('TestRepo')(defaultRepo)(anotherRepo)();
+            const result =
+                reposComposer('TestRepo')(defaultRepo)(anotherRepo)();
 
-            expect(result.getMatched({type: 'string'})).toEqual(defaultRepo.getMatched({type: 'string'}));
-            expect(result.getMatched({type: 'number'})).toEqual(defaultRepo.getMatched({type: 'number'}));
-            expect(result.getMatched({type: 'boolean'})).toEqual(anotherRepo.getMatched({type: 'boolean'}));
+            expect(result.getMatched({type: 'string'})).toEqual(
+                defaultRepo.getMatched({type: 'string'})
+            );
+            expect(result.getMatched({type: 'number'})).toEqual(
+                defaultRepo.getMatched({type: 'number'})
+            );
+            expect(result.getMatched({type: 'boolean'})).toEqual(
+                anotherRepo.getMatched({type: 'boolean'})
+            );
         });
 
         it('result repo should have all wrappers from each repo', () => {
-            const result = reposComposer('TestRepo')(defaultRepo)(anotherRepo)();
+            const result =
+                reposComposer('TestRepo')(defaultRepo)(anotherRepo)();
 
             expect(result.getRawWrappers()).toEqual(
-                defaultRepo.getRawWrappers().concat(anotherRepo.getRawWrappers())
+                defaultRepo
+                    .getRawWrappers()
+                    .concat(anotherRepo.getRawWrappers())
             );
         });
     });
@@ -120,7 +151,9 @@ describe('Compose repos', () => {
         });
 
         it('result repo should have overriden name', () => {
-            const result = new ReposComposer('TestRepo').name('NewName').value();
+            const result = new ReposComposer('TestRepo')
+                .name('NewName')
+                .value();
 
             expect(result.name).toBe('NewName');
         });
@@ -134,30 +167,49 @@ describe('Compose repos', () => {
 
         it('result repo should have overriden getNodeType', () => {
             const getNodeType = () => 'nodeType';
-            const result = new ReposComposer('TestRepo', () => 'type').setNodeTypeGetter(getNodeType).value();
+            const result = new ReposComposer('TestRepo', () => 'type')
+                .setNodeTypeGetter(getNodeType)
+                .value();
 
             expect(result.getNodeType).toEqual(getNodeType);
         });
 
         it('result repo should have getNodeType from last repo if getNodeType not provided', () => {
-            const result = new ReposComposer('TestRepo').compose(defaultRepo).compose(anotherRepo).value();
+            const result = new ReposComposer('TestRepo')
+                .compose(defaultRepo)
+                .compose(anotherRepo)
+                .value();
 
             expect(result.getNodeType).toEqual(anotherRepo.getNodeType);
         });
 
         it('result repo should have all components registered in each repo', () => {
-            const result = new ReposComposer('TestRepo').compose(defaultRepo).compose(anotherRepo).value();
+            const result = new ReposComposer('TestRepo')
+                .compose(defaultRepo)
+                .compose(anotherRepo)
+                .value();
 
-            expect(result.getMatched({type: 'string'})).toEqual(defaultRepo.getMatched({type: 'string'}));
-            expect(result.getMatched({type: 'number'})).toEqual(defaultRepo.getMatched({type: 'number'}));
-            expect(result.getMatched({type: 'boolean'})).toEqual(anotherRepo.getMatched({type: 'boolean'}));
+            expect(result.getMatched({type: 'string'})).toEqual(
+                defaultRepo.getMatched({type: 'string'})
+            );
+            expect(result.getMatched({type: 'number'})).toEqual(
+                defaultRepo.getMatched({type: 'number'})
+            );
+            expect(result.getMatched({type: 'boolean'})).toEqual(
+                anotherRepo.getMatched({type: 'boolean'})
+            );
         });
 
         it('result repo should have all wrappers from each repo', () => {
-            const result = new ReposComposer('TestRepo').compose(defaultRepo).compose(anotherRepo).value();
+            const result = new ReposComposer('TestRepo')
+                .compose(defaultRepo)
+                .compose(anotherRepo)
+                .value();
 
             expect(result.getRawWrappers()).toEqual(
-                defaultRepo.getRawWrappers().concat(anotherRepo.getRawWrappers())
+                defaultRepo
+                    .getRawWrappers()
+                    .concat(anotherRepo.getRawWrappers())
             );
         });
     });

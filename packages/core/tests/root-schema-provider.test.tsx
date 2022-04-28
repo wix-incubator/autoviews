@@ -3,7 +3,11 @@ import {render} from '@testing-library/react';
 
 import {RootSchemaConsumer} from '../src/auto-view';
 import {
-    CoreSchemaMetaSchema, AutoView, ComponentsRepo, AutoFields, RepositoryProvider
+    CoreSchemaMetaSchema,
+    AutoView,
+    ComponentsRepo,
+    AutoFields,
+    RepositoryProvider
 } from '../src';
 
 describe('RootSchemaProvider/RootSchemaConsumer', () => {
@@ -24,25 +28,19 @@ describe('RootSchemaProvider/RootSchemaConsumer', () => {
 
         const repo = new ComponentsRepo('test');
         repo.register('object', {name: 'fields', component: AutoFields});
-        repo.register(
-            'string',
-            {
-                name: 'text',
-                component: () => {
-                    return (
-                        <RootSchemaConsumer>
-                            {
-                                ({schema}) => {
-                                    renderedSchema = schema;
-                                    return JSON.stringify(renderedSchema);
-                                }
-                            }
-                        </RootSchemaConsumer>
-                    );
-
-                }
+        repo.register('string', {
+            name: 'text',
+            component: () => {
+                return (
+                    <RootSchemaConsumer>
+                        {({schema}) => {
+                            renderedSchema = schema;
+                            return JSON.stringify(renderedSchema);
+                        }}
+                    </RootSchemaConsumer>
+                );
             }
-        );
+        });
 
         it('should not reassign original value', () => {
             render(

@@ -1,6 +1,9 @@
 import React from 'react';
 import {
-    AutoView, RepositoryProvider, CoreSchemaMetaSchema, createUISchema
+    AutoView,
+    RepositoryProvider,
+    CoreSchemaMetaSchema,
+    createUISchema
 } from '@autoviews/core';
 import {Box} from '@mui/material';
 

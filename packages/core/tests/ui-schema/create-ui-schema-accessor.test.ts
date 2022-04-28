@@ -169,9 +169,7 @@ describe('createUISchemaAccessor', () => {
             });
 
             it('`getGroupPosition` should return -1', () => {
-                expect(
-                    uiSchemaEntity.getGroupPosition(GROUP_NAMES.A)
-                ).toBe(-1);
+                expect(uiSchemaEntity.getGroupPosition(GROUP_NAMES.A)).toBe(-1);
             });
 
             it('`isPropertyInGroup` should return false', () => {
@@ -223,7 +221,9 @@ describe('createUISchemaAccessor', () => {
             });
 
             it('`isPropertyInOrder` should return false', () => {
-                expect(uiSchemaEntity.isPropertyInOrder(FIELD_NAME_PLACEHOLDER)).toBe(false);
+                expect(
+                    uiSchemaEntity.isPropertyInOrder(FIELD_NAME_PLACEHOLDER)
+                ).toBe(false);
             });
 
             it('`getPropertyPositionInOrder` should return -1', () => {
@@ -254,10 +254,12 @@ describe('createUISchemaAccessor', () => {
                 );
 
                 expect(
-                    getOptionsOfProperty(uiSchemaEntity, REPO_NAME_PLACEHOLDER).name
+                    getOptionsOfProperty(uiSchemaEntity, REPO_NAME_PLACEHOLDER)
+                        .name
                 ).toBe(COMPONENT_NAME_PLACEHOLDER);
                 expect(
-                    getOptionsOfProperty(uiSchemaEntity, REPO_NAME_PLACEHOLDER).options.foo
+                    getOptionsOfProperty(uiSchemaEntity, REPO_NAME_PLACEHOLDER)
+                        .options.foo
                 ).toBe('bar');
             });
 
@@ -342,10 +344,11 @@ describe('createUISchemaAccessor', () => {
                                     name: COMPONENT_NAME_PLACEHOLDER,
                                     options: {foo: 'bar'}
                                 },
-                                [`${DEFAULT_PATH}/${CHILD_PROPERTY_NAME_PLACEHOLDER}`]: {
-                                    name: COMPONENT_NAME_PLACEHOLDER,
-                                    options: {foo: 'bar'}
-                                }
+                                [`${DEFAULT_PATH}/${CHILD_PROPERTY_NAME_PLACEHOLDER}`]:
+                                    {
+                                        name: COMPONENT_NAME_PLACEHOLDER,
+                                        options: {foo: 'bar'}
+                                    }
                             }
                         }
                     },
@@ -453,9 +456,9 @@ describe('createUISchemaAccessor', () => {
                     GROUP_NAMES.B,
                     FIELD_NAME_PLACEHOLDER
                 );
-                expect(
-                    uiSchemaEntity.getGroup(GROUP_NAMES.B)!.fields[2]
-                ).toBe(FIELD_NAME_PLACEHOLDER);
+                expect(uiSchemaEntity.getGroup(GROUP_NAMES.B)!.fields[2]).toBe(
+                    FIELD_NAME_PLACEHOLDER
+                );
             });
 
             it('`removePropertyFromGroup` should remove property from fields', () => {
@@ -463,9 +466,9 @@ describe('createUISchemaAccessor', () => {
                     GROUP_NAMES.B,
                     FIELD_NAME_PLACEHOLDER + 3
                 );
-                expect(
-                    uiSchemaEntity.getGroup(GROUP_NAMES.B)!.fields[0]
-                ).toBe(FIELD_NAME_PLACEHOLDER + 2);
+                expect(uiSchemaEntity.getGroup(GROUP_NAMES.B)!.fields[0]).toBe(
+                    FIELD_NAME_PLACEHOLDER + 2
+                );
                 expect(
                     uiSchemaEntity.getGroup(GROUP_NAMES.B)!.fields.length
                 ).toBe(1);
@@ -492,9 +495,9 @@ describe('createUISchemaAccessor', () => {
                 ];
                 uiSchemaEntity.setOrder(() => orderMock);
 
-                expect(
-                    uiSchemaEntity.get().hints[DEFAULT_PATH].order
-                ).toEqual(orderMock);
+                expect(uiSchemaEntity.get().hints[DEFAULT_PATH].order).toEqual(
+                    orderMock
+                );
             });
 
             it('`getOrder` should return an existed order array', () => {
@@ -538,7 +541,9 @@ describe('createUISchemaAccessor', () => {
             });
 
             it('`isPropertyInOrder` should return true if property is in order', () => {
-                expect(uiSchemaEntity.isPropertyInOrder(FIELD_NAME_PLACEHOLDER)).toBe(true);
+                expect(
+                    uiSchemaEntity.isPropertyInOrder(FIELD_NAME_PLACEHOLDER)
+                ).toBe(true);
             });
 
             it('`getPropertyPositionInOrder` should return position of a property', () => {
@@ -590,66 +595,68 @@ describe('createUISchemaAccessor', () => {
                 ).toBeUndefined();
             });
 
-            it('`removeProperty` should clean up all records related to provided property and ' +
-               'remove options for property from all component options', () => {
-                uiSchemaEntity
-                    .setPropertyComponentOptions(
-                        FIELD_NAME_PLACEHOLDER,
-                        REPO_NAME_PLACEHOLDER,
-                        () => ({
-                            name: COMPONENT_NAME_PLACEHOLDER,
-                            options: {foo: 'bar'}
-                        })
-                    )
-                    .setPropertyComponentOptions(
-                        CHILD_PROPERTY_NAME_PLACEHOLDER,
-                        REPO_NAME_PLACEHOLDER,
-                        () => ({
-                            name: COMPONENT_NAME_PLACEHOLDER,
-                            options: {foo: 'bar'}
-                        })
-                    )
-                    .setPropertyComponentOptions(
-                        FIELD_NAME_PLACEHOLDER,
-                        REPO_NAME_PLACEHOLDER + 1,
-                        () => ({
-                            name: COMPONENT_NAME_PLACEHOLDER,
-                            options: {foo: 'bar'}
-                        })
-                    )
-                    .removeProperty(FIELD_NAME_PLACEHOLDER);
+            it(
+                '`removeProperty` should clean up all records related to provided property and ' +
+                    'remove options for property from all component options',
+                () => {
+                    uiSchemaEntity
+                        .setPropertyComponentOptions(
+                            FIELD_NAME_PLACEHOLDER,
+                            REPO_NAME_PLACEHOLDER,
+                            () => ({
+                                name: COMPONENT_NAME_PLACEHOLDER,
+                                options: {foo: 'bar'}
+                            })
+                        )
+                        .setPropertyComponentOptions(
+                            CHILD_PROPERTY_NAME_PLACEHOLDER,
+                            REPO_NAME_PLACEHOLDER,
+                            () => ({
+                                name: COMPONENT_NAME_PLACEHOLDER,
+                                options: {foo: 'bar'}
+                            })
+                        )
+                        .setPropertyComponentOptions(
+                            FIELD_NAME_PLACEHOLDER,
+                            REPO_NAME_PLACEHOLDER + 1,
+                            () => ({
+                                name: COMPONENT_NAME_PLACEHOLDER,
+                                options: {foo: 'bar'}
+                            })
+                        )
+                        .removeProperty(FIELD_NAME_PLACEHOLDER);
 
-                const {fields} = uiSchemaEntity.getGroup(GROUP_NAMES.A)!;
-                const isPropertyInOrder = uiSchemaEntity.isPropertyInOrder(
-                    FIELD_NAME_PLACEHOLDER
-                );
-                expect(fields.length).toBe(1);
-                expect(fields[0]).toBe(FIELD_NAME_PLACEHOLDER + 1);
-
-                expect(isPropertyInOrder).toBe(false);
-
-                expect(
-                    getOptionsOfProperty(
-                        uiSchemaEntity,
-                        REPO_NAME_PLACEHOLDER,
+                    const {fields} = uiSchemaEntity.getGroup(GROUP_NAMES.A)!;
+                    const isPropertyInOrder = uiSchemaEntity.isPropertyInOrder(
                         FIELD_NAME_PLACEHOLDER
-                    )
-                ).toBeUndefined();
-                expect(
-                    getOptionsOfProperty(
-                        uiSchemaEntity,
-                        REPO_NAME_PLACEHOLDER + 1,
-                        FIELD_NAME_PLACEHOLDER
-                    )
-                ).toBeUndefined();
-                expect(
-                    getOptionsOfProperty(
-                        uiSchemaEntity,
-                        REPO_NAME_PLACEHOLDER,
-                        CHILD_PROPERTY_NAME_PLACEHOLDER
-                    )
-                ).not.toBeUndefined();
-            }
+                    );
+                    expect(fields.length).toBe(1);
+                    expect(fields[0]).toBe(FIELD_NAME_PLACEHOLDER + 1);
+
+                    expect(isPropertyInOrder).toBe(false);
+
+                    expect(
+                        getOptionsOfProperty(
+                            uiSchemaEntity,
+                            REPO_NAME_PLACEHOLDER,
+                            FIELD_NAME_PLACEHOLDER
+                        )
+                    ).toBeUndefined();
+                    expect(
+                        getOptionsOfProperty(
+                            uiSchemaEntity,
+                            REPO_NAME_PLACEHOLDER + 1,
+                            FIELD_NAME_PLACEHOLDER
+                        )
+                    ).toBeUndefined();
+                    expect(
+                        getOptionsOfProperty(
+                            uiSchemaEntity,
+                            REPO_NAME_PLACEHOLDER,
+                            CHILD_PROPERTY_NAME_PLACEHOLDER
+                        )
+                    ).not.toBeUndefined();
+                }
             );
 
             it('`getHidden` should return existing hidden hint', () => {

@@ -34,7 +34,7 @@ export const schemaMapping: SchemaMapping = {
 
 export const resolveMockById = (id: string): Promise<CoreSchemaMetaSchema> => {
     const schema = schemaMapping[id];
-    return schema ?
-        Promise.resolve(schema) :
-        Promise.reject(new Error('schema not found'));
+    return schema
+        ? Promise.resolve(schema)
+        : Promise.reject(new Error('schema not found'));
 };

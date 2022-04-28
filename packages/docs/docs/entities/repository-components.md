@@ -7,7 +7,6 @@ These components are useful in case of rendering some specific logic which could
 Both components use Repository context. Make sure they are rendered inside `<RepositoryProvider />` scope.
 :::
 
-
 ## `<RepositoryComponentByType />`
 
 Renders component, registered by given type.
@@ -15,11 +14,14 @@ Renders component, registered by given type.
 When multiple components registered with the same type, the last registered is chosen.
 
 ### API
+
 ```ts
 interface RepositoryComponentByTypeProps {
-    type: string | symbol;
+  type: string | symbol;
 }
-type RepositoryComponentByType = React.FC<RepositoryComponentByTypeProps & AutoViewProps>
+type RepositoryComponentByType = React.FC<
+  RepositoryComponentByTypeProps & AutoViewProps
+>;
 ```
 
 ### Example
@@ -28,10 +30,10 @@ type RepositoryComponentByType = React.FC<RepositoryComponentByTypeProps & AutoV
 import {RepositoryComponentByType} from '@autoviews/core';
 
 <RepositoryComponentByType
-    type="string"
-    schema={schema}
-    data={data}
-/>
+  type="string"
+  schema={schema}
+  data={data}
+/>;
 ```
 
 :::tip
@@ -43,20 +45,24 @@ Using symbols can help avoid collisions with real types, described in schema.
 Renders component, registered by given record name.
 
 ### API
+
 ```ts
 interface RepositoryComponentByRecordNameProps {
-    recordName: string;
+  recordName: string;
 }
-type RepositoryComponentByRecordName = React.FC<RepositoryComponentByRecordNameProps & AutoViewProps>
+type RepositoryComponentByRecordName = React.FC<
+  RepositoryComponentByRecordNameProps & AutoViewProps
+>;
 ```
 
 ### Example
+
 ```js
 import {RepositoryComponentByType} from '@autoviews/core';
 
 <RepositoryComponentByRecordName
-    recordName="myComponent"
-    schema={schema}
-    data={data}
-/>
+  recordName="myComponent"
+  schema={schema}
+  data={data}
+/>;
 ```

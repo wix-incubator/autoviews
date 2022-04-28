@@ -17,12 +17,20 @@ describe('AutoViews utils', () => {
         };
 
         it('should provide options for component', () => {
-            const componentOptions = getComponentOptions(uiSchema, ViewModes.EDIT, pointer);
+            const componentOptions = getComponentOptions(
+                uiSchema,
+                ViewModes.EDIT,
+                pointer
+            );
             expect(componentOptions).toEqual(options);
         });
 
         it('should return `undefined` if there is no options for requested component', () => {
-            const componentOptions = getComponentOptions(uiSchema, ViewModes.EDIT, '/bar');
+            const componentOptions = getComponentOptions(
+                uiSchema,
+                ViewModes.EDIT,
+                '/bar'
+            );
             expect(componentOptions).toEqual(undefined);
         });
     });

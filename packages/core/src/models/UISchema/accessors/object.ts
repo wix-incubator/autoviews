@@ -60,8 +60,10 @@ export interface ObjectAccessorInterface extends BaseAccessorInterface {
     removeProperty(propertyName: string): this;
 }
 
-export class ObjectAccessor extends BaseAccessor
-    implements ObjectAccessorInterface {
+export class ObjectAccessor
+    extends BaseAccessor
+    implements ObjectAccessorInterface
+{
     public type: ACCESSOR_TYPES = ACCESSOR_TYPES.object;
 
     constructor(uiSchema: UISchema, path: string) {
@@ -78,9 +80,9 @@ export class ObjectAccessor extends BaseAccessor
     }
 
     public getGroups() {
-        return this.uiSchemaClone.hints[this.path] ?
-            this.uiSchemaClone.hints[this.path].uiGroups :
-            undefined;
+        return this.uiSchemaClone.hints[this.path]
+            ? this.uiSchemaClone.hints[this.path].uiGroups
+            : undefined;
     }
 
     public removeGroups(groupNames?: string[]) {
@@ -91,20 +93,19 @@ export class ObjectAccessor extends BaseAccessor
         if (!groupNames) {
             this.uiSchemaClone.hints[this.path].uiGroups = [];
         } else {
-            this.uiSchemaClone.hints[
-                this.path
-            ].uiGroups = this.getGroups()!.filter(
-                group => groupNames.indexOf(group.name) >= 0
-            );
+            this.uiSchemaClone.hints[this.path].uiGroups =
+                this.getGroups()!.filter(
+                    group => groupNames.indexOf(group.name) >= 0
+                );
         }
         return this;
     }
 
     public getGroup(groupName: string) {
         const groups = this.getGroups();
-        return groups ?
-            groups.find(group => groupName === group.name) :
-            undefined;
+        return groups
+            ? groups.find(group => groupName === group.name)
+            : undefined;
     }
 
     public addGroup(groupName: string) {
@@ -347,9 +348,9 @@ export class ObjectAccessor extends BaseAccessor
 
     public getPropertyComponentOptions(propertyName: string, repoName: string) {
         const componentOptions = this.uiSchemaClone.components[repoName];
-        return componentOptions ?
-            componentOptions[getPropertyPath(this.path, propertyName)] :
-            undefined;
+        return componentOptions
+            ? componentOptions[getPropertyPath(this.path, propertyName)]
+            : undefined;
     }
 
     public removePropertyComponentOptions(

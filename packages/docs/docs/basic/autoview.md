@@ -28,7 +28,6 @@ boolean property, if `true` then `data` will be validated against `schema`.
 
 `schemaPointer` is [JSONPointer](https://tools.ietf.org/html/rfc6901) `string`. It defines what `props.schema` part `AutoView` should take to render. By default is `''` which means root of the `props.schema`.
 
-
 ### pick
 
 `pick` is `string[]` and if `AutoView` is rendering `object` type, defines which fields of this object it **should** render.
@@ -52,5 +51,3 @@ boolean property, if `true` then `data` will be validated against `schema`.
 ### onRenderError
 
 `onRenderError` is called if any chiuld component will throw an error during render.
-
-

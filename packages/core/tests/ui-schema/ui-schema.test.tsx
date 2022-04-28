@@ -69,8 +69,12 @@ describe('uiSchema', () => {
                     {name: 'bar', fields: []}
                 ];
 
-                expect(getGroupTitleByName(groups[0].name, groups)).toBe(groups[0].title);
-                expect(getGroupTitleByName(groups[1].name, groups)).toBeUndefined();
+                expect(getGroupTitleByName(groups[0].name, groups)).toBe(
+                    groups[0].title
+                );
+                expect(
+                    getGroupTitleByName(groups[1].name, groups)
+                ).toBeUndefined();
             });
 
             it('should get uiGroup properties by group name', () => {
@@ -299,8 +303,12 @@ describe('uiSchema', () => {
                 </RepositoryProvider>
             );
 
-            expect(screen.getByTestId('/latitude#NATIVE_TEXT_INPUT')).toBeInTheDocument();
-            expect(screen.getByTestId('/longitude#CUSTOM_TEXT_INPUT')).toBeInTheDocument();
+            expect(
+                screen.getByTestId('/latitude#NATIVE_TEXT_INPUT')
+            ).toBeInTheDocument();
+            expect(
+                screen.getByTestId('/longitude#CUSTOM_TEXT_INPUT')
+            ).toBeInTheDocument();
         });
 
         it('should render specific primitive component field inside an array', async () => {
@@ -329,9 +337,15 @@ describe('uiSchema', () => {
                 </RepositoryProvider>
             );
 
-            expect(screen.getByTestId('/0/name#CUSTOM_TEXT_INPUT')).toBeInTheDocument();
-            expect(screen.getByTestId('/0/coordinates/latitude#NATIVE_TEXT_INPUT')).toBeInTheDocument();
-            expect(screen.getByTestId('/0/coordinates/longitude#NATIVE_TEXT_INPUT')).toBeInTheDocument();
+            expect(
+                screen.getByTestId('/0/name#CUSTOM_TEXT_INPUT')
+            ).toBeInTheDocument();
+            expect(
+                screen.getByTestId('/0/coordinates/latitude#NATIVE_TEXT_INPUT')
+            ).toBeInTheDocument();
+            expect(
+                screen.getByTestId('/0/coordinates/longitude#NATIVE_TEXT_INPUT')
+            ).toBeInTheDocument();
         });
 
         it('should fallback to default component', () => {
@@ -355,8 +369,12 @@ describe('uiSchema', () => {
                 </RepositoryProvider>
             );
 
-            expect(screen.getByTestId('/latitude#NATIVE_TEXT_INPUT')).toBeInTheDocument();
-            expect(screen.getByTestId('/longitude#NATIVE_TEXT_INPUT')).toBeInTheDocument();
+            expect(
+                screen.getByTestId('/latitude#NATIVE_TEXT_INPUT')
+            ).toBeInTheDocument();
+            expect(
+                screen.getByTestId('/longitude#NATIVE_TEXT_INPUT')
+            ).toBeInTheDocument();
         });
     });
 
@@ -391,9 +409,18 @@ describe('uiSchema', () => {
                 const textboxes = within(fieldset).getAllByRole('textbox');
                 const [second, third, first] = Array.from(textboxes);
 
-                expect(first).toHaveAttribute('data-automation-id', '/first#NATIVE_TEXT_INPUT');
-                expect(second).toHaveAttribute('data-automation-id', '/second#NATIVE_TEXT_INPUT');
-                expect(third).toHaveAttribute('data-automation-id', '/third#NATIVE_TEXT_INPUT');
+                expect(first).toHaveAttribute(
+                    'data-automation-id',
+                    '/first#NATIVE_TEXT_INPUT'
+                );
+                expect(second).toHaveAttribute(
+                    'data-automation-id',
+                    '/second#NATIVE_TEXT_INPUT'
+                );
+                expect(third).toHaveAttribute(
+                    'data-automation-id',
+                    '/third#NATIVE_TEXT_INPUT'
+                );
             });
 
             it('should order fields in array of objects', () => {
@@ -416,9 +443,18 @@ describe('uiSchema', () => {
                 const textboxes = within(fieldset).getAllByRole('textbox');
                 const [second, third, first] = Array.from(textboxes);
 
-                expect(first).toHaveAttribute('data-automation-id', '/0/first#NATIVE_TEXT_INPUT');
-                expect(second).toHaveAttribute('data-automation-id', '/0/second#NATIVE_TEXT_INPUT');
-                expect(third).toHaveAttribute('data-automation-id', '/0/third#NATIVE_TEXT_INPUT');
+                expect(first).toHaveAttribute(
+                    'data-automation-id',
+                    '/0/first#NATIVE_TEXT_INPUT'
+                );
+                expect(second).toHaveAttribute(
+                    'data-automation-id',
+                    '/0/second#NATIVE_TEXT_INPUT'
+                );
+                expect(third).toHaveAttribute(
+                    'data-automation-id',
+                    '/0/third#NATIVE_TEXT_INPUT'
+                );
             });
 
             it('should order correctly when `order` hint contains only some fields', () => {
@@ -441,9 +477,18 @@ describe('uiSchema', () => {
                 const textboxes = within(fieldset).getAllByRole('textbox');
                 const [second, first, third] = Array.from(textboxes);
 
-                expect(first).toHaveAttribute('data-automation-id', '/first#NATIVE_TEXT_INPUT');
-                expect(second).toHaveAttribute('data-automation-id', '/second#NATIVE_TEXT_INPUT');
-                expect(third).toHaveAttribute('data-automation-id', '/third#NATIVE_TEXT_INPUT');
+                expect(first).toHaveAttribute(
+                    'data-automation-id',
+                    '/first#NATIVE_TEXT_INPUT'
+                );
+                expect(second).toHaveAttribute(
+                    'data-automation-id',
+                    '/second#NATIVE_TEXT_INPUT'
+                );
+                expect(third).toHaveAttribute(
+                    'data-automation-id',
+                    '/third#NATIVE_TEXT_INPUT'
+                );
             });
 
             it(`should not throw if order contains field which uiSchema doesn't have`, () => {
@@ -484,7 +529,9 @@ describe('uiSchema', () => {
                 );
 
                 const first = screen.queryByTestId('/first#NATIVE_TEXT_INPUT');
-                const second = screen.queryByTestId('/second#NATIVE_TEXT_INPUT');
+                const second = screen.queryByTestId(
+                    '/second#NATIVE_TEXT_INPUT'
+                );
                 const third = screen.queryByTestId('/third#NATIVE_TEXT_INPUT');
 
                 expect(first).not.toBeInTheDocument();
@@ -510,7 +557,9 @@ describe('uiSchema', () => {
                 );
 
                 const first = screen.queryByTestId('/first#NATIVE_TEXT_INPUT');
-                const second = screen.queryByTestId('/second#NATIVE_TEXT_INPUT');
+                const second = screen.queryByTestId(
+                    '/second#NATIVE_TEXT_INPUT'
+                );
                 const third = screen.queryByTestId('/third#NATIVE_TEXT_INPUT');
 
                 expect(first).not.toBeInTheDocument();
@@ -536,7 +585,9 @@ describe('uiSchema', () => {
                 );
 
                 const first = screen.queryByTestId('/first#NATIVE_TEXT_INPUT');
-                const second = screen.queryByTestId('/second#NATIVE_TEXT_INPUT');
+                const second = screen.queryByTestId(
+                    '/second#NATIVE_TEXT_INPUT'
+                );
                 const third = screen.queryByTestId('/third#NATIVE_TEXT_INPUT');
 
                 expect(first).toBeInTheDocument();
@@ -576,15 +627,33 @@ describe('uiSchema', () => {
                     </RepositoryProvider>
                 );
 
-                expect(screen.queryByTestId('/0/first#NATIVE_TEXT_INPUT')).not.toBeInTheDocument();
-                expect(screen.queryByTestId('/0/second#NATIVE_TEXT_INPUT')).not.toBeInTheDocument();
-                expect(screen.getByTestId('/0/third#NATIVE_TEXT_INPUT')).toBeInTheDocument();
-                expect(screen.queryByTestId('/1/first#NATIVE_TEXT_INPUT')).not.toBeInTheDocument();
-                expect(screen.queryByTestId('/1/second#NATIVE_TEXT_INPUT')).not.toBeInTheDocument();
-                expect(screen.getByTestId('/1/third#NATIVE_TEXT_INPUT')).toBeInTheDocument();
-                expect(screen.queryByTestId('/2/first#NATIVE_TEXT_INPUT')).not.toBeInTheDocument();
-                expect(screen.queryByTestId('/2/second#NATIVE_TEXT_INPUT')).not.toBeInTheDocument();
-                expect(screen.getByTestId('/2/third#NATIVE_TEXT_INPUT')).toBeInTheDocument();
+                expect(
+                    screen.queryByTestId('/0/first#NATIVE_TEXT_INPUT')
+                ).not.toBeInTheDocument();
+                expect(
+                    screen.queryByTestId('/0/second#NATIVE_TEXT_INPUT')
+                ).not.toBeInTheDocument();
+                expect(
+                    screen.getByTestId('/0/third#NATIVE_TEXT_INPUT')
+                ).toBeInTheDocument();
+                expect(
+                    screen.queryByTestId('/1/first#NATIVE_TEXT_INPUT')
+                ).not.toBeInTheDocument();
+                expect(
+                    screen.queryByTestId('/1/second#NATIVE_TEXT_INPUT')
+                ).not.toBeInTheDocument();
+                expect(
+                    screen.getByTestId('/1/third#NATIVE_TEXT_INPUT')
+                ).toBeInTheDocument();
+                expect(
+                    screen.queryByTestId('/2/first#NATIVE_TEXT_INPUT')
+                ).not.toBeInTheDocument();
+                expect(
+                    screen.queryByTestId('/2/second#NATIVE_TEXT_INPUT')
+                ).not.toBeInTheDocument();
+                expect(
+                    screen.getByTestId('/2/third#NATIVE_TEXT_INPUT')
+                ).toBeInTheDocument();
             });
         });
     });

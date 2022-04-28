@@ -209,7 +209,9 @@ export function runBaseAccessorContract(
 
             it('`removeHints` should remove hints for path', () => {
                 uiSchemaEntity.removeHints();
-                expect(uiSchemaEntity.get().hints[DEFAULT_PATH]).toBeUndefined();
+                expect(
+                    uiSchemaEntity.get().hints[DEFAULT_PATH]
+                ).toBeUndefined();
             });
 
             it('`getHints` should return hints for path', () => {

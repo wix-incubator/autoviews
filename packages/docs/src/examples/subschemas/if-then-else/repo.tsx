@@ -50,36 +50,33 @@ const OneOfAsEnumComponent: React.FC<AutoViewProps> = props => (
             id="select"
             value={props.data}
             label={props.schema.title}
-            onChange={changeEventHandler(
-                props,
-                e => e.target.value
-            )}
+            onChange={changeEventHandler(props, e => e.target.value)}
         >
-            {props.schema.oneOf!.map(
-                item => (
-                    <MenuItem
-                        value={item.const}
-                        key={item.const}
-                    >
-                        {item.title}
-                    </MenuItem>
-                )
-            )}
+            {props.schema.oneOf!.map(item => (
+                <MenuItem
+                    value={item.const}
+                    key={item.const}
+                >
+                    {item.title}
+                </MenuItem>
+            ))}
         </Select>
     </FormControl>
 );
 
-const IfThenElseComponent: React.FC<AutoViewProps> = ({schema, data, ...otherProps}) => {
+const IfThenElseComponent: React.FC<AutoViewProps> = ({
+    schema,
+    data,
+    ...otherProps
+}) => {
     const {validator} = useRepositoryContext();
 
-    const {
-        if: ifStatement,
-        then: thenStatement,
-        else: elseStatement
-    } = schema;
+    const {if: ifStatement, then: thenStatement, else: elseStatement} = schema;
 
     if (!ifStatement || !thenStatement) {
-        throw new Error('IfThenElseComponent cannot be invoked without `if` and `then` properties in schema');
+        throw new Error(
+            'IfThenElseComponent cannot be invoked without `if` and `then` properties in schema'
+        );
     }
 
     if (validator.compile(ifStatement)(data)) {
@@ -107,15 +104,11 @@ const IfThenElseComponent: React.FC<AutoViewProps> = ({schema, data, ...otherPro
     return null;
 };
 
-repo.register(
-    'object',
-    {
-        name: 'object',
-        component: ObjectComponent
-    }
-).register(
-    'number',
-    {
+repo.register('object', {
+    name: 'object',
+    component: ObjectComponent
+})
+    .register('number', {
         name: 'numberInput',
         component: ({schema}) => (
             <Box sx={{margin: '20px 0'}}>
@@ -127,17 +120,12 @@ repo.register(
                 />
             </Box>
         )
-    }
-).register(
-    customIfType,
-    {
+    })
+    .register(customIfType, {
         name: 'if/then/else',
         component: IfThenElseComponent
-    }
-).register(
-    'oneOf',
-    {
+    })
+    .register('oneOf', {
         name: 'oneOfAsEnum',
         component: OneOfAsEnumComponent
-    }
-);
+    });

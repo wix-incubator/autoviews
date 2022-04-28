@@ -25,12 +25,15 @@ import {ComponentsRepo, GetNode} from '../repository/components-repo';
  */
 export const composeRepos = (
     config: {
-        name: string,
-        getNodeType?: GetNode
+        name: string;
+        getNodeType?: GetNode;
     },
     ...repos: [ComponentsRepo, ...ComponentsRepo[]]
 ): ComponentsRepo => {
-    const resultRepo = new ComponentsRepo(config.name, config.getNodeType ?? repos[repos.length - 1].getNodeType);
+    const resultRepo = new ComponentsRepo(
+        config.name,
+        config.getNodeType ?? repos[repos.length - 1].getNodeType
+    );
 
     for (const repo of repos) {
         for (const name of repo.getNames()) {
@@ -43,8 +46,8 @@ export const composeRepos = (
             }
         }
 
-        repo.getRawWrappers().forEach(
-            ({fn, rules}) => resultRepo.addWrapper(fn, rules)
+        repo.getRawWrappers().forEach(({fn, rules}) =>
+            resultRepo.addWrapper(fn, rules)
         );
     }
 
@@ -205,9 +208,6 @@ export class ReposComposer {
             );
         }
 
-        return new ComponentsRepo(
-            this.repoName,
-            this.repoGetNodeType
-        );
+        return new ComponentsRepo(this.repoName, this.repoGetNodeType);
     }
 }

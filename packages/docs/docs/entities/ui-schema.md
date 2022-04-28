@@ -99,7 +99,7 @@ import {
   UISchema,
   AutoFields,
   CoreSchemaMetaSchema,
-  getHints,
+  getHints
 } from '@autoviews/core';
 
 const myRepo = new ComponentsRepo('MyRepo')
@@ -111,39 +111,38 @@ const myRepo = new ComponentsRepo('MyRepo')
           {/* let's just display `order` and `hidden` hints */}
           <div>
             order list is:
-            {' ' + getHints(props.uiSchema, props.schemaPointer).order?.join(', ')}
+            {' ' +
+              getHints(props.uiSchema, props.schemaPointer).order?.join(', ')}
           </div>
           <div>
             hidden list is:
-            {' ' + getHints(props.uiSchema, props.schemaPointer).hidden?.join(', ')}
+            {' ' +
+              getHints(props.uiSchema, props.schemaPointer).hidden?.join(', ')}
           </div>
-          {
-            /*
-            * This component renders <AutoView /> per each object field and
-            * supports `order` and `hidden` UISchema.hints
-            **/
-          }
+          {/*
+           * This component renders <AutoView /> per each object field and
+           * supports `order` and `hidden` UISchema.hints
+           **/}
           <AutoFields {...props} />
         </>
-      )
+      );
     }
   })
   .register('string', {
     name: 'MyStringComponent',
-    component: props => (
-      <div>{props.data}</div>
-    ),
+    component: props => <div>{props.data}</div>
   });
 
 const uiSchema: UISchema = {
   hints: {
-    '': { // for the root JSONPointer
+    '': {
+      // for the root JSONPointer
       order: ['firstName', 'lastName'], // those object fields would be renderend first
       hidden: ['country'] // this field will be ignored and not rendered
     }
   },
   components: {}
-}
+};
 
 const schema: CoreSchemaMetaSchema = {
   type: 'object',
@@ -172,7 +171,7 @@ const data = {
   city: 'My City',
   lastName: 'Doe',
   firstName: 'John'
-}
+};
 
 export default function App() {
   return (
@@ -193,7 +192,6 @@ export default function App() {
 
 Let's do an example where we will separate groups with `<hr/>` line.
 
-
 You can use this complex example with Create React App:
 
 ```js
@@ -208,7 +206,7 @@ import {
   CoreSchemaMetaSchema,
   getHints,
   OTHER_PROPERTIES,
-  getPropertiesByGroupName,
+  getPropertiesByGroupName
 } from '@autoviews/core';
 
 const myRepo = new ComponentsRepo('MyRepo')
@@ -218,44 +216,46 @@ const myRepo = new ComponentsRepo('MyRepo')
       const {uiGroups} = getHints(props.uiSchema, props.schemaPointer);
 
       if (!uiGroups) {
-        return <AutoFields {...props} />
+        return <AutoFields {...props} />;
       }
 
       return (
-       <>
-       {uiGroups.map(group => (
-          <>
-            <h1>{group.title}</h1>
-            {/**
-             * render only certain fields
-             */}
-            <AutoFields
-              {...props}
-              pick={
-                // this utility retrieves `OTHER_PROPERTIES` used in `UIGroups` as well
-                getPropertiesByGroupName(
-                  uiGroups,
-                  group.name,
-                  Object.keys(props.data))}
-            />
-            <hr />
+        <>
+          {uiGroups.map(group => (
+            <>
+              <h1>{group.title}</h1>
+              {/**
+               * render only certain fields
+               */}
+              <AutoFields
+                {...props}
+                pick={
+                  // this utility retrieves `OTHER_PROPERTIES` used in `UIGroups` as well
+                  getPropertiesByGroupName(
+                    uiGroups,
+                    group.name,
+                    Object.keys(props.data)
+                  )
+                }
+              />
+              <hr />
+            </>
+          ))}
         </>
-       ))}
-       </>
-      )
+      );
     }
   })
   .register('string', {
     name: 'MyStringComponent',
-    component: props => (
-      <div>{props.data}</div>
-    ),
+    component: props => <div>{props.data}</div>
   });
 
 const uiSchema: UISchema = {
   hints: {
-    '': { // for the root JSONPointer
-      uiGroups: [ // divide object fields into next groups
+    '': {
+      // for the root JSONPointer
+      uiGroups: [
+        // divide object fields into next groups
         {
           name: 'personal',
           fields: ['firstName', 'lastName'],
@@ -266,7 +266,7 @@ const uiSchema: UISchema = {
           /**
            * with `OTHER_PROPERTIES` you can ask to put all properties
            * that are not part of any group into this group
-          */
+           */
           fields: [OTHER_PROPERTIES],
           title: 'Contact Details'
         }
@@ -274,7 +274,7 @@ const uiSchema: UISchema = {
     }
   },
   components: {}
-}
+};
 
 const schema: CoreSchemaMetaSchema = {
   type: 'object',
@@ -303,7 +303,7 @@ const data = {
   city: 'My City',
   lastName: 'Doe',
   firstName: 'John'
-}
+};
 
 export default function App() {
   return (
@@ -317,4 +317,3 @@ export default function App() {
   );
 }
 ```
-

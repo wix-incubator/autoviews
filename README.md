@@ -5,7 +5,7 @@
 ## Installation
 
 ```
-npm install @autoviews/core 
+npm install @autoviews/core
 ```
 
 ## License

@@ -23,10 +23,7 @@ module.exports = {
             type: 'category',
             label: 'Getting Started',
             collapsed: false,
-            items: [
-                'basic/autoview',
-                'basic/quickstart'
-            ]
+            items: ['basic/autoview', 'basic/quickstart']
         },
         {
             type: 'category',

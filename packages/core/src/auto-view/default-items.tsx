@@ -156,7 +156,10 @@ export function nextSchema(
 
     if (dataPointer !== undefined && schema.type === 'object') {
         const {properties = {}, additionalProperties} = schema;
-        const additional = typeof additionalProperties === 'object' ? additionalProperties : {};
+        const additional =
+            typeof additionalProperties === 'object'
+                ? additionalProperties
+                : {};
         return properties[dataPointer] ?? additional;
     }
     throw Error('array schema or object schema and dataPointer expected');
@@ -173,9 +176,9 @@ export function buildNextSchemaPointer(
 
     if (schema.type === 'object') {
         const isAdditional = !(dataPointer in (schema.properties || {}));
-        return isAdditional ?
-            buildJsonPointer(schemaPointer, 'additionalProperties') :
-            buildJsonPointer(schemaPointer, 'properties', dataPointer);
+        return isAdditional
+            ? buildJsonPointer(schemaPointer, 'additionalProperties')
+            : buildJsonPointer(schemaPointer, 'properties', dataPointer);
     }
     throw Error('object or array schema expected');
 }

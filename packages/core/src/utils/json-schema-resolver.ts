@@ -54,11 +54,11 @@ function findKeys<T>(
 ): Array<[string, T]> {
     return Object.keys(schema)
         .map(key =>
-            typeof schema[key] === 'object' ?
-                findKeys(schema[key], objKey, `${pointer}/${key}`, keys) :
-                ((
-                    key === objKey ? [[pointer, schema[key]]] : []
-                ) as Array<[string, T]>)
+            typeof schema[key] === 'object'
+                ? findKeys(schema[key], objKey, `${pointer}/${key}`, keys)
+                : ((key === objKey ? [[pointer, schema[key]]] : []) as Array<
+                      [string, T]
+                  >)
         )
         .reduce((acc, arr) => acc.concat(arr), []);
 }

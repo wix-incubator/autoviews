@@ -34,9 +34,9 @@ export function getPropertiesByGroupName(
 
             if (uiGroup) {
                 return uiGroup.fields.flatMap(field =>
-                    field === OTHER_PROPERTIES ?
-                        getOtherProperties(groups, properties) :
-                        field
+                    field === OTHER_PROPERTIES
+                        ? getOtherProperties(groups, properties)
+                        : field
                 );
             }
             return [];
@@ -48,12 +48,18 @@ export function extractItemUISchema({components, hints}: UISchema): UISchema {
     return createUISchema(
         Object.entries<RepoPointers>(components).reduce<RepoPointersCollection>(
             (acc, [repoName, repoPointers]) => {
-                acc[repoName] = Object.entries(repoPointers).reduce(accumulateItemsPointer, {});
+                acc[repoName] = Object.entries(repoPointers).reduce(
+                    accumulateItemsPointer,
+                    {}
+                );
                 return acc;
             },
             {}
         ),
-        Object.entries<UIHints>(hints).reduce<UIHintsOverrides>(accumulateItemsPointer, {})
+        Object.entries<UIHints>(hints).reduce<UIHintsOverrides>(
+            accumulateItemsPointer,
+            {}
+        )
     );
 }
 
@@ -77,7 +83,9 @@ function accumulatePrefixedPointers<T = any>(
 }
 
 function getOtherProperties(groups: UIGroup[], properties: string[]): string[] {
-    const notOtherProperties = flattenGroups(groups).filter(property => property !== OTHER_PROPERTIES);
+    const notOtherProperties = flattenGroups(groups).filter(
+        property => property !== OTHER_PROPERTIES
+    );
     return properties.filter(prop => !notOtherProperties.includes(prop));
 }
 

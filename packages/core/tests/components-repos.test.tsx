@@ -91,7 +91,7 @@ describe('ComponentsRepo', () => {
                 /* eslint-disable no-prototype-builtins */
                 node.hasOwnProperty('minimum') &&
                 node.hasOwnProperty('maximum');
-                /* eslint-enable no-prototype-builtins */
+            /* eslint-enable no-prototype-builtins */
             const component3 = () => <span>component3</span>;
 
             repo.register('number', {
@@ -134,7 +134,7 @@ describe('ComponentsRepo', () => {
                     /* eslint-disable no-prototype-builtins */
                     node.hasOwnProperty('minimum') &&
                     node.hasOwnProperty('maximum');
-                    /* eslint-enable no-prototype-builtins */
+                /* eslint-enable no-prototype-builtins */
                 const component3 = () => <span>component3</span>;
 
                 repo.register('custom-number', {
@@ -185,12 +185,10 @@ describe('ComponentsRepo', () => {
                     name: 'component2',
                     component: component2
                 })
-                .replace(
-                    'component1',
-                    () => ({
-                        name: 'component3', component: component3
-                    })
-                )
+                .replace('component1', () => ({
+                    name: 'component3',
+                    component: component3
+                }))
                 .getMatched({type: 'number'});
 
             expect(result).toEqual([
@@ -211,25 +209,22 @@ describe('ComponentsRepo', () => {
                     name: 'component2',
                     component: component2
                 })
-                .replace(
-                    'not-present',
-                    () => {
-                        spy();
-                        return {
-                            name: 'component3', component: component3
-                        };
-                    }
-                );
+                .replace('not-present', () => {
+                    spy();
+                    return {
+                        name: 'component3',
+                        component: component3
+                    };
+                });
 
             expect(spy).not.toHaveBeenCalled();
         });
 
         it('should throw error if registering record with existing name', () => {
-            const repo = new ComponentsRepo('testRepo')
-                .register('number', {
-                    name: 'component1',
-                    component: component1
-                });
+            const repo = new ComponentsRepo('testRepo').register('number', {
+                name: 'component1',
+                component: component1
+            });
 
             expect(() => {
                 repo.register('number', {
@@ -352,7 +347,9 @@ describe('ComponentsRepo', () => {
             repo.remove('bar');
 
             expect(repo.getNames()).toEqual(['foo']);
-            expect(repo.getMatched({type: 'string'})).toEqual([{name: 'foo', component}]);
+            expect(repo.getMatched({type: 'string'})).toEqual([
+                {name: 'foo', component}
+            ]);
         });
     });
 

@@ -7,8 +7,10 @@ export interface NumberAccessorInterface extends BaseAccessorInterface {
     type: ACCESSOR_TYPES;
 }
 
-export class NumberAccessor extends BaseAccessor
-    implements NumberAccessorInterface {
+export class NumberAccessor
+    extends BaseAccessor
+    implements NumberAccessorInterface
+{
     public type: ACCESSOR_TYPES = ACCESSOR_TYPES.number;
 
     constructor(uiSchema: UISchema, path: string) {

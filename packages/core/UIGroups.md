@@ -23,9 +23,9 @@ interface UIGroup {
 }
 ```
 
--   `name` is required property and may be used to address it in `ComponentOptions`.
--   `title` is optional, that could be the actual title string or `i18n` identifier.
--   `fields` array of object keys that have to be grouped.
+- `name` is required property and may be used to address it in `ComponentOptions`.
+- `title` is optional, that could be the actual title string or `i18n` identifier.
+- `fields` array of object keys that have to be grouped.
 
 Like other `UIHints`, `UIGroups` need components that respect this type of hints.
 
@@ -128,7 +128,7 @@ const uiSchema = {
 
 ## Key features:
 
--   groups may have different layouts using specific component options
--   same field may appear in different groups
--   special constants `OTHER_PROPERTIES`, `OTHER_GROUPS` allows to select all non-selected properties and groups
--   there is virtual `UNGROUPED` group, which contains all properties that is not defined in any group, there is special utility `getUngroupedProperties` to retirieve them
+- groups may have different layouts using specific component options
+- same field may appear in different groups
+- special constants `OTHER_PROPERTIES`, `OTHER_GROUPS` allows to select all non-selected properties and groups
+- there is virtual `UNGROUPED` group, which contains all properties that is not defined in any group, there is special utility `getUngroupedProperties` to retirieve them

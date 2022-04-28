@@ -27,7 +27,7 @@ export default function Home(): JSX.Element {
         >
             <HomepageHeader />
             <div className={clsx('container', styles.article)}>
-                <PartialHome/>
+                <PartialHome />
             </div>
         </Layout>
     );
