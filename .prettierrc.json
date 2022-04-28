@@ -1,0 +1,17 @@
+{
+  "semi": true,
+  "singleQuote": true,
+  "bracketSpacing": false,
+  "trailingComma": "none",
+  "arrowParens": "avoid",
+  "quoteProps": "consistent",
+  "singleAttributePerLine": true,
+  "overrides": [
+    {
+      "files": "*.{js,jsx,ts,tsx,css}",
+      "options": {
+        "tabWidth": 4
+      }
+    }
+  ]
+}
