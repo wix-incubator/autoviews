@@ -1,11 +1,7 @@
 import {fireEvent, render, screen} from '@testing-library/react';
 import React from 'react';
 
-import {
-    AutoView,
-    AutoViewProps,
-    RepositoryProvider
-} from '../src';
+import {AutoView, AutoViewProps, RepositoryProvider} from '../src';
 import {addFieldEventHandler, addItemEventHandler} from '../src/events';
 
 import {getRepoWithDefaults} from './repositories/recursive-edit-component-repo';
@@ -19,7 +15,9 @@ describe('Events', () => {
                     schema: {type: 'object'}
                 };
 
-                expect(() => addItemEventHandler(props, () => 'whatever')).toThrow();
+                expect(() =>
+                    addItemEventHandler(props, () => 'whatever')
+                ).toThrow();
             });
         });
 
@@ -73,7 +71,9 @@ describe('Events', () => {
                     </RepositoryProvider>
                 );
 
-                const input = screen.getByTestId('#NATIVE_TEXT_INPUT') as HTMLInputElement;
+                const input = screen.getByTestId(
+                    '#NATIVE_TEXT_INPUT'
+                ) as HTMLInputElement;
 
                 fireEvent.change(input, {target: {value: 'new value'}});
 
@@ -106,7 +106,9 @@ describe('Events', () => {
                     </RepositoryProvider>
                 );
 
-                const checkbox = screen.getByTestId('#NATIVE_CHECKBOX') as HTMLInputElement;
+                const checkbox = screen.getByTestId(
+                    '#NATIVE_CHECKBOX'
+                ) as HTMLInputElement;
 
                 fireEvent.click(checkbox);
 
@@ -138,7 +140,9 @@ describe('Events', () => {
                     </RepositoryProvider>
                 );
 
-                const input = screen.getByTestId('#NATIVE_NUMBER_INPUT') as HTMLInputElement;
+                const input = screen.getByTestId(
+                    '#NATIVE_NUMBER_INPUT'
+                ) as HTMLInputElement;
 
                 fireEvent.change(input, {target: {value: '11'}});
 
@@ -179,7 +183,9 @@ describe('Events', () => {
                     </RepositoryProvider>
                 );
 
-                const input1 = screen.getByTestId('/field1#NATIVE_TEXT_INPUT') as HTMLInputElement;
+                const input1 = screen.getByTestId(
+                    '/field1#NATIVE_TEXT_INPUT'
+                ) as HTMLInputElement;
 
                 fireEvent.change(input1, {target: {value: 'new value1'}});
 
@@ -216,7 +222,9 @@ describe('Events', () => {
                     </RepositoryProvider>
                 );
 
-                const input1 = screen.getByTestId('/0#NATIVE_TEXT_INPUT') as HTMLInputElement;
+                const input1 = screen.getByTestId(
+                    '/0#NATIVE_TEXT_INPUT'
+                ) as HTMLInputElement;
 
                 fireEvent.change(input1, {target: {value: 'new value1'}});
 

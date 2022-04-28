@@ -5,10 +5,6 @@ module.exports = {
         '.tsx?$': ['ts-jest', 'babel-jest'],
         '.jsx?$': 'babel-jest'
     },
-    setupFiles: [
-        `<rootDir>/tests/__jest__/env.ts`
-    ],
-    setupFilesAfterEnv: [
-        `<rootDir>/tests/__jest__/setup.ts`
-    ]
+    setupFiles: [`<rootDir>/tests/__jest__/env.ts`],
+    setupFilesAfterEnv: [`<rootDir>/tests/__jest__/setup.ts`]
 };

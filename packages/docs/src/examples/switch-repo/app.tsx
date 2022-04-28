@@ -13,7 +13,7 @@ import {data} from './data';
 import schema from './schema.json';
 import {repo} from './list-repo';
 
-export type MyClickEvent = AutoEvent & {data: {type: string, value?: any}};
+export type MyClickEvent = AutoEvent & {data: {type: string; value?: any}};
 
 export default function App() {
     const [currentData, setData] = React.useState(data);
@@ -22,7 +22,9 @@ export default function App() {
         (_, {pointer, data}) => {
             switch (data.type) {
                 case 'SAVE_ITEM': {
-                    setData([...applyPatch(currentData, data.value).newDocument]);
+                    setData([
+                        ...applyPatch(currentData, data.value).newDocument
+                    ]);
                     break;
                 }
 
@@ -33,8 +35,9 @@ export default function App() {
                     break;
                 }
             }
-        }
-        , [currentData, setData]);
+        },
+        [currentData, setData]
+    );
 
     return (
         <RepositoryProvider components={repo}>

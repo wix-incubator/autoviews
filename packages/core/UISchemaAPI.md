@@ -17,21 +17,21 @@ There is an abstraction called `UISchemaAccessor` which provides semantic API ov
 
 ```ts
 interface BaseAccessorInterface {
-    get(): UISchema;
-    clear(): this;
+  get(): UISchema;
+  clear(): this;
 
-    // hints
-    setHints(callback: (hints: UIHints) => UIHints): this;
-    getHints(): UIHints | undefined;
-    removeHints(): this;
+  // hints
+  setHints(callback: (hints: UIHints) => UIHints): this;
+  getHints(): UIHints | undefined;
+  removeHints(): this;
 
-    // components
-    setComponentOptions(
-        repoName: string,
-        callback: (options?: ComponentOptions) => ComponentOptions
-    ): this;
-    getComponentOptions(repoName: string): ComponentOptions | undefined;
-    removeComponentOptions(repoName: string): this;
+  // components
+  setComponentOptions(
+    repoName: string,
+    callback: (options?: ComponentOptions) => ComponentOptions
+  ): this;
+  getComponentOptions(repoName: string): ComponentOptions | undefined;
+  removeComponentOptions(repoName: string): this;
 }
 ```
 
@@ -39,47 +39,44 @@ At current point of time, only `ObjectAccessor` has additional methods:
 
 ```ts
 interface ObjectAccessorInterface extends BaseAccessorInterface {
-    type: AccessorType;
+  type: AccessorType;
 
-    setGroups(callback: (groups?: UIGroup[]) => UIGroup[]): this;
-    getGroups(): UIGroup[] | undefined;
-    removeGroups(groupNames?: string[]): this;
+  setGroups(callback: (groups?: UIGroup[]) => UIGroup[]): this;
+  getGroups(): UIGroup[] | undefined;
+  removeGroups(groupNames?: string[]): this;
 
-    setGroup(groupName: string, callback: (group: UIGroup) => UIGroup): this;
-    getGroup(groupName: string): UIGroup | undefined;
-    addGroup(groupName: string): this;
-    removeGroup(groupName: string): this;
-    setGroupPosition(groupName: string, position: number): this;
-    setGroupTitle(groupName: string, title: string): this;
-    addPropertyToGroup(groupName: string, prop: string): this;
-    removePropertyFromGroup(groupName: string, prop: string): this;
-    getGroupPosition(groupName: string): number;
-    isPropertyInGroup(groupName: string, prop: string): boolean;
+  setGroup(groupName: string, callback: (group: UIGroup) => UIGroup): this;
+  getGroup(groupName: string): UIGroup | undefined;
+  addGroup(groupName: string): this;
+  removeGroup(groupName: string): this;
+  setGroupPosition(groupName: string, position: number): this;
+  setGroupTitle(groupName: string, title: string): this;
+  addPropertyToGroup(groupName: string, prop: string): this;
+  removePropertyFromGroup(groupName: string, prop: string): this;
+  getGroupPosition(groupName: string): number;
+  isPropertyInGroup(groupName: string, prop: string): boolean;
 
-    setOrder(callback: (order?: string[]) => string[]): this;
-    getOrder(): string[] | undefined;
-    addPropertyToOrder(propertyName: string, position?: number): this;
-    removePropertyFromOrder(propertyName: string): this;
-    setPropertyPositionInOrder(propertyName: string, position: number): this;
-    isPropertyInOrder(propertyName: string): boolean;
-    getPropertyPositionInOrder(propertyName: string): number;
-    clearOrder(): this;
+  setOrder(callback: (order?: string[]) => string[]): this;
+  getOrder(): string[] | undefined;
+  addPropertyToOrder(propertyName: string, position?: number): this;
+  removePropertyFromOrder(propertyName: string): this;
+  setPropertyPositionInOrder(propertyName: string, position: number): this;
+  isPropertyInOrder(propertyName: string): boolean;
+  getPropertyPositionInOrder(propertyName: string): number;
+  clearOrder(): this;
 
-    setPropertyComponentOptions(
-        propertyName: string,
-        repoName: string,
-        callback: (options?: ComponentOptions) => ComponentOptions
-    ): this;
-    getPropertyComponentOptions(
-        propertyName: string,
-        repoName: string
-    ): ComponentOptions | undefined;
-    removePropertyComponentOptions(
-        propertyName: string,
-        repoName: string
-    ): this;
+  setPropertyComponentOptions(
+    propertyName: string,
+    repoName: string,
+    callback: (options?: ComponentOptions) => ComponentOptions
+  ): this;
+  getPropertyComponentOptions(
+    propertyName: string,
+    repoName: string
+  ): ComponentOptions | undefined;
+  removePropertyComponentOptions(propertyName: string, repoName: string): this;
 
-    removeProperty(propertyName: string): this;
+  removeProperty(propertyName: string): this;
 }
 ```
 
@@ -87,8 +84,8 @@ interface ObjectAccessorInterface extends BaseAccessorInterface {
 
 ```ts
 interface ComponentOptions {
-    name: string;
-    options: any;
+  name: string;
+  options: any;
 }
 ```
 
@@ -106,13 +103,13 @@ const emptySchema = createUISchema();
 const accessor = createUISchemaAccessor(emptySchema, '/path/to/data', 'object');
 
 accessor
-    .addGroup('C')
-    .addGroup('A')
-    .addGroup('B')
-    .setGroupTitle('A', 'Title for A')
-    .setGroupTitle('C', 'Title for C')
-    .setGroupTitle('B', 'Title for B')
-    .setGroups(groups => groups.sort((a, b) => a.name.localeCompare(b.name)));
+  .addGroup('C')
+  .addGroup('A')
+  .addGroup('B')
+  .setGroupTitle('A', 'Title for A')
+  .setGroupTitle('C', 'Title for C')
+  .setGroupTitle('B', 'Title for B')
+  .setGroups(groups => groups.sort((a, b) => a.name.localeCompare(b.name)));
 ```
 
 Result of `accessor.get()`:
@@ -151,14 +148,14 @@ Result of `accessor.get()`:
 const accessor = createUISchemaAccessor(emptySchema, '/path/to/data', 'object');
 
 accessor
-    .addGroup('myAwesomeGroup')
-    .setGroupTitle('myAwesomeGroup', 'MyAwesomeGroupTitle')
-    .addPropertyToGroup('myAwesomeGroup', 'someProp0')
-    .addPropertyToGroup('myAwesomeGroup', 'someProp1')
-    .setPropertyComponentOptions('someProp0', 'EditRepo', () => ({
-        name: 'SomeComponentName',
-        options: {foo: 'bar'}
-    }));
+  .addGroup('myAwesomeGroup')
+  .setGroupTitle('myAwesomeGroup', 'MyAwesomeGroupTitle')
+  .addPropertyToGroup('myAwesomeGroup', 'someProp0')
+  .addPropertyToGroup('myAwesomeGroup', 'someProp1')
+  .setPropertyComponentOptions('someProp0', 'EditRepo', () => ({
+    name: 'SomeComponentName',
+    options: {foo: 'bar'}
+  }));
 ```
 
 Result of `accessor.get()`:
@@ -191,17 +188,17 @@ Result of `accessor.get()`:
 const accessor = createUISchemaAccessor(emptySchema, '/path/to/data', 'object');
 
 accessor
-    .addGroup('myAwesomeGroup')
-    .setGroupTitle('myAwesomeGroup', 'MyAwesomeGroupTitle')
-    .addPropertyToGroup('myAwesomeGroup', 'someProp0')
-    .addPropertyToGroup('myAwesomeGroup', 'someProp1')
-    .addPropertyToOrder('someProp0')
-    .addPropertyToOrder('someProp1')
-    .setPropertyPositionInOrder('someProp1', 0)
-    .setComponentOptions('EditRepo', () => ({
-        name: 'SomeComponentName',
-        options: {foo: 'bar'}
-    }));
+  .addGroup('myAwesomeGroup')
+  .setGroupTitle('myAwesomeGroup', 'MyAwesomeGroupTitle')
+  .addPropertyToGroup('myAwesomeGroup', 'someProp0')
+  .addPropertyToGroup('myAwesomeGroup', 'someProp1')
+  .addPropertyToOrder('someProp0')
+  .addPropertyToOrder('someProp1')
+  .setPropertyPositionInOrder('someProp1', 0)
+  .setComponentOptions('EditRepo', () => ({
+    name: 'SomeComponentName',
+    options: {foo: 'bar'}
+  }));
 ```
 
 Result of `accessor.get()`:

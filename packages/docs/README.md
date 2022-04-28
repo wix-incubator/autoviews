@@ -16,6 +16,7 @@ See what [markdown features](https://docusaurus.io/docs/markdown-features) are s
 ### Code blocks
 
 #### 1) Create folder with example files
+
 ```shell
 src/examples/<name>/
   schema.json
@@ -33,15 +34,15 @@ function Example() {
 }
 
 // index.ts:
-import schema from './schema.json?raw-loader'
-import data from './data.json?raw-loader'
-import indexFile from './index.tsx?raw-loader'
+import schema from './schema.json?raw-loader';
+import data from './data.json?raw-loader';
+import indexFile from './index.tsx?raw-loader';
 
 export default {
   'schema.json': schema,
   'data.json': data,
-  'index.tsx': indexFile,
-}
+  'index.tsx': indexFile
+};
 ```
 
 #### 2) Use example in `docs/<name>.md` file
@@ -49,10 +50,10 @@ export default {
 Use component `<Code/>` to render live-editor of the example.
 
 ```js
-import Code from '../src/components/Code/Code'
-import exampleFiles from '../src/examples/<name>'
+import Code from '../src/components/Code/Code';
+import exampleFiles from '../src/examples/<name>';
 
-<Code files={exampleFiles} />
+<Code files={exampleFiles} />;
 ```
 
 Every file will be rendered and allowed to edit **on separate tab**.

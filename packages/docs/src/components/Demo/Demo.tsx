@@ -1,5 +1,9 @@
 import React from 'react';
-import {Sandpack, SandpackFiles, SandpackProps} from '@codesandbox/sandpack-react';
+import {
+    Sandpack,
+    SandpackFiles,
+    SandpackProps
+} from '@codesandbox/sandpack-react';
 import {useColorMode} from '@docusaurus/theme-common';
 
 export type DemoFiles = SandpackFiles;

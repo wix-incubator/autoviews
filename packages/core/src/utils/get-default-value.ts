@@ -6,24 +6,21 @@ export function getDefaultValue(schema: CoreSchemaMetaSchema): any {
     }
     switch (schema.type) {
         case 'object':
-            return schema.properties ?
-                Object.keys(schema.properties).reduce<{[k: string]: any}>(
-                    (acc, key) => {
-                        acc[key] = getDefaultValue(
-                            schema.properties![key]
-                        );
-                        return acc;
-                    },
-                    {}
-                ) :
-                {};
+            return schema.properties
+                ? Object.keys(schema.properties).reduce<{[k: string]: any}>(
+                      (acc, key) => {
+                          acc[key] = getDefaultValue(schema.properties![key]);
+                          return acc;
+                      },
+                      {}
+                  )
+                : {};
         case 'array':
-            return schema.items &&
-                    !(schema.items instanceof Array) &&
-                    (schema.items.default ?
-                        [schema.items.default] :
-                        []
-                    );
+            return (
+                schema.items &&
+                !(schema.items instanceof Array) &&
+                (schema.items.default ? [schema.items.default] : [])
+            );
         default:
             return undefined;
     }

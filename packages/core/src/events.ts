@@ -26,9 +26,7 @@ export function addItemEventHandler<T>(
     props: Partial<AutoViewProps>,
     getValue: ValueGetter<T>
 ): (e: T) => void {
-    const {
-        data, onChange, schemaPointer = '', pointer = ''
-    } = props;
+    const {data, onChange, schemaPointer = '', pointer = ''} = props;
 
     if (data instanceof Array) {
         return e =>
@@ -46,7 +44,6 @@ export function addItemEventHandler<T>(
             });
     }
     throw Error('cannot add items to a non-array type');
-
 }
 
 export function addFieldEventHandler<T>(
@@ -54,9 +51,7 @@ export function addFieldEventHandler<T>(
     getValue: ValueGetter<T>,
     getTargetKey: ValueGetter<T>
 ): (e: T) => void {
-    const {
-        data, onChange, schemaPointer = '', pointer = ''
-    } = props;
+    const {data, onChange, schemaPointer = '', pointer = ''} = props;
 
     if (data instanceof Object && !(data instanceof Array)) {
         return e =>
@@ -74,7 +69,6 @@ export function addFieldEventHandler<T>(
             });
     }
     throw Error('cannot add fields to a non-object type');
-
 }
 
 export function removeEventHandler({

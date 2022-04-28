@@ -37,15 +37,14 @@ export interface ComponentRepoRecord<P> {
     defaultOptions?: any;
 }
 
-export type ReplaceComponentRepoRecordFn =
-    (record: ComponentRepoRecord<AutoViewProps>) => ComponentRepoRecord<AutoViewProps>;
+export type ReplaceComponentRepoRecordFn = (
+    record: ComponentRepoRecord<AutoViewProps>
+) => ComponentRepoRecord<AutoViewProps>;
 
 const filterByIncludeExclude = (name: string, rules?: IncludeExcludeRules) =>
     !rules ||
-        (
-            (!rules.include || rules.include.includes(name)) &&
-            (!rules.exclude || !rules.exclude.includes(name))
-        );
+    ((!rules.include || rules.include.includes(name)) &&
+        (!rules.exclude || !rules.exclude.includes(name)));
 
 export class ComponentsRepo {
     private byType: ComponentsRepoStorage<AutoViewProps> = {};
@@ -83,7 +82,10 @@ export class ComponentsRepo {
         });
     }
 
-    public register(type: string | symbol, record: ComponentRepoRecord<AutoViewProps>) {
+    public register(
+        type: string | symbol,
+        record: ComponentRepoRecord<AutoViewProps>
+    ) {
         if (this.byName.has(record.name)) {
             throw new Error(
                 `Component record with name '${record.name}' is already registered in ComponentRepo '${this.name}'. You can't register multiple records with same name.`
@@ -129,8 +131,7 @@ export class ComponentsRepo {
         fn: ReplaceComponentRepoRecordFn,
         rules?: IncludeExcludeRules
     ) {
-        this
-            .getNames()
+        this.getNames()
             .filter(name => filterByIncludeExclude(name, rules))
             .forEach(name => {
                 this.replace(name, fn);
@@ -172,10 +173,10 @@ export class ComponentsRepo {
         if (typeof type !== 'string') {
             return [];
         }
-        const registered = this.getByType(type)|| [];
+        const registered = this.getByType(type) || [];
         // noinspection JSUnusedLocalSymbols
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        return registered.filter(({predicate = (n) => true}) => predicate(node));
+        return registered.filter(({predicate = n => true}) => predicate(node));
     }
 
     public registerCollection(

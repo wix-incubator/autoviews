@@ -1,6 +1,4 @@
-import {
-    ComponentOptions, getDefaultHints, UIHints, UISchema
-} from '../models';
+import {ComponentOptions, getDefaultHints, UIHints, UISchema} from '../models';
 import {createUISchemaAccessor} from '../models/UISchema';
 import {RepoName} from '../repository';
 

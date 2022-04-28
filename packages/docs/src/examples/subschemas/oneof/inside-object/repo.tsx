@@ -25,10 +25,7 @@ const StringComponent: React.FC<AutoViewProps> = props => (
             variant="outlined"
             label={props.schema.title}
             value={props.data}
-            onChange={changeEventHandler(
-                props,
-                e => e.target.value
-            )}
+            onChange={changeEventHandler(props, e => e.target.value)}
         />
     </FormControl>
 );
@@ -50,15 +47,11 @@ const OneOfAsEnumComponent: React.FC<AutoViewProps> = props => (
         fullWidth
         margin="normal"
     >
-
         <FormLabel id={props.schema.title}>{props.schema.title}</FormLabel>
         <RadioGroup
             row
             name={props.schema.title}
-            onChange={changeEventHandler(
-                props,
-                e => e.target.value
-            )}
+            onChange={changeEventHandler(props, e => e.target.value)}
             defaultValue={props.schema.oneOf[0].const}
         >
             {props.schema.oneOf!.map(item => (
@@ -77,9 +70,14 @@ const customOneOfType = Symbol('customOneOf');
 const CustomOneOfComponent: React.FC<AutoViewProps> = props => {
     const [option, setOption] = React.useState(0);
 
-    const onChange = React.useCallback<React.ChangeEventHandler<HTMLSelectElement>>(e => {
-        setOption(parseInt(e.target.value, 10));
-    }, [setOption]);
+    const onChange = React.useCallback<
+        React.ChangeEventHandler<HTMLSelectElement>
+    >(
+        e => {
+            setOption(parseInt(e.target.value, 10));
+        },
+        [setOption]
+    );
 
     const optionSchema = {
         title: 'Select contact',

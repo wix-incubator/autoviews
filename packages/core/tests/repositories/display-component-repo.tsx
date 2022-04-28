@@ -73,10 +73,7 @@ const defaultComponents: ComponentsRepoStorage<AutoViewProps> = {
             name: uniqueString('title'),
             component: props => (
                 <h2
-                    data-automation-id={getAutomationId(
-                        props.pointer,
-                        'TITLE'
-                    )}
+                    data-automation-id={getAutomationId(props.pointer, 'TITLE')}
                 >
                     {props.data}
                 </h2>

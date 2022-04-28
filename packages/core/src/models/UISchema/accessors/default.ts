@@ -7,8 +7,10 @@ export interface DefaultAccessorInterface extends BaseAccessorInterface {
     type: ACCESSOR_TYPES;
 }
 
-export class DefaultAccessor extends BaseAccessor
-    implements DefaultAccessorInterface {
+export class DefaultAccessor
+    extends BaseAccessor
+    implements DefaultAccessorInterface
+{
     public type: ACCESSOR_TYPES = ACCESSOR_TYPES.default;
 
     constructor(uiSchema: UISchema, path: string) {

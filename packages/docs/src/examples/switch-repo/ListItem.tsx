@@ -8,9 +8,7 @@ import {
     AutoChangeEvent,
     clickEventHandler
 } from '@autoviews/core';
-import {
-    ListItem as MUIListItem, Divider, Button, Stack
-} from '@mui/material';
+import {ListItem as MUIListItem, Divider, Button, Stack} from '@mui/material';
 
 import {repo} from './item-repo';
 
@@ -49,7 +47,7 @@ export const ListItem: React.ComponentType<AutoViewProps> = props => {
                             Edit
                         </Button>
                     </MUIListItem>
-                    <Divider component="li"/>
+                    <Divider component="li" />
                 </>
             );
         }
@@ -91,4 +89,3 @@ export const ListItem: React.ComponentType<AutoViewProps> = props => {
         }
     }
 };
-

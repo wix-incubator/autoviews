@@ -61,9 +61,9 @@ export class ErrorBoundary extends React.Component<
             message: error.message,
             stack: error.stack,
             componentStack: errorInfo.componentStack,
-            props: isChildrenAnElement(children) ?
-                filterProps(children.props) :
-                null
+            props: isChildrenAnElement(children)
+                ? filterProps(children.props)
+                : null
         });
     }
 

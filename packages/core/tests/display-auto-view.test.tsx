@@ -10,7 +10,10 @@ import {
 import {jsonSchemaResolver} from '../src/utils';
 
 import {productItemSchema, productSchema, resolveMockById} from './json-schema';
-import {getRepoWithDefaults as getEditRepo, getDefaultComponents as getEditRepoDafaultComponent} from './repositories/edit-component-repo';
+import {
+    getRepoWithDefaults as getEditRepo,
+    getDefaultComponents as getEditRepoDafaultComponent
+} from './repositories/edit-component-repo';
 import {ViewModes} from './repositories/types';
 import {getDefaultComponents as getDisplayRepoDafaultComponent} from './repositories/display-component-repo';
 
@@ -58,7 +61,9 @@ describe('Display AutoView', () => {
             expect(nameInput).toBeInTheDocument();
             expect(nameInput).toHaveValue('bar');
 
-            const lengthText = screen.getByTestId('/dimensions/length#SIMPLE-TEXT');
+            const lengthText = screen.getByTestId(
+                '/dimensions/length#SIMPLE-TEXT'
+            );
             const cardItem = screen.getByTestId('/dimensions#CARD');
             expect(lengthText).toBeInTheDocument();
             expect(cardItem).toBeInTheDocument();
@@ -86,8 +91,12 @@ describe('Display AutoView', () => {
             expect(screen.getByTestId('/0/name#TITLE')).toBeInTheDocument();
             expect(screen.getByTestId('/1/name#TITLE')).toBeInTheDocument();
 
-            expect(screen.getByTestId('/0/name#TITLE')).toHaveTextContent(productItemData.name);
-            expect(screen.getByTestId('/1/name#TITLE')).toHaveTextContent(productItem2.name);
+            expect(screen.getByTestId('/0/name#TITLE')).toHaveTextContent(
+                productItemData.name
+            );
+            expect(screen.getByTestId('/1/name#TITLE')).toHaveTextContent(
+                productItem2.name
+            );
         });
     });
 
@@ -111,7 +120,9 @@ describe('Display AutoView', () => {
             const lengthInput = screen.getByTestId(
                 '/dimensions/length#NATIVE_NUMBER_INPUT'
             );
-            const widthInput = screen.getByTestId('/dimensions/width#NATIVE_NUMBER_INPUT');
+            const widthInput = screen.getByTestId(
+                '/dimensions/width#NATIVE_NUMBER_INPUT'
+            );
             const heightInput = screen.getByTestId(
                 '/dimensions/height#NATIVE_NUMBER_INPUT'
             );
@@ -134,7 +145,8 @@ describe('Display AutoView', () => {
                 components: {
                     [ViewModes.DISPLAY]: {
                         '/properties/dimensions/properties/length': {
-                            name: getDisplayRepoDafaultComponent().number[0].name
+                            name: getDisplayRepoDafaultComponent().number[0]
+                                .name
                         }
                     }
                 }
@@ -150,7 +162,9 @@ describe('Display AutoView', () => {
                 </RepositoryProvider>
             );
 
-            const lengthText = screen.getByTestId('/dimensions/length#FORMATTED-NUMBER');
+            const lengthText = screen.getByTestId(
+                '/dimensions/length#FORMATTED-NUMBER'
+            );
 
             expect(lengthText).toBeInTheDocument();
             expect(lengthText).toHaveTextContent(
@@ -185,9 +199,15 @@ describe('Display AutoView', () => {
 
             fireEvent.click(cardItem!);
 
-            const lengthInput = screen.getByTestId('/dimensions/length#NATIVE_INPUT');
-            const widthInput = screen.getByTestId('/dimensions/width#NATIVE_NUMBER_INPUT');
-            const heightInput = screen.getByTestId('/dimensions/height#NATIVE_NUMBER_INPUT');
+            const lengthInput = screen.getByTestId(
+                '/dimensions/length#NATIVE_INPUT'
+            );
+            const widthInput = screen.getByTestId(
+                '/dimensions/width#NATIVE_NUMBER_INPUT'
+            );
+            const heightInput = screen.getByTestId(
+                '/dimensions/height#NATIVE_NUMBER_INPUT'
+            );
 
             expect(lengthInput).toBeInTheDocument();
             expect(heightInput).toBeInTheDocument();

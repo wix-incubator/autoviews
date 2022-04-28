@@ -9,43 +9,56 @@ export interface RepositoryComponentByTypeProps {
     type: string | symbol;
 }
 
-export const RepositoryComponentByType: React.FC<RepositoryComponentByTypeProps & AutoViewProps> =
-    ({type, ...autoViewProps}) => (
-        <RepositoryConsumer>
-            {({components}) => {
-                const componentsByType = components.getByType(type);
+export const RepositoryComponentByType: React.FC<
+    RepositoryComponentByTypeProps & AutoViewProps
+> = ({type, ...autoViewProps}) => (
+    <RepositoryConsumer>
+        {({components}) => {
+            const componentsByType = components.getByType(type);
 
-                if (!Array.isArray(componentsByType) || componentsByType.length === 0) {
-                    return null;
-                }
+            if (
+                !Array.isArray(componentsByType) ||
+                componentsByType.length === 0
+            ) {
+                return null;
+            }
 
-                const component = componentsByType[componentsByType.length - 1].component;
+            const component =
+                componentsByType[componentsByType.length - 1].component;
 
-                return React.createElement(component, autoViewProps);
-            }}
-        </RepositoryConsumer>
-    );
+            return React.createElement(component, autoViewProps);
+        }}
+    </RepositoryConsumer>
+);
 
 export interface RepositoryComponentByRecordNameProps {
     recordName: string;
 }
 
-export const RepositoryComponentByRecordName: React.FC<RepositoryComponentByRecordNameProps & AutoViewProps> =
-    ({recordName, ...autoViewProps}) => (
-        <RepositoryConsumer>
-            {({components}) => {
-                const component = components.get(recordName)?.component;
+export const RepositoryComponentByRecordName: React.FC<
+    RepositoryComponentByRecordNameProps & AutoViewProps
+> = ({recordName, ...autoViewProps}) => (
+    <RepositoryConsumer>
+        {({components}) => {
+            const component = components.get(recordName)?.component;
 
-                return component ? React.createElement(component, autoViewProps) : null;
-            }}
-        </RepositoryConsumer>
-    );
+            return component
+                ? React.createElement(component, autoViewProps)
+                : null;
+        }}
+    </RepositoryConsumer>
+);
 
-export const RefComponent: React.FC<AutoViewProps> = ({schema, ...otherProps}) => {
+export const RefComponent: React.FC<AutoViewProps> = ({
+    schema,
+    ...otherProps
+}) => {
     const {validator} = useRepositoryContext();
 
     if (!schema.$ref) {
-        throw new Error('RefComponent cannot be invoked without `$ref` property in schema');
+        throw new Error(
+            'RefComponent cannot be invoked without `$ref` property in schema'
+        );
     }
 
     const referredSchema = validator.getSchema(schema.$ref);

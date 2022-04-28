@@ -41,9 +41,7 @@ module.exports = {
             type: 'category',
             label: 'utilities',
             collapsed: false,
-            items: [
-                'entities/repository-components'
-            ]
+            items: ['entities/repository-components']
         },
         {
             type: 'category',

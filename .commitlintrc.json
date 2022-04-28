@@ -1,9 +1,7 @@
 {
-    "extends": [
-        "@commitlint/config-conventional"
-    ],
-    "rules": {
-        "subject-case": [2, "always", ["lower-case", "sentence-case"]],
-        "body-max-line-length": [2, "always", "Infinity"]
-    }
+  "extends": ["@commitlint/config-conventional"],
+  "rules": {
+    "subject-case": [2, "always", ["lower-case", "sentence-case"]],
+    "body-max-line-length": [2, "always", "Infinity"]
+  }
 }

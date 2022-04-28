@@ -22,25 +22,28 @@ const App = () => {
                     onChange={onChange}
                 />
             </RepositoryProvider>
-            {
-                value && (
-                    <>
-                        <Typography>
-                            <Box
-                                sx={{marginTop: '20px'}}
-                                style={{display: 'flex', alignItems: 'center'}}
-                            >
-                                <span>You just selected</span>
-                                <span style={{
+            {value && (
+                <>
+                    <Typography>
+                        <Box
+                            sx={{marginTop: '20px'}}
+                            style={{display: 'flex', alignItems: 'center'}}
+                        >
+                            <span>You just selected</span>
+                            <span
+                                style={{
                                     background: value,
-                                    display: 'block', width: '16px', height: '16px', margin: '0 10px', borderRadius: '4px'
+                                    display: 'block',
+                                    width: '16px',
+                                    height: '16px',
+                                    margin: '0 10px',
+                                    borderRadius: '4px'
                                 }}
-                                />
-                            </Box>
-                        </Typography>
-                    </>
-                )}
-
+                            />
+                        </Box>
+                    </Typography>
+                </>
+            )}
         </>
     );
 };

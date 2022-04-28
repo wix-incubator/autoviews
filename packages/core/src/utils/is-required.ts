@@ -23,5 +23,5 @@ export const isRequired = (
         return false;
     }
 
-    return (parent.required as string []).includes(parse(pointer).pop()!);
+    return (parent.required as string[]).includes(parse(pointer).pop()!);
 };

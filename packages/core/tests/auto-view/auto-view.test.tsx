@@ -65,7 +65,9 @@ describe('AutoView', () => {
                 );
 
                 const fieldset = screen.getByTestId('#FIELDSET');
-                const input = within(fieldset).getByTestId('/foo#NATIVE_TEXT_INPUT');
+                const input = within(fieldset).getByTestId(
+                    '/foo#NATIVE_TEXT_INPUT'
+                );
 
                 expect(fieldset).toBeInTheDocument();
                 expect(input).toHaveValue('');
@@ -85,7 +87,9 @@ describe('AutoView', () => {
                 );
 
                 const fieldset = screen.getByTestId('#FIELDSET');
-                const input = within(fieldset).getByTestId('/foo#NATIVE_TEXT_INPUT');
+                const input = within(fieldset).getByTestId(
+                    '/foo#NATIVE_TEXT_INPUT'
+                );
 
                 expect(fieldset).toBeInTheDocument();
                 expect(input).toHaveValue('');
@@ -105,7 +109,9 @@ describe('AutoView', () => {
                 );
 
                 const fieldset = screen.getByTestId('#FIELDSET');
-                const input = within(fieldset).getByTestId('/foo#NATIVE_TEXT_INPUT');
+                const input = within(fieldset).getByTestId(
+                    '/foo#NATIVE_TEXT_INPUT'
+                );
 
                 expect(fieldset).toBeInTheDocument();
                 expect(input).toHaveValue('');
@@ -131,8 +137,12 @@ describe('AutoView', () => {
                 );
 
                 const fieldset = screen.getByTestId('#FIELDSET');
-                const input1 = within(fieldset).getByTestId('/field1#NATIVE_TEXT_INPUT');
-                const input2 = within(fieldset).getByTestId('/field2#NATIVE_TEXT_INPUT');
+                const input1 = within(fieldset).getByTestId(
+                    '/field1#NATIVE_TEXT_INPUT'
+                );
+                const input2 = within(fieldset).getByTestId(
+                    '/field2#NATIVE_TEXT_INPUT'
+                );
 
                 expect(input1).toBeInTheDocument();
                 expect(input1).toHaveValue('value1');
@@ -162,8 +172,12 @@ describe('AutoView', () => {
                 );
 
                 const fieldset = screen.getByTestId('#FIELDSET');
-                const input1 = within(fieldset).queryByTestId('/field1#NATIVE_TEXT_INPUT');
-                const input2 = within(fieldset).queryByTestId('/field2#NATIVE_TEXT_INPUT');
+                const input1 = within(fieldset).queryByTestId(
+                    '/field1#NATIVE_TEXT_INPUT'
+                );
+                const input2 = within(fieldset).queryByTestId(
+                    '/field2#NATIVE_TEXT_INPUT'
+                );
 
                 expect(input1).not.toBeInTheDocument();
                 expect(input2).toBeInTheDocument();
@@ -192,9 +206,15 @@ describe('AutoView', () => {
                 );
 
                 const fieldset = screen.getByTestId('#FIELDSET');
-                const input1 = within(fieldset).queryByTestId('/field1#NATIVE_TEXT_INPUT');
-                const input2 = within(fieldset).queryByTestId('/field2#NATIVE_TEXT_INPUT');
-                const input3 = within(fieldset).queryByTestId('/field3#NATIVE_TEXT_INPUT');
+                const input1 = within(fieldset).queryByTestId(
+                    '/field1#NATIVE_TEXT_INPUT'
+                );
+                const input2 = within(fieldset).queryByTestId(
+                    '/field2#NATIVE_TEXT_INPUT'
+                );
+                const input3 = within(fieldset).queryByTestId(
+                    '/field3#NATIVE_TEXT_INPUT'
+                );
 
                 expect(input1).toBeInTheDocument();
                 expect(input2).toBeInTheDocument();
@@ -223,8 +243,12 @@ describe('AutoView', () => {
                 );
 
                 const fieldset = screen.getByTestId('#FIELDSET');
-                const input1 = within(fieldset).queryByTestId('/field1#NATIVE_TEXT_INPUT');
-                const input2 = within(fieldset).queryByTestId('/field2#NATIVE_TEXT_INPUT');
+                const input1 = within(fieldset).queryByTestId(
+                    '/field1#NATIVE_TEXT_INPUT'
+                );
+                const input2 = within(fieldset).queryByTestId(
+                    '/field2#NATIVE_TEXT_INPUT'
+                );
 
                 expect(input1).toBeInTheDocument();
                 expect(input2).not.toBeInTheDocument();
@@ -275,8 +299,12 @@ describe('AutoView', () => {
                 );
 
                 const fieldset = screen.getByTestId('#FIELDSET');
-                const input1 = within(fieldset).queryByTestId('/field1#NATIVE_TEXT_INPUT');
-                const input2 = within(fieldset).queryByTestId('/field2#NATIVE_TEXT_INPUT');
+                const input1 = within(fieldset).queryByTestId(
+                    '/field1#NATIVE_TEXT_INPUT'
+                );
+                const input2 = within(fieldset).queryByTestId(
+                    '/field2#NATIVE_TEXT_INPUT'
+                );
 
                 expect(input1).toBeInTheDocument();
                 expect(input2).toBeInTheDocument();
@@ -307,10 +335,14 @@ describe('AutoView', () => {
                 );
 
                 const fieldset = screen.getByTestId('#FIELDSET');
-                const input1 = within(fieldset).queryByTestId('/field1#NATIVE_TEXT_INPUT');
+                const input1 = within(fieldset).queryByTestId(
+                    '/field1#NATIVE_TEXT_INPUT'
+                );
 
                 const innerFieldset = screen.getByTestId('/inner#FIELDSET');
-                const input2 = within(innerFieldset).queryByTestId('/inner/field2#NATIVE_TEXT_INPUT');
+                const input2 = within(innerFieldset).queryByTestId(
+                    '/inner/field2#NATIVE_TEXT_INPUT'
+                );
 
                 expect(input1).toBeInTheDocument();
                 expect(input1).toHaveValue('value1');
@@ -337,7 +369,9 @@ describe('AutoView', () => {
                 );
 
                 const fieldset = screen.getByTestId('#FIELDSET');
-                const input = within(fieldset).getByTestId('/#NATIVE_TEXT_INPUT');
+                const input = within(fieldset).getByTestId(
+                    '/#NATIVE_TEXT_INPUT'
+                );
 
                 expect(input).toBeInTheDocument();
                 expect(input).toHaveValue('value1');
@@ -370,10 +404,18 @@ describe('AutoView', () => {
                         </RepositoryProvider>
                     );
 
-                    expect(screen.getByTestId('/foo#NATIVE_TEXT_INPUT')).toBeInTheDocument();
-                    expect(screen.getByTestId('/one#NATIVE_NUMBER_INPUT')).toBeInTheDocument();
-                    expect(screen.getByTestId('/two#NATIVE_NUMBER_INPUT')).toBeInTheDocument();
-                    expect(screen.getByTestId('/three#NATIVE_NUMBER_INPUT')).toBeInTheDocument();
+                    expect(
+                        screen.getByTestId('/foo#NATIVE_TEXT_INPUT')
+                    ).toBeInTheDocument();
+                    expect(
+                        screen.getByTestId('/one#NATIVE_NUMBER_INPUT')
+                    ).toBeInTheDocument();
+                    expect(
+                        screen.getByTestId('/two#NATIVE_NUMBER_INPUT')
+                    ).toBeInTheDocument();
+                    expect(
+                        screen.getByTestId('/three#NATIVE_NUMBER_INPUT')
+                    ).toBeInTheDocument();
                 });
 
                 it('should not render additional properties when not defined', () => {
@@ -397,8 +439,12 @@ describe('AutoView', () => {
                         </RepositoryProvider>
                     );
 
-                    expect(screen.getByTestId('/foo#NATIVE_TEXT_INPUT')).toBeInTheDocument();
-                    expect(screen.queryByTestId('/one#NATIVE_NUMBER_INPUT')).not.toBeInTheDocument();
+                    expect(
+                        screen.getByTestId('/foo#NATIVE_TEXT_INPUT')
+                    ).toBeInTheDocument();
+                    expect(
+                        screen.queryByTestId('/one#NATIVE_NUMBER_INPUT')
+                    ).not.toBeInTheDocument();
                 });
             });
         });
@@ -417,7 +463,9 @@ describe('AutoView', () => {
                 );
 
                 const fieldset = screen.getByTestId('#FIELDSET');
-                const input = within(fieldset).queryByTestId('/0#NATIVE_TEXT_INPUT');
+                const input = within(fieldset).queryByTestId(
+                    '/0#NATIVE_TEXT_INPUT'
+                );
 
                 expect(fieldset).toBeInTheDocument();
                 expect(input).not.toBeInTheDocument();
@@ -437,7 +485,9 @@ describe('AutoView', () => {
                 );
 
                 const fieldset = screen.getByTestId('#FIELDSET');
-                const input = within(fieldset).queryByTestId('/0#NATIVE_TEXT_INPUT');
+                const input = within(fieldset).queryByTestId(
+                    '/0#NATIVE_TEXT_INPUT'
+                );
 
                 expect(fieldset).toBeInTheDocument();
                 expect(input).toHaveValue('');
@@ -457,7 +507,9 @@ describe('AutoView', () => {
                 );
 
                 const fieldset = screen.getByTestId('#FIELDSET');
-                const input = within(fieldset).queryByTestId('/0#NATIVE_TEXT_INPUT');
+                const input = within(fieldset).queryByTestId(
+                    '/0#NATIVE_TEXT_INPUT'
+                );
 
                 expect(fieldset).toBeInTheDocument();
                 expect(input).toHaveValue('');
@@ -578,9 +630,13 @@ describe('AutoView', () => {
                     </RepositoryProvider>
                 );
 
-                expect(onRenderError).toHaveBeenCalledWith(expect.objectContaining({
-                    message: expect.stringContaining('cannot resolve any type from "["string","number"]" for ""')
-                }));
+                expect(onRenderError).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        message: expect.stringContaining(
+                            'cannot resolve any type from "["string","number"]" for ""'
+                        )
+                    })
+                );
             });
         });
     });
@@ -604,7 +660,9 @@ describe('AutoView', () => {
                 );
 
                 const stringInput = screen.queryByTestId('#NATIVE_TEXT_INPUT');
-                const numberInput = screen.queryByTestId('#NATIVE_NUMBER_INPUT');
+                const numberInput = screen.queryByTestId(
+                    '#NATIVE_NUMBER_INPUT'
+                );
 
                 expect(stringInput).toBeInTheDocument();
                 expect(numberInput).not.toBeInTheDocument();
@@ -621,7 +679,9 @@ describe('AutoView', () => {
                 );
 
                 const stringInput = screen.queryByTestId('#NATIVE_TEXT_INPUT');
-                const numberInput = screen.queryByTestId('#NATIVE_NUMBER_INPUT');
+                const numberInput = screen.queryByTestId(
+                    '#NATIVE_NUMBER_INPUT'
+                );
 
                 expect(stringInput).not.toBeInTheDocument();
                 expect(numberInput).toBeInTheDocument();
@@ -661,9 +721,15 @@ describe('AutoView', () => {
                     </RepositoryProvider>
                 );
 
-                const firstNameInput = screen.queryByTestId('/firstName#NATIVE_TEXT_INPUT');
-                const lastNameInput = screen.queryByTestId('/lastName#NATIVE_TEXT_INPUT');
-                const emailInput = screen.queryByTestId('/email#NATIVE_TEXT_INPUT');
+                const firstNameInput = screen.queryByTestId(
+                    '/firstName#NATIVE_TEXT_INPUT'
+                );
+                const lastNameInput = screen.queryByTestId(
+                    '/lastName#NATIVE_TEXT_INPUT'
+                );
+                const emailInput = screen.queryByTestId(
+                    '/email#NATIVE_TEXT_INPUT'
+                );
 
                 expect(firstNameInput).toBeInTheDocument();
                 expect(lastNameInput).toBeInTheDocument();
@@ -680,9 +746,15 @@ describe('AutoView', () => {
                     </RepositoryProvider>
                 );
 
-                const firstNameInput = screen.queryByTestId('/firstName#NATIVE_TEXT_INPUT');
-                const lastNameInput = screen.queryByTestId('/lastName#NATIVE_TEXT_INPUT');
-                const emailInput = screen.queryByTestId('/email#NATIVE_TEXT_INPUT');
+                const firstNameInput = screen.queryByTestId(
+                    '/firstName#NATIVE_TEXT_INPUT'
+                );
+                const lastNameInput = screen.queryByTestId(
+                    '/lastName#NATIVE_TEXT_INPUT'
+                );
+                const emailInput = screen.queryByTestId(
+                    '/email#NATIVE_TEXT_INPUT'
+                );
 
                 expect(firstNameInput).not.toBeInTheDocument();
                 expect(lastNameInput).not.toBeInTheDocument();
@@ -693,7 +765,7 @@ describe('AutoView', () => {
 
     describe.skip('if-then-else', () => {
         const defaultComponents = getRepoWithDefaults('test', node =>
-            'enum' in node ? 'enum' : node.type as string
+            'enum' in node ? 'enum' : (node.type as string)
         );
 
         describe('basic logic', () => {
@@ -713,7 +785,9 @@ describe('AutoView', () => {
                 );
 
                 const stringInput = screen.queryByTestId('#NATIVE_TEXT_INPUT');
-                const numberInput = screen.queryByTestId('#NATIVE_NUMBER_INPUT');
+                const numberInput = screen.queryByTestId(
+                    '#NATIVE_NUMBER_INPUT'
+                );
 
                 expect(stringInput).not.toBeInTheDocument();
                 expect(numberInput).not.toBeInTheDocument();
@@ -738,7 +812,9 @@ describe('AutoView', () => {
                 );
 
                 const stringInput = screen.queryByTestId('#NATIVE_TEXT_INPUT');
-                const numberInput = screen.queryByTestId('#NATIVE_NUMBER_INPUT');
+                const numberInput = screen.queryByTestId(
+                    '#NATIVE_NUMBER_INPUT'
+                );
 
                 expect(stringInput).toBeInTheDocument();
                 expect(numberInput).not.toBeInTheDocument();
@@ -755,7 +831,9 @@ describe('AutoView', () => {
                 );
 
                 const stringInput = screen.queryByTestId('#NATIVE_TEXT_INPUT');
-                const numberInput = screen.queryByTestId('#NATIVE_NUMBER_INPUT');
+                const numberInput = screen.queryByTestId(
+                    '#NATIVE_NUMBER_INPUT'
+                );
 
                 expect(stringInput).not.toBeInTheDocument();
                 expect(numberInput).toBeInTheDocument();
@@ -796,8 +874,12 @@ describe('AutoView', () => {
                     </RepositoryProvider>
                 );
 
-                const firstNameInput = screen.queryByTestId('/firstName#NATIVE_TEXT_INPUT');
-                const ageInput = screen.queryByTestId('/age#NATIVE_NUMBER_INPUT');
+                const firstNameInput = screen.queryByTestId(
+                    '/firstName#NATIVE_TEXT_INPUT'
+                );
+                const ageInput = screen.queryByTestId(
+                    '/age#NATIVE_NUMBER_INPUT'
+                );
 
                 expect(firstNameInput).toBeInTheDocument();
                 expect(ageInput).not.toBeInTheDocument();
@@ -813,8 +895,12 @@ describe('AutoView', () => {
                     </RepositoryProvider>
                 );
 
-                const firstNameInput = screen.queryByTestId('/firstName#NATIVE_TEXT_INPUT');
-                const ageInput = screen.queryByTestId('/age#NATIVE_NUMBER_INPUT');
+                const firstNameInput = screen.queryByTestId(
+                    '/firstName#NATIVE_TEXT_INPUT'
+                );
+                const ageInput = screen.queryByTestId(
+                    '/age#NATIVE_NUMBER_INPUT'
+                );
 
                 expect(firstNameInput).not.toBeInTheDocument();
                 expect(ageInput).toBeInTheDocument();
@@ -868,7 +954,9 @@ describe('AutoView', () => {
             );
 
             const latitude = screen.getByTestId('/latitude#NATIVE_TEXT_INPUT');
-            const longitude = screen.getByTestId('/longitude#NATIVE_TEXT_INPUT');
+            const longitude = screen.getByTestId(
+                '/longitude#NATIVE_TEXT_INPUT'
+            );
 
             expect(latitude).toHaveValue(geoSchema.default.latitude);
             expect(longitude).toHaveValue(geoSchema.default.longitude);
@@ -1044,7 +1132,9 @@ describe('AutoView', () => {
             );
 
             const modelInput = screen.getByTestId('/model#NATIVE_TEXT_INPUT');
-            const firstNameInput = screen.getByTestId('/owner/firstName#NATIVE_TEXT_INPUT');
+            const firstNameInput = screen.getByTestId(
+                '/owner/firstName#NATIVE_TEXT_INPUT'
+            );
 
             expect(modelInput).toBeInTheDocument();
             expect(firstNameInput).toBeInTheDocument();
@@ -1116,7 +1206,9 @@ describe('AutoView', () => {
                 expect(screen.getByTestId('SPAN_TEXT')).toBeInTheDocument();
                 expect(screen.getByTestId('WRAPPER_1')).toBeInTheDocument();
                 expect(screen.getByTestId('WRAPPER_2')).toBeInTheDocument();
-                expect(screen.queryByTestId('WRAPPER_3')).not.toBeInTheDocument();
+                expect(
+                    screen.queryByTestId('WRAPPER_3')
+                ).not.toBeInTheDocument();
             });
 
             it('"number" should have only default wrapper', () => {
@@ -1136,24 +1228,30 @@ describe('AutoView', () => {
 
                 expect(screen.getByTestId('SPAN_NUMBER')).toBeInTheDocument();
                 expect(screen.getByTestId('WRAPPER_1')).toBeInTheDocument();
-                expect(screen.queryByTestId('WRAPPER_2')).not.toBeInTheDocument();
-                expect(screen.queryByTestId('WRAPPER_3')).not.toBeInTheDocument();
+                expect(
+                    screen.queryByTestId('WRAPPER_2')
+                ).not.toBeInTheDocument();
+                expect(
+                    screen.queryByTestId('WRAPPER_3')
+                ).not.toBeInTheDocument();
             });
         });
     });
 
     describe('metadata', () => {
         type MyMetaData = {
-            '': {readonlyForm: boolean}
-            '/a': {id: string}
+            '': {readonlyForm: boolean};
+            '/a': {id: string};
         };
 
         const components = new ComponentsRepo('test')
             .register('object', {name: 'MyObject', component: AutoFields})
             .register('string', {
-                name: 'MyString', component: props => {
-                    const metadata = (props.metadata as MyMetaData);
-                    const componentMetadata = getComponentMetadata<MyMetaData['/a']>(props);
+                name: 'MyString',
+                component: props => {
+                    const metadata = props.metadata as MyMetaData;
+                    const componentMetadata =
+                        getComponentMetadata<MyMetaData['/a']>(props);
                     return (
                         <input
                             name={props.pointer!.split('/').pop()}

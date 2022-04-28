@@ -1,3 +1,0 @@
-{
-    "**/*.{js,ts}?(x)": "eslint --fix --quiet"
-}

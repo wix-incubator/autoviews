@@ -1,5 +1,9 @@
 import React from 'react';
-import {AutoView, RepositoryProvider, CoreSchemaMetaSchema} from '@autoviews/core';
+import {
+    AutoView,
+    RepositoryProvider,
+    CoreSchemaMetaSchema
+} from '@autoviews/core';
 
 import schema from './schema.json';
 import {repo} from './repo';

@@ -36,7 +36,8 @@ export interface Metadata {
     [pointer: string]: any;
 }
 
-export interface AutoCustomEvent<Name extends string = string, Data = any> extends AutoEvent {
+export interface AutoCustomEvent<Name extends string = string, Data = any>
+    extends AutoEvent {
     name: Name;
     data: Data;
 }
@@ -81,9 +82,7 @@ class AutoViewLogic extends React.Component<AutoViewLogicProps> {
     }
 
     public render(): JSX.Element | null {
-        const {
-            uiSchema, schema, schemaPointer, data, components
-        } = this.props;
+        const {uiSchema, schema, schemaPointer, data, components} = this.props;
 
         if (Array.isArray(schema.type)) {
             return this.renderMultipleTypes();
@@ -115,29 +114,21 @@ class AutoViewLogic extends React.Component<AutoViewLogicProps> {
 
             return wrappers.reduce(
                 (item, fn) => fn(item, this.props),
-                (
-                    <Component
-                        {...this.props}
-                        data={dataOrDefault}
-                        repositoryName={components.name}
-                        validation={false}
-                    />
-                )
+                <Component
+                    {...this.props}
+                    data={dataOrDefault}
+                    repositoryName={components.name}
+                    validation={false}
+                />
             );
         }
         throw Error(
             `cannot resolve "${type}" component for "${schemaPointer}"`
         );
-
     }
 
     private renderMultipleTypes() {
-        const {
-            schema,
-            validator,
-            data,
-            schemaPointer
-        } = this.props;
+        const {schema, validator, data, schemaPointer} = this.props;
         const {type: types, ...rest} = schema;
 
         let resolvedType: SimpleTypes | undefined = undefined;
@@ -154,7 +145,9 @@ class AutoViewLogic extends React.Component<AutoViewLogicProps> {
 
         if (!resolvedType) {
             throw new Error(`
-                cannot resolve any type from "${JSON.stringify(types)}" for "${schemaPointer}"
+                cannot resolve any type from "${JSON.stringify(
+                    types
+                )}" for "${schemaPointer}"
             `);
         }
 
@@ -168,9 +161,7 @@ class AutoViewLogic extends React.Component<AutoViewLogicProps> {
     }
 
     private validate(props: AutoViewLogicProps) {
-        const {
-            schema, validation, data, validator, onError
-        } = props;
+        const {schema, validation, data, validator, onError} = props;
 
         if (validation && onError) {
             const validate = validator.compile(schema);

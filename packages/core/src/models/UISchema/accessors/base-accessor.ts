@@ -54,9 +54,9 @@ export class BaseAccessor implements BaseAccessorInterface {
     }
 
     public getComponentOptions(repoName: string) {
-        return this.uiSchemaClone.components[repoName] ?
-            this.uiSchemaClone.components[repoName][this.path] :
-            undefined;
+        return this.uiSchemaClone.components[repoName]
+            ? this.uiSchemaClone.components[repoName][this.path]
+            : undefined;
     }
 
     public setComponentOptions(

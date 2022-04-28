@@ -7,8 +7,10 @@ export interface ArrayAccessorInterface extends BaseAccessorInterface {
     type: ACCESSOR_TYPES;
 }
 
-export class ArrayAccessor extends BaseAccessor
-    implements ArrayAccessorInterface {
+export class ArrayAccessor
+    extends BaseAccessor
+    implements ArrayAccessorInterface
+{
     public type: ACCESSOR_TYPES = ACCESSOR_TYPES.array;
 
     constructor(uiSchema: UISchema, path: string) {

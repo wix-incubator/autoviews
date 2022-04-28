@@ -57,5 +57,5 @@ To start development server in for docs, run:
 yarn workspace @autoviews/docs start
 ```
 
-Note: the website is dependent on the core package and requires a build of the 
+Note: the website is dependent on the core package and requires a build of the
 core package.
