@@ -27,33 +27,3 @@ export function getComponentOptions(
     ).getComponentOptions(repo);
     return compOptions && compOptions.options;
 }
-
-export function orderFields(source: string[], rules?: string[]): string[] {
-    if (!rules || !rules.length) {
-        return source;
-    }
-    const orderedByRules = rules.filter(rule => source.includes(rule));
-    const orderedByDefault = source.filter(field => !rules.includes(field));
-    return orderedByRules.concat(orderedByDefault);
-}
-
-export function filter(
-    properties: string[],
-    toPick?: string[],
-    toOmit?: string[],
-    hidden?: string[]
-): string[] {
-    if (properties && toPick) {
-        return properties.filter(prop => toPick.includes(prop));
-    }
-
-    if (properties && toOmit) {
-        return properties.filter(prop => !toOmit.includes(prop));
-    }
-
-    if (properties && hidden) {
-        return properties.filter(prop => !hidden.includes(prop));
-    }
-
-    return properties;
-}

@@ -6,3 +6,8 @@ export * from './json-schema-resolver';
 export * from './is-required';
 export * from './get-component-metadata';
 export * from './compose-repos';
+export * from './order-fields';
+export * from './filter-fields';
+export * from './filter-and-order-fields';
+export * from './all-fields';
+export * from './object-schema-as-array';

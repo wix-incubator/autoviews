@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {buildJsonPointer} from '../utils';
+import {allFields, buildJsonPointer, filterAndOrderFields} from '../utils';
 
 import {AutoView, AutoViewProps} from './auto-view';
-import {filter, getHints, orderFields} from './utils';
+import {getHints} from './utils';
 
 export interface AutoFieldsProps extends AutoViewProps {
     render?(
@@ -26,16 +26,15 @@ export function autoFieldsProps(
     } = autoViewProps;
 
     const {order, hidden} = getHints(uiSchema, schemaPointer);
-    const allProperties: string[] = Object.keys({
-        ...properties,
-        // if schema allows additionalProperties
-        // iterate over them in data
-        ...(additionalProperties ? data : {})
-    });
-    const filtered = filter(allProperties, pick, omit, hidden);
-    const fields = orderFields(
-        filtered,
-        order && order.length > 0 ? order : pick || []
+
+    const fields = filterAndOrderFields(
+        allFields(
+            {type: 'object', properties, additionalProperties},
+            additionalProperties ? data : {}
+        ), // if schema has additionalProperties, take fields from `data`
+        pick,
+        omit ?? hidden,
+        order
     );
 
     return fields.map(field => ({
