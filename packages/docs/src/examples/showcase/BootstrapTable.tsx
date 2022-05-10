@@ -22,6 +22,7 @@ export const BootstrapTable = (props: AutoViewProps) => {
             striped
             bordered
             hover
+            responsive
         >
             <thead>
                 <tr>
