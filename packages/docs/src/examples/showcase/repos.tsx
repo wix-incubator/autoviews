@@ -1,14 +1,8 @@
 import React from 'react';
-import {
-    ComponentsRepo,
-    RootSchemaConsumer,
-    isRequired
-} from '@autoviews/core';
+import {ComponentsRepo, RootSchemaConsumer, isRequired} from '@autoviews/core';
 import {Box} from '@mui/material';
 
-import {
-    MUIForm, MUIText, MUINumber, MUISwitch, MUISlider
-} from './MUIForm';
+import {MUIForm, MUIText, MUINumber, MUISwitch, MUISlider} from './MUIForm';
 import {
     BootstrapForm,
     BootstrapText,
@@ -33,11 +27,15 @@ export const MUIFormRepo = new ComponentsRepo('MUIFormRepo', detectEnums)
     .register('number', {
         name: 'sliderComponent',
         component: MUISlider,
-        predicate: (schema) => 'minimum' in schema && 'maximum' in schema
+        predicate: schema => 'minimum' in schema && 'maximum' in schema
+    })
+    .register('array', {
+        name: 'arrayComponent',
+        component: () => <span>array</span>
     })
     .register('oneOfEnumLike', {
         name: 'enumComponent',
-        component: (props) => <span>{props.data}</span>
+        component: props => <span>{props.data}</span>
     })
     .register('boolean', {
         name: 'switchComponent',
@@ -51,7 +49,10 @@ export const MUIFormRepo = new ComponentsRepo('MUIFormRepo', detectEnums)
                         <Box sx={{margin: '5px 0'}}>
                             {React.cloneElement(item, {
                                 metadata: {
-                                    isRequired: isRequired(schema!, props.schemaPointer)
+                                    isRequired: isRequired(
+                                        schema!,
+                                        props.schemaPointer
+                                    )
                                 }
                             })}
                         </Box>
@@ -69,7 +70,10 @@ export const MUIFormRepo = new ComponentsRepo('MUIFormRepo', detectEnums)
         }
     );
 
-export const BootstrapFormRepo = new ComponentsRepo('BootstrapFormRepo', detectEnums)
+export const BootstrapFormRepo = new ComponentsRepo(
+    'BootstrapFormRepo',
+    detectEnums
+)
     .register('object', {
         name: 'formComponent',
         component: BootstrapForm
@@ -86,11 +90,14 @@ export const BootstrapFormRepo = new ComponentsRepo('BootstrapFormRepo', detectE
         name: 'switchComponent',
         component: BootstrapSwitch
     })
+    .register('array', {
+        name: 'arrayComponent',
+        component: () => <span>array</span>
+    })
     .register('oneOfEnumLike', {
         name: 'enumComponent',
-        component: (props) => <span>{props.data}</span>
+        component: props => <span>{props.data}</span>
     })
-    .addWrapper((item) => <div style={{margin: '5px 0'}}>{item}</div>, {
+    .addWrapper(item => <div style={{margin: '5px 0'}}>{item}</div>, {
         include: ['textComponent', 'numberComponent', 'switchComponent']
     });
-

@@ -99,9 +99,49 @@ const carSchema: CoreSchemaMetaSchema = {
 const cocktailSchema: CoreSchemaMetaSchema = {
     type: 'object',
     properties: {
-        name: {
+        drink: {
             type: 'string',
-            title: 'Cocktail name'
+            title: 'Drink'
+        },
+        tags: {
+            type: 'array',
+            title: 'tags',
+            items: {
+                type: 'string'
+            }
+        },
+        category: {
+            type: 'string',
+            title: 'Category'
+        },
+        iba: {
+            type: 'string',
+            title: 'IBA'
+        },
+        glass: {
+            title: 'Glass',
+            oneOf: [
+                {
+                    const: 'cocktail_glass',
+                    title: 'Cocktail glass'
+                },
+                {
+                    const: 'old_fashioned_glass',
+                    title: 'Old-Fashioned glass'
+                },
+                {
+                    const: 'coupette_glass',
+                    title: 'Margarita/Coupette glass'
+                },
+                {
+                    const: 'colling_glass',
+                    title: 'Collins glass'
+                },
+                {
+                    const: 'brandy',
+                    title: 'Brandy'
+                }
+            ]
         },
         alcohol: {
             type: 'number',
@@ -109,45 +149,62 @@ const cocktailSchema: CoreSchemaMetaSchema = {
             minimum: 10,
             title: 'Level of alcohol'
         },
-        ingredients: {
-            type: 'string',
-            title: 'Ingredients'
-        },
-        preparation: {
+        instructions: {
             type: 'string',
             title: 'Preparation Instructions'
         },
-        time: {
-            type: 'number',
-            title: 'Time to mix'
+        drinkThumb: {
+            type: 'string',
+            title: 'Thumbnail',
+            format: IMAGE_SUBTYPE
+        },
+        ingredients: {
+            type: 'array',
+            title: 'Ingredients',
+            items: {
+                type: 'object',
+                properties: {
+                    ingredient: {
+                        type: 'string',
+                        title: 'Ingredient'
+                    },
+                    measure: {
+                        type: 'string',
+                        title: 'Measure'
+                    }
+                }
+            }
         },
         isUnique: {
             type: 'boolean',
             title: 'A Unique cocktail'
         },
-        drinkType: {
-            title: 'The type of Cocktail',
-            hint: 'enum',
-            'oneOf': [
+        base: {
+            title: 'Spirit the Cocktail is based on',
+            oneOf: [
                 {
-                    'const': 'jin',
-                    'title': 'Jin'
+                    const: 'jin',
+                    title: 'Jin'
                 },
                 {
-                    'const': 'vodka',
-                    'title': 'Vodka'
+                    const: 'tequila',
+                    title: 'Tequila'
                 },
                 {
-                    'const': 'whiskey',
-                    'title': 'Whiskey'
+                    const: 'vodka',
+                    title: 'Vodka'
                 },
                 {
-                    'const': 'rum',
-                    'title': 'Rum'
+                    const: 'whiskey',
+                    title: 'Whiskey'
                 },
                 {
-                    'const': 'brandy',
-                    'title': 'Brandy'
+                    const: 'rum',
+                    title: 'Rum'
+                },
+                {
+                    const: 'brandy',
+                    title: 'Brandy'
                 }
             ]
         }
