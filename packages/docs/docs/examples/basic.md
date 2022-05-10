@@ -1,7 +1,7 @@
 # Basic usage
 
 import {Demo} from '@site/src/components';
-import \* as demo from '@site/src/examples/basic';
+import * as demo from '@site/src/examples/basic';
 
 This is the basic example of using `<Autoview />` component.
 

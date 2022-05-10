@@ -1,7 +1,7 @@
 # Switch ComponentsRepo
 
 import {Demo} from '@site/src/components';
-import \* as demo from '@site/src/examples/switch-repo';
+import * as demo from '@site/src/examples/switch-repo';
 
 Here we extended our simple [onClick](./onclick) example with `Edit` button which opens item view as form.
 
