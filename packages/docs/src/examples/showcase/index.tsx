@@ -4,6 +4,7 @@ import app from './App.tsx?raw-loader';
 import basicRepo from './basicRepo.tsx?raw-loader';
 import BootstrapForm from './BootstrapForm.tsx?raw-loader';
 import BootstrapTable from './BootstrapTable.tsx?raw-loader';
+import Data from './Data.ts?raw-loader';
 import MUIForm from './MUIForm.tsx?raw-loader';
 import MUITable from './MUITable.tsx?raw-loader';
 import repos from './repos.tsx?raw-loader';
@@ -16,6 +17,7 @@ export const files: DemoFiles = {
     '/basicRepo.tsx': basicRepo,
     '/BootstrapForm.tsx': BootstrapForm,
     '/BootstrapTable.tsx': BootstrapTable,
+    '/Data.ts': Data,
     '/MUIForm.tsx': MUIForm,
     '/MUITable.tsx': MUITable,
     '/repos.tsx': repos,

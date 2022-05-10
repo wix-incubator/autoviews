@@ -1,47 +1,29 @@
-import React from 'react';
-import {useCallback, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {applyPatch} from 'fast-json-patch';
 import {
-    RepositoryProvider,
-    AutoView,
-    CoreSchemaMetaSchema,
-    ComponentsRepo
+    AutoView, ComponentsRepo, CoreSchemaMetaSchema, RepositoryProvider
 } from '@autoviews/core';
 import {
+    Box,
     Button,
+    ButtonGroup,
     Card,
     CardContent,
-    Box,
-    ButtonGroup,
     FormControl,
     InputLabel,
-    Select,
     MenuItem,
+    Select,
     SelectChangeEvent
 } from '@mui/material';
 
-import {usersSchema, carsSchema, cocktailsSchema} from './schemas';
-import {
-    MUIFormRepo,
-    BootstrapFormRepo
-} from './repos';
-import {
-    MUITableRepo,
-    BootstrapTableRepo
-} from './basicRepo';
-import {hintsSchema} from './uiSchemas';
-
+import {BootstrapFormRepo, MUIFormRepo} from './repos';
+import {BootstrapTableRepo, MUITableRepo} from './basicRepo';
+import {hintsSchema, tableUISchema} from './uiSchemas';
 import './styles.css';
-
-type SchemaNames = 'user' | 'cocktail' | 'car';
-const schemas: Record<SchemaNames, CoreSchemaMetaSchema> = {
-    user: usersSchema,
-    cocktail: cocktailsSchema,
-    car: carsSchema
-};
+import {dataStore, SchemaNames, schemas} from './Data';
 
 export default function App() {
-    const [data, setData] = useState<any[]>([]);
+    const [data, setData] = useState<any[]>(dataStore.user);
     const [[schema, schemaName], setSchema] = useState<
         [CoreSchemaMetaSchema, SchemaNames]
         >([schemas.user, 'user']);
@@ -51,7 +33,7 @@ export default function App() {
     const onSchemaChange = useCallback((e: SelectChangeEvent<string>) => {
         const name = e.target.value as SchemaNames;
         setSchema([schemas[name], name]);
-        setData([]);
+        setData(dataStore[name]);
     }, []);
 
     const onFormChange = useCallback(
@@ -141,7 +123,7 @@ export default function App() {
                             <AutoView
                                 schema={schema}
                                 data={data}
-                                uiSchema={hintsSchema}
+                                uiSchema={tableUISchema}
                             />
                         </RepositoryProvider>
                     </>

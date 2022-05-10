@@ -5,6 +5,7 @@ import {TableCell} from '@mui/material';
 
 import {BootstrapTable} from './BootstrapTable';
 import {MUITable, MUITableRow} from './MUITable';
+import {EMAIL_SUBTYPE, IMAGE_SUBTYPE, LINK_SUBTYPE} from './schemas';
 
 export const oneOfEnumLike = 'oneOfEnumLike';
 export function detectEnums(node: CoreSchemaMetaSchema): string {
@@ -21,6 +22,28 @@ export const basicRepo = new ComponentsRepo('displayRepo', detectEnums)
     .register('string', {
         name: 'textComponent',
         component: (props) => <span>{props.data}</span>
+    })
+    .register('string', {
+        name: 'imageComponent',
+        component: (props) => (
+            <span>
+                <img
+                    src={props.data}
+                    style={{width:'60px', height: '60px'}}
+                />
+            </span>
+        ),
+        predicate: node => node.format === IMAGE_SUBTYPE
+    })
+    .register('string', {
+        name: 'emailComponent',
+        component: (props) => <span><a href={`mailto:${props.data}`}>{props.data}</a></span>,
+        predicate: node => node.format === EMAIL_SUBTYPE
+    })
+    .register('string', {
+        name: 'linkComponent',
+        component: (props) => <span><a href={props.data}>{props.data}</a></span>,
+        predicate: node => node.format === LINK_SUBTYPE
     })
     .register('number', {
         name: 'numberComponent',
@@ -46,7 +69,7 @@ export const MUITableRepo = basicRepo
         component: MUITableRow
     })
     .addWrapper((item) => <TableCell>{item}</TableCell>, {
-        include: ['textComponent', 'numberComponent', 'booleanComponent']
+        include: ['textComponent', 'numberComponent', 'booleanComponent', 'imageComponent', 'emailComponent', 'linkComponent']
     });
 
 export const BootstrapTableRepo = basicRepo
@@ -61,5 +84,5 @@ export const BootstrapTableRepo = basicRepo
         )
     })
     .addWrapper((item) => <td>{item}</td>, {
-        include: ['textComponent', 'numberComponent', 'booleanComponent']
+        include: ['textComponent', 'numberComponent', 'booleanComponent', 'imageComponent', 'emailComponent', 'linkComponent']
     });

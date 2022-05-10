@@ -5,6 +5,7 @@ import {
     AutoFields,
     orderFields,
     getHints,
+    filter,
     extractItemUISchema,
     createUISchema
 } from '@autoviews/core';
@@ -19,9 +20,13 @@ import {
 } from '@mui/material';
 
 export const MUITable = (props: AutoViewProps) => {
-    const headers = orderFields(
-        Object.keys((props.schema.items as any).properties),
-        getHints(extractItemUISchema(props.uiSchema ?? createUISchema()), '').order
+    const uiHints = getHints(extractItemUISchema(props.uiSchema ?? createUISchema()), '');
+    const headers = filter(
+        orderFields(
+            Object.keys((props.schema.items as any).properties),
+            uiHints.order
+        ),
+        undefined, undefined, uiHints.hidden
     ).map(
         (field) => (props.schema?.items as any).properties[field].title
     ) as string[];

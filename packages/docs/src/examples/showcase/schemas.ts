@@ -1,5 +1,8 @@
 import {CoreSchemaMetaSchema} from '@autoviews/core';
 
+export const IMAGE_SUBTYPE = 'image';
+export const LINK_SUBTYPE = 'link';
+export const EMAIL_SUBTYPE = 'email';
 const userSchema: CoreSchemaMetaSchema = {
     $id: 'userSchema',
     type: 'object',
@@ -12,24 +15,55 @@ const userSchema: CoreSchemaMetaSchema = {
             type: 'string',
             title: 'Last Name'
         },
-        age: {
-            type: 'number',
-            title: 'Age'
-        },
-        active: {
-            type: 'boolean',
-            title: 'Active User'
-        },
-        picture: {
+        companyName: {
             type: 'string',
-            title: 'The user picture'
+            title: 'Company'
+        },
+        address: {
+            type: 'string',
+            title: 'Address'
+        },
+        city: {
+            type: 'string',
+            title: 'City'
+        },
+        county: {
+            type: 'string',
+            title: 'County'
+        },
+        state: {
+            type: 'string',
+            title: 'State'
+        },
+        zip: {
+            type: 'number',
+            title: 'Zip'
+        },
+        phone1: {
+            type: 'string',
+            title: 'Phone 1'
+        },
+        phone2: {
+            type: 'string',
+            title: 'Phone 2'
+        },
+        email: {
+            type: 'string',
+            title: 'Email',
+            format: EMAIL_SUBTYPE
+        },
+        web: {
+            type: 'string',
+            title: 'Web Page',
+            format: LINK_SUBTYPE
         },
         avatar: {
             type: 'string',
-            title: 'Avatar'
+            title: 'Avatar',
+            format: IMAGE_SUBTYPE
         }
     },
-    required: ['firstName', 'lastName', 'age']
+    required: ['firstName', 'lastName', 'email']
 };
 
 const carSchema: CoreSchemaMetaSchema = {
