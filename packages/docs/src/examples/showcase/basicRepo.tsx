@@ -1,7 +1,7 @@
 import {AutoFields, ComponentsRepo} from '@autoviews/core';
 import React from 'react';
 import {CoreSchemaMetaSchema} from '@autoviews/core';
-import {TableCell} from '@mui/material';
+import {TableCell, Avatar} from '@mui/material';
 
 import {BootstrapTable} from './BootstrapTable';
 import {MUITable, MUITableRow} from './MUITable';
@@ -68,8 +68,15 @@ export const MUITableRepo = basicRepo
         name: 'tableRowComponent',
         component: MUITableRow
     })
+    .register('string', {
+        name: 'avatarComponent',
+        component: (props) => (
+            <Avatar src={props.data}/>
+        ),
+        predicate: node => node.format === IMAGE_SUBTYPE
+    })
     .addWrapper((item) => <TableCell>{item}</TableCell>, {
-        include: ['textComponent', 'numberComponent', 'booleanComponent', 'imageComponent', 'emailComponent', 'linkComponent']
+        include: ['textComponent', 'numberComponent', 'booleanComponent', 'imageComponent', 'emailComponent', 'linkComponent', 'avatarComponent']
     });
 
 export const BootstrapTableRepo = basicRepo

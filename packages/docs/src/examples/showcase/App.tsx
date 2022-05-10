@@ -13,7 +13,9 @@ import {
     InputLabel,
     MenuItem,
     Select,
-    SelectChangeEvent
+    SelectChangeEvent,
+    Divider,
+    CardHeader
 } from '@mui/material';
 
 import {BootstrapFormRepo, MUIFormRepo} from './repos';
@@ -76,49 +78,59 @@ export default function App() {
 
     return (
         <div className="App">
-            <Card>
-                <CardContent>
-                    <h1>AutoViews Examples</h1>
-                    <>
-                        <Box sx={{margin: '20px 0'}}>
-                            <ButtonGroup
-                                variant="outlined"
-                                aria-label="outlined button group"
+            <Box style={{margin: '0 20px'}}>
+                <Card sx={{margin: '20px 0'}}>
+                    <CardHeader
+                        title="Controls"
+                        subheader="Change UI Library, Schema or UI Schema"
+                    />
+                    <Divider />
+                    <CardContent>
+                        <ButtonGroup
+                            aria-label="outlined button group"
+                        >
+                            <Button
+                                onClick={() => onSetRepo('mui')}
+                                variant={tableRepo === MUITableRepo?'contained':'outlined'}
                             >
-                                <Button
-                                    onClick={() => onSetRepo('mui')}
-                                    disabled={tableRepo === MUITableRepo}
+                                Mateial UI
+                            </Button>
+                            <Button
+                                onClick={() => onSetRepo('bootstrap')}
+                                variant={tableRepo === BootstrapTableRepo?'contained':'outlined'}
+                            >
+                                Bootstrap
+                            </Button>
+                            <FormControl sx={{width: '140px', margin: '0 10px'}}>
+                                <InputLabel id="schema-select-label">Schema</InputLabel>
+                                <Select
+                                    labelId="schema-select-label"
+                                    id="schema-select"
+                                    value={schemaName}
+                                    label="Schema"
+                                    onChange={onSchemaChange}
                                 >
-                                    Mateial UI
-                                </Button>
-                                <Button
-                                    onClick={() => onSetRepo('bootstrap')}
-                                    disabled={tableRepo === BootstrapTableRepo}
-                                >
-                                    Bootstrap
-                                </Button>
-                                <FormControl sx={{width: '140px', margin: '0 10px'}}>
-                                    <InputLabel id="schema-select-label">Schema</InputLabel>
-                                    <Select
-                                        labelId="schema-select-label"
-                                        id="schema-select"
-                                        value={schemaName}
-                                        label="Schema"
-                                        onChange={onSchemaChange}
-                                    >
-                                        {Object.keys(schemas).map((key) => (
-                                            <MenuItem
-                                                value={key}
-                                                key={key}
-                                            >
-                                                {key}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            </ButtonGroup>
-                        </Box>
+                                    {Object.keys(schemas).map((key) => (
+                                        <MenuItem
+                                            value={key}
+                                            key={key}
+                                        >
+                                            {key}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </ButtonGroup>
+                    </CardContent>
+                </Card>
 
+                <Card variant="outlined">
+                    <CardHeader
+                        title="Table"
+                        subheader="First instance of AutoView"
+                    />
+                    <Divider />
+                    <CardContent>
                         <RepositoryProvider components={tableRepo}>
                             <AutoView
                                 schema={schema}
@@ -126,9 +138,18 @@ export default function App() {
                                 uiSchema={tableUISchema}
                             />
                         </RepositoryProvider>
-                    </>
-
-                    <Box sx={{margin: '20px 0'}}>
+                    </CardContent>
+                </Card>
+                <Card
+                    variant="outlined"
+                    sx={{margin: '20px 0'}}
+                >
+                    <CardHeader
+                        title="Form"
+                        subheader="Second instance of AutoView"
+                    />
+                    <Divider />
+                    <CardContent>
                         <RepositoryProvider components={formRepo}>
                             <AutoView
                                 data={item}
@@ -138,9 +159,9 @@ export default function App() {
                                 onClick={onAddItem}
                             />
                         </RepositoryProvider>
-                    </Box>
-                </CardContent>
-            </Card>
+                    </CardContent>
+                </Card>
+            </Box>
         </div>
     );
 }
