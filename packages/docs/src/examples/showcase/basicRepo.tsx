@@ -1,10 +1,7 @@
-import {AutoFields, ComponentsRepo} from '@autoviews/core';
+import {ComponentsRepo} from '@autoviews/core';
 import React from 'react';
 import {CoreSchemaMetaSchema} from '@autoviews/core';
-import {TableCell, Avatar} from '@mui/material';
 
-import {BootstrapTable} from './BootstrapTable';
-import {MUITable, MUITableRow} from './MUITable';
 import {EMAIL_SUBTYPE, IMAGE_SUBTYPE, LINK_SUBTYPE} from './schemas';
 
 export const oneOfEnumLike = 'oneOfEnumLike';
@@ -76,58 +73,4 @@ export const basicRepo = new ComponentsRepo('displayRepo', detectEnums)
     .register('oneOfEnumLike', {
         name: 'enumComponent',
         component: props => <span>{props.data}</span>
-    });
-
-export const MUITableRepo = basicRepo
-    .clone('MUITableRepo')
-    .register('array', {
-        name: 'tableComponent',
-        component: MUITable,
-        predicate: node => node.items.type === 'object'
-    })
-    .register('object', {
-        name: 'tableRowComponent',
-        component: MUITableRow
-    })
-    .register('string', {
-        name: 'avatarComponent',
-        component: props => <Avatar src={props.data} />,
-        predicate: node => node.format === IMAGE_SUBTYPE
-    })
-    .addWrapper(item => <TableCell>{item}</TableCell>, {
-        include: [
-            'textComponent',
-            'numberComponent',
-            'booleanComponent',
-            'imageComponent',
-            'emailComponent',
-            'linkComponent',
-            'avatarComponent'
-        ]
-    });
-
-export const BootstrapTableRepo = basicRepo
-    .clone('BootstrapTableRepo')
-    .register('array', {
-        name: 'tableComponent',
-        component: BootstrapTable,
-        predicate: node => node.items.type === 'object'
-    })
-    .register('object', {
-        name: 'tableRowComponent',
-        component: props => (
-            <tr>
-                <AutoFields {...props} />
-            </tr>
-        )
-    })
-    .addWrapper(item => <td>{item}</td>, {
-        include: [
-            'textComponent',
-            'numberComponent',
-            'booleanComponent',
-            'imageComponent',
-            'emailComponent',
-            'linkComponent'
-        ]
     });

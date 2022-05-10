@@ -1,7 +1,10 @@
 import React, {useCallback, useState} from 'react';
 import {applyPatch} from 'fast-json-patch';
 import {
-    AutoView, ComponentsRepo, CoreSchemaMetaSchema, RepositoryProvider
+    AutoView,
+    ComponentsRepo,
+    CoreSchemaMetaSchema,
+    RepositoryProvider
 } from '@autoviews/core';
 import {
     Box,
@@ -18,17 +21,17 @@ import {
     CardHeader
 } from '@mui/material';
 
-import {BootstrapFormRepo, MUIFormRepo} from './repos';
-import {BootstrapTableRepo, MUITableRepo} from './basicRepo';
 import {hintsSchema, tableUISchema} from './uiSchemas';
 import './styles.css';
 import {dataStore, SchemaNames, schemas} from './Data';
+import {MUIFormRepo, MUITableRepo} from './MUIRepos';
+import {BootstrapFormRepo, BootstrapTableRepo} from './BootstrapRepos';
 
 export default function App() {
     const [data, setData] = useState<any[]>(dataStore.user);
     const [[schema, schemaName], setSchema] = useState<
         [CoreSchemaMetaSchema, SchemaNames]
-        >([schemas.user, 'user']);
+    >([schemas.user, 'user']);
 
     const [item, setItem] = useState<any>({});
 
@@ -86,23 +89,33 @@ export default function App() {
                     />
                     <Divider />
                     <CardContent>
-                        <ButtonGroup
-                            aria-label="outlined button group"
-                        >
+                        <ButtonGroup aria-label="outlined button group">
                             <Button
                                 onClick={() => onSetRepo('mui')}
-                                variant={tableRepo === MUITableRepo?'contained':'outlined'}
+                                variant={
+                                    tableRepo === MUITableRepo
+                                        ? 'contained'
+                                        : 'outlined'
+                                }
                             >
                                 Mateial UI
                             </Button>
                             <Button
                                 onClick={() => onSetRepo('bootstrap')}
-                                variant={tableRepo === BootstrapTableRepo?'contained':'outlined'}
+                                variant={
+                                    tableRepo === BootstrapTableRepo
+                                        ? 'contained'
+                                        : 'outlined'
+                                }
                             >
                                 Bootstrap
                             </Button>
-                            <FormControl sx={{width: '140px', margin: '0 10px'}}>
-                                <InputLabel id="schema-select-label">Schema</InputLabel>
+                            <FormControl
+                                sx={{width: '140px', margin: '0 10px'}}
+                            >
+                                <InputLabel id="schema-select-label">
+                                    Schema
+                                </InputLabel>
                                 <Select
                                     labelId="schema-select-label"
                                     id="schema-select"
@@ -110,7 +123,7 @@ export default function App() {
                                     label="Schema"
                                     onChange={onSchemaChange}
                                 >
-                                    {Object.keys(schemas).map((key) => (
+                                    {Object.keys(schemas).map(key => (
                                         <MenuItem
                                             value={key}
                                             key={key}

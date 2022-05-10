@@ -3,11 +3,12 @@ import {DemoDependencies, DemoFiles, DemoOptions} from '@site/src/components';
 import app from './App.tsx?raw-loader';
 import basicRepo from './basicRepo.tsx?raw-loader';
 import BootstrapForm from './BootstrapForm.tsx?raw-loader';
+import BootstrapRepos from './BootstrapRepos.tsx?raw-loader';
 import BootstrapTable from './BootstrapTable.tsx?raw-loader';
 import Data from './Data.ts?raw-loader';
 import MUIForm from './MUIForm.tsx?raw-loader';
+import MUIRepos from './MUIRepos.tsx?raw-loader';
 import MUITable from './MUITable.tsx?raw-loader';
-import repos from './repos.tsx?raw-loader';
 import schemas from './schemas.ts?raw-loader';
 // import styles from './styles.css';
 import uiSchemas from './uiSchemas.ts?raw-loader';
@@ -16,11 +17,12 @@ export const files: DemoFiles = {
     '/App.tsx': app,
     '/basicRepo.tsx': basicRepo,
     '/BootstrapForm.tsx': BootstrapForm,
+    '/BootstrapRepos.tsx': BootstrapRepos,
     '/BootstrapTable.tsx': BootstrapTable,
     '/Data.ts': Data,
     '/MUIForm.tsx': MUIForm,
+    '/MUIRepos.tsx': MUIRepos,
     '/MUITable.tsx': MUITable,
-    '/repos.tsx': repos,
     '/schemas.ts': schemas,
     // '/styles.css': styles,
     '/uiSchemas.ts': uiSchemas
