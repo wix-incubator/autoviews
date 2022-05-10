@@ -4,7 +4,8 @@ import {
     AutoView,
     ComponentsRepo,
     CoreSchemaMetaSchema,
-    RepositoryProvider
+    RepositoryProvider,
+    UISchema
 } from '@autoviews/core';
 import {
     Box,
@@ -21,7 +22,7 @@ import {
     CardHeader
 } from '@mui/material';
 
-import {hintsSchema, tableUISchema} from './uiSchemas';
+import {UISchemas} from './uiSchemas';
 import './styles.css';
 import {dataStore, SchemaNames, schemas} from './Data';
 import {MUIFormRepo, MUITableRepo} from './MUIRepos';
@@ -32,6 +33,9 @@ export default function App() {
     const [[schema, schemaName], setSchema] = useState<
         [CoreSchemaMetaSchema, SchemaNames]
     >([schemas.user, 'user']);
+    const [[formUISchema, tableUISchema], setUISchemas] = useState<
+        [UISchema, UISchema]
+    >(UISchemas.user);
 
     const [item, setItem] = useState<any>({});
 
@@ -39,6 +43,7 @@ export default function App() {
         const name = e.target.value as SchemaNames;
         setSchema([schemas[name], name]);
         setData(dataStore[name]);
+        setUISchemas(UISchemas[name]);
     }, []);
 
     const onFormChange = useCallback(
@@ -166,7 +171,7 @@ export default function App() {
                         <RepositoryProvider components={formRepo}>
                             <AutoView
                                 data={item}
-                                uiSchema={hintsSchema}
+                                uiSchema={formUISchema}
                                 schema={schema.items!}
                                 onChange={onFormChange}
                                 onClick={onAddItem}

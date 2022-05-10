@@ -1,16 +1,39 @@
 import {OTHER_PROPERTIES, UISchema} from '@autoviews/core';
 
-export const tableUISchema: UISchema = {
+const userTableUISchema: UISchema = {
     hints: {
         '/items': {
-            order: ['avatar', 'firstName', 'lastName', 'companyName', 'email', 'web'],
-            hidden: ['address', 'city', 'county', 'state', 'zip', 'phone1', 'phone2']
+            order: [
+                'avatar',
+                'firstName',
+                'lastName',
+                'companyName',
+                'email',
+                'web'
+            ],
+            hidden: [
+                'address',
+                'city',
+                'county',
+                'state',
+                'zip',
+                'phone1',
+                'phone2'
+            ]
         }
     },
     components: {}
 };
 
-export const hintsSchema: UISchema = {
+const cocktailTableUISchema: UISchema = {
+    hints: {},
+    components: {}
+};
+const carsTableUISchema: UISchema = {
+    hints: {},
+    components: {}
+};
+const userFormUISchema: UISchema = {
     hints: {
         '/items': {
             uiGroups: [
@@ -38,4 +61,20 @@ export const hintsSchema: UISchema = {
         }
     },
     components: {}
+};
+
+const cocktailFormUISchema: UISchema = {
+    hints: {},
+    components: {}
+};
+
+const carsFormUISchema: UISchema = {
+    hints: {},
+    components: {}
+};
+
+export const UISchemas = {
+    user: [userFormUISchema, userTableUISchema],
+    cocktail: [cocktailFormUISchema, cocktailTableUISchema],
+    car: [carsFormUISchema, carsTableUISchema]
 };
