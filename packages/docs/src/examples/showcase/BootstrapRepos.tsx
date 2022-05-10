@@ -32,7 +32,8 @@ export const BootstrapTableRepo = basicRepo
             'booleanComponent',
             'imageComponent',
             'emailComponent',
-            'linkComponent'
+            'linkComponent',
+            'arrayOfStringComponent'
         ]
     });
 

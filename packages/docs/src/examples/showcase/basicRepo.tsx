@@ -67,7 +67,7 @@ export const basicRepo = new ComponentsRepo('displayRepo', detectEnums)
     })
     .register('array', {
         name: 'arrayOfStringComponent',
-        component: () => <span>array</span>,
+        component: props => <span>{props.data.join(', ')}</span>,
         predicate: node => node.items.type === 'string'
     })
     .register('oneOfEnumLike', {

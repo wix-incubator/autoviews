@@ -32,7 +32,8 @@ export const MUITableRepo = basicRepo
             'imageComponent',
             'emailComponent',
             'linkComponent',
-            'avatarComponent'
+            'avatarComponent',
+            'arrayOfStringComponent'
         ]
     });
 
