@@ -1,12 +1,18 @@
 import React from 'react';
 import {ComponentsRepo, isRequired, RootSchemaConsumer} from '@autoviews/core';
-import {Box} from '@mui/material';
-import {TableCell, Avatar} from '@mui/material';
+import {Avatar, Box, TableCell} from '@mui/material';
 
 import {MUITable, MUITableRow} from './MUITable';
-import {IMAGE_SUBTYPE} from './schemas';
+import {IMAGE_SUBTYPE, LONG_TEXT_SUBTYPE} from './schemas';
 import {basicRepo, detectEnums} from './basicRepo';
-import {MUIForm, MUINumber, MUISlider, MUISwitch, MUIText} from './MUIForm';
+import {
+    MUIForm,
+    MUINumber,
+    MUISlider,
+    MUISwitch,
+    MUIText,
+    MUITextVariant
+} from './MUIForm';
 
 interface LabelProps {
     text: string;
@@ -87,7 +93,12 @@ export const MUIFormRepo = new ComponentsRepo('MUIFormRepo', detectEnums)
     })
     .register('string', {
         name: 'textComponent',
-        component: MUIText
+        component: MUIText()
+    })
+    .register('string', {
+        name: 'longTextComponent',
+        component: MUIText(MUITextVariant.multiline),
+        predicate: node => node.format === LONG_TEXT_SUBTYPE
     })
     .register('number', {
         name: 'numberComponent',

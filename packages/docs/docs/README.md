@@ -16,6 +16,12 @@ Additional Resources: [GitHub](https://github.com/wix-incubator/autoviews/),
 
 ## AutoViews showcase
 
+import {Demo} from '@site/src/components';
+import {showcaseHomepage} from '@site/src/examples/showcase';
+
+<Demo {...showcaseHomepage()} />
+
+
 ## The Elements of AutoViews
 
 ‘AutoViews’ renders UI by combining 4 elements

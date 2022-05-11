@@ -38,5 +38,18 @@ export const dependencies: DemoDependencies = {
 };
 
 export const options: DemoOptions = {
-    activePath: '/App.tsx'
+    activePath: '/App.tsx',
+    editorWidthPercentage: 50
 };
+export const optionsHomepage: DemoOptions = {
+    activePath: '/App.tsx',
+    editorWidthPercentage: 30
+};
+
+export function showcaseExample() {
+    return {files, dependencies, options};
+}
+
+export function showcaseHomepage() {
+    return {files, dependencies, options: optionsHomepage};
+}

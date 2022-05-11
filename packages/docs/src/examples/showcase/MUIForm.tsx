@@ -23,7 +23,9 @@ export const MUIForm = (props: AutoViewProps) => {
             <FormGroup>
                 <AutoFields
                     {...props}
-                    uiSchema={extractItemUISchema(props.uiSchema ?? createUISchema())}
+                    uiSchema={extractItemUISchema(
+                        props.uiSchema ?? createUISchema()
+                    )}
                 />
             </FormGroup>
             <Box sx={{marginTop: '20px'}}>
@@ -41,16 +43,28 @@ export const MUIForm = (props: AutoViewProps) => {
     );
 };
 
-export const MUIText = (props: AutoViewProps) => {
-    return (
-        <TextField
-            required={props.metadata?.isRequired}
-            label={props.schema.title || props.field}
-            value={props.data || ''}
-            onChange={changeEventHandler(props, (e) => e.target.value)}
-        />
-    );
-};
+export enum MUITextVariant {
+    regular,
+    multiline
+}
+
+export const MUIText =
+    (variant: MUITextVariant = MUITextVariant.regular) =>
+    (props: AutoViewProps) => {
+        return (
+            <TextField
+                required={props.metadata?.isRequired}
+                label={props.schema.title || props.field}
+                value={props.data || ''}
+                onChange={changeEventHandler(props, e => e.target.value)}
+                fullWidth
+                multiline={
+                    variant === MUITextVariant.multiline ? true : undefined
+                }
+                rows={variant === MUITextVariant.multiline ? 4 : undefined}
+            />
+        );
+    };
 
 export const MUINumber = (props: AutoViewProps) => {
     return (
@@ -59,7 +73,7 @@ export const MUINumber = (props: AutoViewProps) => {
             type="number"
             label={props.schema.title || props.field}
             value={props.data || ''}
-            onChange={changeEventHandler(props, (e) => e.target.value)}
+            onChange={changeEventHandler(props, e => e.target.value)}
         />
     );
 };
@@ -71,7 +85,7 @@ export const MUISwitch = (props: AutoViewProps) => {
                 <Switch
                     required={props.metadata?.isRequired}
                     checked={props.data ?? false}
-                    onChange={changeEventHandler(props, (e) => e.target.checked)}
+                    onChange={changeEventHandler(props, e => e.target.checked)}
                 />
             }
             label={props.schema.title}
@@ -87,7 +101,7 @@ export const MUISlider = (props: AutoViewProps) => {
             valueLabelDisplay="on"
             min={props.schema.minimum}
             max={props.schema.maximum}
-            onChange={changeEventHandler(props, (e) => (e?.target as any).value)}
+            onChange={changeEventHandler(props, e => (e?.target as any).value)}
         />
     );
 };
