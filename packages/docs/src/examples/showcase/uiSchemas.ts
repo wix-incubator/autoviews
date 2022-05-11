@@ -26,7 +26,22 @@ const userTableUISchema: UISchema = {
 };
 
 const cocktailTableUISchema: UISchema = {
-    hints: {},
+    hints: {
+        '/items': {
+            order: [
+                'drinkThumb',
+                'drink',
+                'tags',
+                'ingredients',
+                'instructions',
+                'category',
+                'iba',
+                'glass',
+                'base'
+            ],
+            hidden: ['isUnique', 'alcohol', 'glass']
+        }
+    },
     components: {}
 };
 const carsTableUISchema: UISchema = {

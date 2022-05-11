@@ -8,6 +8,47 @@ import {IMAGE_SUBTYPE} from './schemas';
 import {basicRepo, detectEnums} from './basicRepo';
 import {MUIForm, MUINumber, MUISlider, MUISwitch, MUIText} from './MUIForm';
 
+interface LabelProps {
+    text: string;
+    colorIndex?: number;
+}
+const colors = [
+    '#32B777',
+    '#170093',
+    '#D0427D',
+    '#6C48EF',
+    '#0097a7',
+    '#2B81CB'
+];
+
+const textToColor = {};
+let nextColorIndex = 0;
+function resloveColor(text: string) {
+    if (!textToColor[text]) {
+        textToColor[text] = colors[nextColorIndex++ % colors.length];
+    }
+    return textToColor[text];
+}
+
+const Label = (props: LabelProps) => {
+    const color = props.colorIndex
+        ? colors[props.colorIndex % colors.length]
+        : resloveColor(props.text);
+    return (
+        <span
+            style={{
+                borderRadius: '16px',
+                backgroundColor: color,
+                padding: '0 5px',
+                color: 'white',
+                margin: '0 3px 0 0'
+            }}
+        >
+            {props.text}
+        </span>
+    );
+};
+
 export const MUITableRepo = basicRepo
     .clone('MUITableRepo')
     .register('array', {
@@ -19,22 +60,24 @@ export const MUITableRepo = basicRepo
         name: 'tableRowComponent',
         component: MUITableRow
     })
+    .register('array', {
+        name: 'labelsComponent',
+        component: props =>
+            props.data.map(label => (
+                <Label
+                    key={label}
+                    text={label}
+                />
+            )),
+        predicate: node => node.items.type === 'string'
+    })
     .register('string', {
         name: 'avatarComponent',
         component: props => <Avatar src={props.data} />,
         predicate: node => node.format === IMAGE_SUBTYPE
     })
     .addWrapper(item => <TableCell>{item}</TableCell>, {
-        include: [
-            'textComponent',
-            'numberComponent',
-            'booleanComponent',
-            'imageComponent',
-            'emailComponent',
-            'linkComponent',
-            'avatarComponent',
-            'arrayOfStringComponent'
-        ]
+        exclude: ['tableComponent', 'tableRowComponent']
     });
 
 export const MUIFormRepo = new ComponentsRepo('MUIFormRepo', detectEnums)

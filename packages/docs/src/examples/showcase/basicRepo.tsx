@@ -2,7 +2,12 @@ import {ComponentsRepo} from '@autoviews/core';
 import React from 'react';
 import {CoreSchemaMetaSchema} from '@autoviews/core';
 
-import {EMAIL_SUBTYPE, IMAGE_SUBTYPE, LINK_SUBTYPE} from './schemas';
+import {
+    EMAIL_SUBTYPE,
+    IMAGE_SUBTYPE,
+    LINK_SUBTYPE,
+    LONG_TEXT_SUBTYPE
+} from './schemas';
 
 export const oneOfEnumLike = 'oneOfEnumLike';
 export function detectEnums(node: CoreSchemaMetaSchema): string {
@@ -26,6 +31,16 @@ export const basicRepo = new ComponentsRepo('displayRepo', detectEnums)
     .register('string', {
         name: 'textComponent',
         component: props => <span>{props.data}</span>
+    })
+    .register('string', {
+        name: 'longTextComponent',
+        component: props => (
+            <span>
+                {props.data.substring(0, 60)}
+                ...
+            </span>
+        ),
+        predicate: node => node.format === LONG_TEXT_SUBTYPE
     })
     .register('string', {
         name: 'imageComponent',
@@ -63,7 +78,7 @@ export const basicRepo = new ComponentsRepo('displayRepo', detectEnums)
     })
     .register('boolean', {
         name: 'booleanComponent',
-        component: props => <span>{props.data ? '+' : '-'}</span>
+        component: props => <span>{props.data ? 'Yes' : 'No'}</span>
     })
     .register('array', {
         name: 'arrayOfStringComponent',

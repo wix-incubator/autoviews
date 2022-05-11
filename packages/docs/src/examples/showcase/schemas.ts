@@ -3,6 +3,7 @@ import {CoreSchemaMetaSchema} from '@autoviews/core';
 export const IMAGE_SUBTYPE = 'image';
 export const LINK_SUBTYPE = 'link';
 export const EMAIL_SUBTYPE = 'email';
+export const LONG_TEXT_SUBTYPE = 'long text';
 const userSchema: CoreSchemaMetaSchema = {
     $id: 'userSchema',
     type: 'object',
@@ -151,7 +152,8 @@ const cocktailSchema: CoreSchemaMetaSchema = {
         },
         instructions: {
             type: 'string',
-            title: 'Preparation Instructions'
+            title: 'Preparation Instructions',
+            format: LONG_TEXT_SUBTYPE
         },
         drinkThumb: {
             type: 'string',
@@ -180,7 +182,8 @@ const cocktailSchema: CoreSchemaMetaSchema = {
             title: 'A Unique cocktail'
         },
         base: {
-            title: 'Spirit the Cocktail is based on',
+            title: 'Based on',
+            description: 'Spirit the Cocktail is based on',
             oneOf: [
                 {
                     const: 'jin',

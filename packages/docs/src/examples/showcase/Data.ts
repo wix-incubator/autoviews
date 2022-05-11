@@ -176,15 +176,14 @@ export const dataStore = {
                 },
                 {
                     ingredient: 'Salt',
-                    measure: 'null'
+                    measure: 'pinch'
                 }
             ]
         },
         {
             drink: 'Blue Margarita',
-            tags: [],
+            tags: ['Classic'],
             category: 'Ordinary Drink',
-            iba: 'null',
             glass: 'cocktail glass',
             alcohol: 13,
             instructions:
@@ -241,9 +240,8 @@ export const dataStore = {
         },
         {
             drink: 'Whitecap Margarita',
-            tags: [],
+            tags: ['Original'],
             category: 'Other/Unknown',
-            iba: 'null',
             glass: 'margarita/coupette glass',
             alcohol: 20,
             instructions:
@@ -273,9 +271,8 @@ export const dataStore = {
         },
         {
             drink: 'Strawberry Margarita',
-            tags: [],
+            tags: ['Classic', 'DinnerParty'],
             category: 'Ordinary Drink',
-            iba: 'null',
             glass: 'cocktail glass',
             alcohol: 17,
             instructions:
@@ -307,15 +304,14 @@ export const dataStore = {
                 },
                 {
                     ingredient: 'Salt',
-                    measure: 'null'
+                    measure: 'pinch'
                 }
             ]
         },
         {
             drink: 'Smashed Watermelon Margarita',
-            tags: [],
+            tags: ['Unique'],
             category: 'Cocktail',
-            iba: 'null',
             glass: 'collins glass',
             alcohol: 11,
             instructions:
@@ -357,9 +353,8 @@ export const dataStore = {
         },
         {
             drink: 'Long vodka',
-            tags: [],
+            tags: ['ContemporaryClassic'],
             category: 'Ordinary Drink',
-            iba: 'null',
             glass: 'highball glass',
             alcohol: 28,
             instructions:
@@ -395,7 +390,6 @@ export const dataStore = {
             drink: 'Vodka Fizz',
             tags: [],
             category: 'Other/Unknown',
-            iba: 'null',
             glass: 'white wine glass',
             alcohol: 24,
             instructions:
@@ -419,19 +413,18 @@ export const dataStore = {
                 },
                 {
                     ingredient: 'Ice',
-                    measure: 'null'
+                    measure: '2 cubes'
                 },
                 {
                     ingredient: 'Nutmeg',
-                    measure: 'null'
+                    measure: '1 oz'
                 }
             ]
         },
         {
             drink: 'Vodka Slime',
-            tags: [],
+            tags: ['DinnerParty'],
             category: 'Cocktail',
-            iba: 'null',
             glass: 'highball glass',
             alcohol: 14,
             instructions:
@@ -457,9 +450,8 @@ export const dataStore = {
         },
         {
             drink: 'Rum Sour',
-            tags: [],
+            tags: ['ContemporaryClassic'],
             category: 'Ordinary Drink',
-            iba: 'null',
             glass: 'whiskey sour glass',
             alcohol: 20,
             instructions:
@@ -495,7 +487,6 @@ export const dataStore = {
             drink: 'Espresso Rumtini',
             tags: ['DinnerParty', 'StrongFlavor'],
             category: 'Cocktail',
-            iba: 'null',
             glass: 'cocktail glass',
             alcohol: 15,
             instructions:
@@ -527,7 +518,6 @@ export const dataStore = {
             drink: 'Rum Old-fashioned',
             tags: [],
             category: 'Ordinary Drink',
-            iba: 'null',
             glass: 'old-fashioned glass',
             alcohol: 38,
             instructions:
