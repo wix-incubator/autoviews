@@ -36,13 +36,13 @@ export default function App() {
     const schema = useMemo(() => schemas[schemaName], [schemaName]);
 
     // UI Schema
-    const [tableUISchemaIndex, setTableUISchemaIndex] = useState(0);
-    const [formUISchemaIndex, setFormUISchemaIndex] = useState(0);
+    const [tableUISchemaName, setTableUISchemaName] = useState('Default');
+    const [formUISchemaName, setFormUISchemaName] = useState('Default');
     const [[formUISchema, tableUISchema], setUISchemas] = useState<
         [UISchema, UISchema]
     >([
-        availableUISchemas['user'].form[formUISchemaIndex].uiSchema,
-        availableUISchemas['user'].table[tableUISchemaIndex].uiSchema
+        availableUISchemas['user'].form[formUISchemaName],
+        availableUISchemas['user'].table[tableUISchemaName]
     ]);
 
     // Item to be edited in the form
@@ -52,13 +52,37 @@ export default function App() {
         const name = e.target.value as SchemaNames;
         setSchemaName(name);
         setData(dataStore[name]);
-        setTableUISchemaIndex(0);
-        setFormUISchemaIndex(0);
+        setTableUISchemaName('Default');
+        setFormUISchemaName('Default');
         setUISchemas([
-            availableUISchemas[name].form[0].uiSchema,
-            availableUISchemas[name].table[0].uiSchema
+            availableUISchemas[name].form['Default'],
+            availableUISchemas[name].table['Default']
         ]);
     }, []);
+
+    const onTableUISchemaChange = useCallback(
+        (e: SelectChangeEvent<string>) => {
+            const name = e.target.value as string;
+            setTableUISchemaName(name);
+            setUISchemas([
+                formUISchema,
+                availableUISchemas[schemaName].table[name]
+            ]);
+        },
+        [formUISchema, schemaName]
+    );
+
+    const onFormUISchemaChange = useCallback(
+        (e: SelectChangeEvent<string>) => {
+            const name = e.target.value as string;
+            setFormUISchemaName(name);
+            setUISchemas([
+                availableUISchemas[schemaName].form[name],
+                tableUISchema
+            ]);
+        },
+        [tableUISchema, schemaName]
+    );
 
     const onFormChange = useCallback(
         (_: any, {patch}) => {
@@ -178,9 +202,11 @@ export default function App() {
                             <Dropdown
                                 id={'table-ui-schema'}
                                 title={'Table UI Schema'}
-                                value={schemaName}
-                                values={Object.keys(schemas)}
-                                onChange={onSchemaChange}
+                                value={tableUISchemaName}
+                                values={Object.keys(
+                                    availableUISchemas[schemaName].table
+                                )}
+                                onChange={onTableUISchemaChange}
                             />
                         }
                     />
@@ -202,6 +228,17 @@ export default function App() {
                     <CardHeader
                         title="Form"
                         subheader="Second instance of AutoView"
+                        action={
+                            <Dropdown
+                                id={'form-ui-schema'}
+                                title={'Form UI Schema'}
+                                value={formUISchemaName}
+                                values={Object.keys(
+                                    availableUISchemas[schemaName].form
+                                )}
+                                onChange={onFormUISchemaChange}
+                            />
+                        }
                     />
                     <Divider />
                     <CardContent>
