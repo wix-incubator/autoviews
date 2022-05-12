@@ -1,9 +1,8 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import {applyPatch} from 'fast-json-patch';
 import {
     AutoView,
     ComponentsRepo,
-    CoreSchemaMetaSchema,
     RepositoryProvider,
     UISchema
 } from '@autoviews/core';
@@ -22,28 +21,43 @@ import {
     CardHeader
 } from '@mui/material';
 
-import {UISchemas} from './uiSchemas';
+import {availableUISchemas} from './uiSchemas';
 import './styles.css';
 import {dataStore, SchemaNames, schemas} from './Data';
 import {MUIFormRepo, MUITableRepo} from './MUIRepos';
 import {BootstrapFormRepo, BootstrapTableRepo} from './BootstrapRepos';
 
 export default function App() {
+    // data
     const [data, setData] = useState<any[]>(dataStore.user);
-    const [[schema, schemaName], setSchema] = useState<
-        [CoreSchemaMetaSchema, SchemaNames]
-    >([schemas.user, 'user']);
+
+    // JSON Schema
+    const [schemaName, setSchemaName] = useState('user');
+    const schema = useMemo(() => schemas[schemaName], [schemaName]);
+
+    // UI Schema
+    const [tableUISchemaIndex, setTableUISchemaIndex] = useState(0);
+    const [formUISchemaIndex, setFormUISchemaIndex] = useState(0);
     const [[formUISchema, tableUISchema], setUISchemas] = useState<
         [UISchema, UISchema]
-    >(UISchemas.user);
+    >([
+        availableUISchemas['user'].form[formUISchemaIndex].uiSchema,
+        availableUISchemas['user'].table[tableUISchemaIndex].uiSchema
+    ]);
 
+    // Item to be edited in the form
     const [item, setItem] = useState<any>({});
 
     const onSchemaChange = useCallback((e: SelectChangeEvent<string>) => {
         const name = e.target.value as SchemaNames;
-        setSchema([schemas[name], name]);
+        setSchemaName(name);
         setData(dataStore[name]);
-        setUISchemas(UISchemas[name]);
+        setTableUISchemaIndex(0);
+        setFormUISchemaIndex(0);
+        setUISchemas([
+            availableUISchemas[name].form[0].uiSchema,
+            availableUISchemas[name].table[0].uiSchema
+        ]);
     }, []);
 
     const onFormChange = useCallback(
@@ -83,6 +97,36 @@ export default function App() {
         },
         [item, data]
     );
+    interface DropdownProps {
+        id: string;
+        title: string;
+        value: string;
+        values: string[];
+        onChange: (e: SelectChangeEvent<string>) => void;
+    }
+    const Dropdown = ({id, title, value, values, onChange}: DropdownProps) => {
+        return (
+            <FormControl sx={{width: '140px', margin: '0 10px'}}>
+                <InputLabel id={`${id}-select-label`}>{title}</InputLabel>
+                <Select
+                    labelId={`${id}-select-label`}
+                    id={`${id}-select`}
+                    value={value}
+                    label={title}
+                    onChange={onChange}
+                >
+                    {values.map(key => (
+                        <MenuItem
+                            value={key}
+                            key={key}
+                        >
+                            {key}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        );
+    };
 
     return (
         <div className="App">
@@ -115,29 +159,13 @@ export default function App() {
                             >
                                 Bootstrap
                             </Button>
-                            <FormControl
-                                sx={{width: '140px', margin: '0 10px'}}
-                            >
-                                <InputLabel id="schema-select-label">
-                                    Schema
-                                </InputLabel>
-                                <Select
-                                    labelId="schema-select-label"
-                                    id="schema-select"
-                                    value={schemaName}
-                                    label="Schema"
-                                    onChange={onSchemaChange}
-                                >
-                                    {Object.keys(schemas).map(key => (
-                                        <MenuItem
-                                            value={key}
-                                            key={key}
-                                        >
-                                            {key}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                            <Dropdown
+                                id={'schema'}
+                                title={'Schema'}
+                                value={schemaName}
+                                values={Object.keys(schemas)}
+                                onChange={onSchemaChange}
+                            />
                         </ButtonGroup>
                     </CardContent>
                 </Card>
@@ -146,6 +174,15 @@ export default function App() {
                     <CardHeader
                         title="Table"
                         subheader="First instance of AutoView"
+                        action={
+                            <Dropdown
+                                id={'table-ui-schema'}
+                                title={'Table UI Schema'}
+                                value={schemaName}
+                                values={Object.keys(schemas)}
+                                onChange={onSchemaChange}
+                            />
+                        }
                     />
                     <Divider />
                     <CardContent>
