@@ -40,7 +40,7 @@ Order of resolving types in `getNodeType` does matter. By placing `$ref` conditi
 
 ## Full example
 
-import \* as ref from '../../src/examples/subschemas/ref';
+import * as ref from '../../src/examples/subschemas/ref';
 
 <Demo {...ref} />
 
