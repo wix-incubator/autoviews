@@ -14,6 +14,7 @@ In this example, schema's node with `oneOf` doesn't contain `type` keyword, so r
 Alternatively, `<RepositoryComponentByType />` could be used to render `oneOf` component manually inside object component.
 :::
 
+import * as enumDemo from '@site/src/examples/subschemas/oneof/enum';
 
 <Demo {...enumDemo} />
 
@@ -27,5 +28,6 @@ This examples have two different oneOf components, one the same as in previous e
 Note, here <CustomOneOfComponent /> contains some JSON Schema generation, which could passed to AutoView to automatically render dropdown with registered in repo component.
 :::
 
+import * as insideObjectFiles from '../../src/examples/subschemas/oneof/inside-object';
 
 <Demo {...insideObjectFiles} />
