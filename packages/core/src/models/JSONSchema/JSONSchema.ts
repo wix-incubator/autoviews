@@ -28,7 +28,8 @@ export interface CoreSchemaMetaSchema {
     minLength?: NonNegativeIntegerDefault0;
     pattern?: string;
     additionalItems?: CoreSchemaMetaSchema;
-    items?: CoreSchemaMetaSchema | SchemaArray;
+    items?: CoreSchemaMetaSchema;
+    prefixItems?: SchemaArray;
     maxItems?: NonNegativeInteger;
     minItems?: NonNegativeIntegerDefault0;
     uniqueItems?: boolean;
