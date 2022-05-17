@@ -577,6 +577,136 @@ describe('AutoView', () => {
                 expect(field12).toBeInTheDocument();
                 expect(field12).toHaveValue('1-2');
             });
+
+            describe('tuple', () => {
+                it('should render fieldset with empty string as default value', () => {
+                    render(
+                        <RepositoryProvider components={components}>
+                            <AutoView
+                                schema={{
+                                    type: 'array',
+                                    prefixItems: [{type: 'string'}]
+                                }}
+                            />
+                        </RepositoryProvider>
+                    );
+
+                    const fieldset = screen.getByTestId('#FIELDSET');
+                    const input = within(fieldset).queryByTestId(
+                        '/0#NATIVE_TEXT_INPUT'
+                    );
+
+                    expect(fieldset).toBeInTheDocument();
+                    expect(input).toHaveValue('');
+                });
+
+                it('should render a fieldset without data', () => {
+                    render(
+                        <RepositoryProvider components={components}>
+                            <AutoView
+                                schema={{
+                                    type: 'array',
+                                    prefixItems: [
+                                        {type: 'string'},
+                                        {
+                                            type: 'object',
+                                            properties: {
+                                                field1: {type: 'string'},
+                                                inner: {
+                                                    type: 'object',
+                                                    properties: {
+                                                        field2: {type: 'string'}
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }}
+                            />
+                        </RepositoryProvider>
+                    );
+
+                    const fieldset = screen.getByTestId('#FIELDSET');
+
+                    const field01 = within(fieldset).getByTestId(
+                        '/0#NATIVE_TEXT_INPUT'
+                    );
+                    const field11 = within(fieldset).getByTestId(
+                        '/1/field1#NATIVE_TEXT_INPUT'
+                    );
+                    const field12 = within(fieldset).getByTestId(
+                        '/1/inner/field2#NATIVE_TEXT_INPUT'
+                    );
+
+                    expect(fieldset).toBeInTheDocument();
+
+                    expect(field01).toBeInTheDocument();
+                    expect(field01).toHaveValue('');
+
+                    expect(field11).toBeInTheDocument();
+                    expect(field11).toHaveValue('');
+
+                    expect(field12).toBeInTheDocument();
+                    expect(field12).toHaveValue('');
+                });
+
+                it('should render a fieldset with data', () => {
+                    render(
+                        <RepositoryProvider components={components}>
+                            <AutoView
+                                schema={{
+                                    type: 'array',
+                                    prefixItems: [
+                                        {type: 'string'},
+                                        {
+                                            type: 'object',
+                                            properties: {
+                                                field1: {type: 'string'},
+                                                inner: {
+                                                    type: 'object',
+                                                    properties: {
+                                                        field2: {type: 'string'}
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }}
+                                data={[
+                                    '0-1',
+                                    {
+                                        field1: '1-1',
+                                        inner: {field2: '1-2'}
+                                    }
+                                ]}
+                            />
+                        </RepositoryProvider>
+                    );
+
+                    const fieldset = screen.getByTestId('#FIELDSET');
+
+                    const field01 = within(fieldset).getByTestId(
+                        '/0#NATIVE_TEXT_INPUT'
+                    );
+                    const field11 = within(fieldset).getByTestId(
+                        '/1/field1#NATIVE_TEXT_INPUT'
+                    );
+                    const field12 = within(fieldset).getByTestId(
+                        '/1/inner/field2#NATIVE_TEXT_INPUT'
+                    );
+
+                    expect(fieldset).toBeInTheDocument();
+
+                    expect(field01).toBeInTheDocument();
+                    expect(field01).toHaveValue('0-1');
+
+                    expect(field11).toBeInTheDocument();
+                    expect(field11).toHaveValue('1-1');
+
+                    expect(field12).toBeInTheDocument();
+                    expect(field12).toHaveValue('1-2');
+                });
+            });
         });
 
         describe('multiple types', () => {

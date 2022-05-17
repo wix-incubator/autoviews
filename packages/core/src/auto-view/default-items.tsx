@@ -79,7 +79,7 @@ export const AutoFields: React.FunctionComponent<AutoFieldsProps> = ({
     render = (a: React.ReactNode) => a,
     ...props
 }) => (
-    <React.Fragment>
+    <>
         {autoFieldsProps(props).map(fieldProps => {
             return render(
                 <AutoView
@@ -90,7 +90,7 @@ export const AutoFields: React.FunctionComponent<AutoFieldsProps> = ({
                 fieldProps.field
             );
         })}
-    </React.Fragment>
+    </>
 );
 
 export type AutoItemsProps = {
@@ -102,7 +102,7 @@ export type AutoItemsProps = {
 } & AutoViewProps;
 
 export const AutoItems = ({render = a => a, ...props}: AutoItemsProps) => (
-    <React.Fragment>
+    <>
         {autoItemsProps(props).map((itemProps, index) =>
             render(
                 <AutoView
@@ -113,11 +113,24 @@ export const AutoItems = ({render = a => a, ...props}: AutoItemsProps) => (
                 index
             )
         )}
-    </React.Fragment>
+    </>
 );
 
+const ensureArrayData = (
+    data: any,
+    schema: AutoFieldsProps['schema']
+): any[] => {
+    if (data && Array.isArray(data)) {
+        return data;
+    }
+
+    return Array.isArray(schema.prefixItems)
+        ? new Array(schema.prefixItems.length).fill(undefined)
+        : [];
+};
+
 export function autoItemsProps({
-    data = [],
+    data,
     metadata,
     schema,
     uiSchema,
@@ -129,8 +142,8 @@ export function autoItemsProps({
     onRenderError,
     onCustomEvent
 }: AutoViewProps): AutoViewProps[] {
-    return (data as any[]).map((item, i) => ({
-        schema: nextSchema(schema),
+    return ensureArrayData(data, schema).map((item, i) => ({
+        schema: nextSchema(schema, i),
         data: item,
         metadata,
         uiSchema,
@@ -145,12 +158,30 @@ export function autoItemsProps({
     }));
 }
 
+const findPrefixMatch = (
+    prefixItems?: AutoViewProps['schema']['prefixItems'],
+    index?: number | string
+) => {
+    if (
+        Array.isArray(prefixItems) &&
+        typeof index === 'number' &&
+        prefixItems[index]
+    ) {
+        return prefixItems[index];
+    }
+};
+
 export function nextSchema(
     schema: AutoViewProps['schema'],
-    dataPointer?: string
+    dataPointer?: string | number
 ): AutoViewProps['schema'] {
     if (schema.type === 'array') {
-        return schema.items || [];
+        return (
+            findPrefixMatch(schema.prefixItems, dataPointer) ??
+            schema.items ??
+            schema.additionalItems ??
+            []
+        );
     }
 
     if (dataPointer !== undefined && schema.type === 'object') {
@@ -161,6 +192,7 @@ export function nextSchema(
                 : {};
         return properties[dataPointer] ?? additional;
     }
+
     throw Error('array schema or object schema and dataPointer expected');
 }
 
@@ -182,6 +214,6 @@ export function buildNextSchemaPointer(
     throw Error('object or array schema expected');
 }
 
-export const AnyData: React.SFC<AutoViewProps> = props => (
+export const AnyData: React.FunctionComponent<AutoViewProps> = props => (
     <pre>{JSON.stringify(props.data, null, 4)}</pre>
 );
