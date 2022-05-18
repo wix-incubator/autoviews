@@ -3,7 +3,7 @@ import {CoreSchemaMetaSchema} from '../models';
 import {allFields} from './all-fields';
 import {filterAndOrderFields} from './filter-and-order-fields';
 
-type Rules = {
+export type ObjectSchemaAsArrayRules = {
     pick?: string[];
     omit?: string[];
     order?: string[];
@@ -29,7 +29,7 @@ export const objectSchemaAsArrayMapFn = (
 export const objectSchemaAsArray = <T>(
     schema: CoreSchemaMetaSchema,
     data: Record<string, any>,
-    {pick, omit, order}: Rules = {},
+    {pick, omit, order}: ObjectSchemaAsArrayRules = {},
     mapFunction: (field: string, schema: CoreSchemaMetaSchema) => T
 ) => {
     if (schema.type !== 'object' || !schema.properties) {
