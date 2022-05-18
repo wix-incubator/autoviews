@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {allFields, buildJsonPointer, filterAndOrderFields} from '../utils';
+import {CoreSchemaMetaSchema} from '../models';
 
 import {AutoView, AutoViewProps} from './auto-view';
 import {getHints} from './utils';
@@ -116,10 +117,7 @@ export const AutoItems = ({render = a => a, ...props}: AutoItemsProps) => (
     </>
 );
 
-const ensureArrayData = (
-    data: any,
-    schema: AutoFieldsProps['schema']
-): any[] => {
+const ensureArrayData = (data: any, schema: CoreSchemaMetaSchema): any[] => {
     if (data && Array.isArray(data)) {
         return data;
     }
