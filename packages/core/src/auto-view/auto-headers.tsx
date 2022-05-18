@@ -35,7 +35,7 @@ export const AutoHeaders = (props: AutoHeadersProps) => {
 
     if (sourceObjectSchema?.type !== 'object') {
         throw new Error(
-            `expected schema \`type\` value to be \`object\`, but got ${props.schema?.type}`
+            `expected schema \`type\` value to be \`object\`, but got ${sourceObjectSchema?.type}`
         );
     }
 
