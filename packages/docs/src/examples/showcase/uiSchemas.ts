@@ -23,7 +23,7 @@ export const userFullTableUISchema: UISchema = {
     components: {}
 };
 
-export const userBriefTableUISchema: UISchema = {
+export const userDefaultTableUISchema: UISchema = {
     hints: {
         '/items': {
             order: [
@@ -48,7 +48,7 @@ export const userBriefTableUISchema: UISchema = {
     components: {}
 };
 
-const cocktailTableUISchema: UISchema = {
+const cocktailDefaultTableUISchema: UISchema = {
     hints: {
         '/items': {
             order: [
@@ -63,6 +63,24 @@ const cocktailTableUISchema: UISchema = {
                 'base'
             ],
             hidden: ['isUnique', 'alcohol', 'glass']
+        }
+    },
+    components: {}
+};
+
+const cocktailBriefTableUISchema: UISchema = {
+    hints: {
+        '/items': {
+            order: ['drinkThumb', 'drink', 'tags', 'category', 'base'],
+            hidden: [
+                'isUnique',
+                'alcohol',
+                'glass',
+                'ingredients',
+                'instructions',
+                'iba',
+                'glass'
+            ]
         }
     },
     components: {}
@@ -126,13 +144,16 @@ export interface AvailableUISchemas {
 const userAvailableUISchemas: AvailableUISchemasForJSONSchema = {
     form: {Default: userFormUISchema},
     table: {
-        Default: userBriefTableUISchema,
+        Default: userDefaultTableUISchema,
         Full: userFullTableUISchema
     }
 };
 const cocktailAvailableUISchemas = {
     form: {Default: cocktailFormUISchema},
-    table: {Default: cocktailTableUISchema}
+    table: {
+        Default: cocktailDefaultTableUISchema,
+        Brief: cocktailBriefTableUISchema
+    }
 };
 const carsAvailableUISchemas = {
     form: {Default: carsFormUISchema},
