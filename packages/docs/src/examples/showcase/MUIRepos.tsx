@@ -7,6 +7,7 @@ import {IMAGE_SUBTYPE, LONG_TEXT_SUBTYPE} from './schemas';
 import {basicRepo, detectEnums} from './basicRepo';
 import {
     MUIForm,
+    MUILabelsInput,
     MUINumber,
     MUISlider,
     MUISwitch,
@@ -112,6 +113,11 @@ export const MUIFormRepo = new ComponentsRepo('MUIFormRepo', detectEnums)
     .register('array', {
         name: 'arrayComponent',
         component: () => <span>array</span>
+    })
+    .register('array', {
+        name: 'labelsArrayComponent',
+        component: MUILabelsInput,
+        predicate: node => node.items.type === 'string' && !!node.items.oneOf
     })
     .register('oneOfEnumLike', {
         name: 'enumComponent',

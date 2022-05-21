@@ -108,7 +108,18 @@ const cocktailSchema: CoreSchemaMetaSchema = {
             type: 'array',
             title: 'tags',
             items: {
-                type: 'string'
+                type: 'string',
+                oneOf: [
+                    {const: 'IBA'},
+                    {const: 'ContemporaryClassic'},
+                    {const: 'Classic'},
+                    {const: 'NewEra'},
+                    {const: 'Original'},
+                    {const: 'DinnerParty'},
+                    {const: 'Unique'},
+                    {const: 'ContemporaryClassic'},
+                    {const: 'StrongFlavor'}
+                ]
             }
         },
         category: {

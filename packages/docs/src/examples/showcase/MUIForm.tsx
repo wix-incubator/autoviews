@@ -6,13 +6,21 @@ import {
     FormGroup,
     Slider,
     Switch,
-    TextField
+    TextField,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    Chip,
+    Checkbox,
+    ListItemText
 } from '@mui/material';
 import {
     AutoFields,
     AutoViewProps,
     changeEventHandler,
     clickEventHandler,
+    CoreSchemaMetaSchema,
     createUISchema,
     extractItemUISchema
 } from '@autoviews/core';
@@ -103,5 +111,62 @@ export const MUISlider = (props: AutoViewProps) => {
             max={props.schema.maximum}
             onChange={changeEventHandler(props, e => (e?.target as any).value)}
         />
+    );
+};
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250
+        }
+    }
+};
+export const MUILabelsInput = (props: AutoViewProps) => {
+    const data: Array<string> = props.data || [];
+    const labels: Array<string> = (
+        props.schema.items as CoreSchemaMetaSchema
+    ).oneOf.map(oneOfOption => oneOfOption.const);
+    return (
+        <FormControl>
+            <InputLabel id={`${props.field}-labels-label`}>
+                {props.schema.title || props.field}
+            </InputLabel>
+            <Select
+                labelId={`${props.field}-labels-label`}
+                label={props.schema.title || props.field}
+                id={`${props.field}-labels`}
+                multiple
+                value={data}
+                onChange={changeEventHandler(
+                    props,
+                    e => (e?.target as any).value
+                )}
+                // input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+                renderValue={selected => (
+                    <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
+                        {selected.map(value => (
+                            <Chip
+                                key={value}
+                                label={value}
+                            />
+                        ))}
+                    </Box>
+                )}
+                MenuProps={MenuProps}
+            >
+                {labels.map(label => (
+                    <MenuItem
+                        key={label}
+                        value={label}
+                    >
+                        <Checkbox checked={data.indexOf(label) > -1} />
+                        <ListItemText primary={label} />
+                    </MenuItem>
+                ))}
+            </Select>
+        </FormControl>
     );
 };
