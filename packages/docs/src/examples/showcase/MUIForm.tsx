@@ -13,7 +13,8 @@ import {
     MenuItem,
     Chip,
     Checkbox,
-    ListItemText
+    ListItemText,
+    Typography
 } from '@mui/material';
 import {
     AutoFields,
@@ -103,14 +104,32 @@ export const MUISwitch = (props: AutoViewProps) => {
 
 export const MUISlider = (props: AutoViewProps) => {
     return (
-        <Slider
-            sx={{maxWidth: '250px'}}
-            value={props.data ?? props.schema.minimum}
-            valueLabelDisplay="on"
-            min={props.schema.minimum}
-            max={props.schema.maximum}
-            onChange={changeEventHandler(props, e => (e?.target as any).value)}
-        />
+        <formControl>
+            <Typography gutterBottom>
+                {props.schema.title || props.field}
+            </Typography>
+            <Slider
+                sx={{maxWidth: '250px'}}
+                value={props.data ?? props.schema.minimum}
+                valueLabelDisplay="on"
+                min={props.schema.minimum}
+                max={props.schema.maximum}
+                onChange={changeEventHandler(
+                    props,
+                    e => (e?.target as any).value
+                )}
+                marks={[
+                    {
+                        value: props.schema.minimum,
+                        label: `${props.schema.minimum}`
+                    },
+                    {
+                        value: props.schema.maximum,
+                        label: `${props.schema.maximum}`
+                    }
+                ]}
+            />
+        </formControl>
     );
 };
 
