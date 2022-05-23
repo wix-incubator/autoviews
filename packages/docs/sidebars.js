@@ -20,10 +20,8 @@ module.exports = {
             id: 'index'
         },
         {
-            type: 'category',
-            label: 'Getting Started',
-            collapsed: false,
-            items: ['basic/autoview', 'basic/quickstart']
+            type: 'doc',
+            id: 'basic/autoview'
         },
         {
             type: 'category',
@@ -31,11 +29,19 @@ module.exports = {
             collapsed: false,
             items: [
                 'entities/components-repo',
-                'entities/repository-context',
-                'entities/repository-components',
+                'entities/array-components',
+                'entities/object-components',
+                'entities/repository-provider',
+                'entities/the-json-schema',
                 'entities/ui-schema',
                 'entities/events'
             ]
+        },
+        {
+            type: 'category',
+            label: 'utilities',
+            collapsed: false,
+            items: ['entities/repository-components']
         },
         {
             type: 'category',
@@ -60,6 +66,7 @@ module.exports = {
             collapsed: false,
             items: [
                 'examples/basic',
+                'examples/showcase',
                 'examples/onclick',
                 'examples/switch-repo'
             ]

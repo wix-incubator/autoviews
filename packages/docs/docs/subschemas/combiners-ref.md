@@ -1,6 +1,7 @@
 # $ref
 
 import {Demo} from '@site/src/components';
+import * as ref from '../../src/examples/subschemas/ref';
 
 With `$ref` keyword schema can reference another schema or itself.
 To make this work, all referred schemas must be in context by passing them to `<RepositoryProvider />`.
@@ -39,8 +40,6 @@ Order of resolving types in `getNodeType` does matter. By placing `$ref` conditi
 :::
 
 ## Full example
-
-import * as ref from '../../src/examples/subschemas/ref';
 
 <Demo {...ref} />
 

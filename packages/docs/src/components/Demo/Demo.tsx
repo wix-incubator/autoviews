@@ -22,7 +22,6 @@ const initialDeps = {
 
 export function Demo(props: DemoProps) {
     const {isDarkTheme} = useColorMode();
-
     return (
         <Sandpack
             theme={isDarkTheme ? 'dark' : 'light'}
@@ -38,7 +37,8 @@ export function Demo(props: DemoProps) {
                 showNavigator: true,
                 editorHeight: 500,
                 externalResources: [
-                    'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
+                    'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap',
+                    'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css'
                 ],
                 ...props.options
             }}

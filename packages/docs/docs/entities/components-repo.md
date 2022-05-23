@@ -4,17 +4,27 @@ The component repository is a map of data type to AutoView React components used
 
 In essence, the component repository is a map of
 
-```
+```typescript
 Map<type => React.ComponentType<AutoViewProps>>
 ```
 
 An AutoView React Component has the signature
 
-```
+```typescript
 React.ComponentType<AutoViewProps>
 ```
 
 `AutoViewProps` has a lot of properties, but the most important is the `data` prop which is the field data the component has to render.
+
+## Usage of the Component Repository
+
+The main use of the component repository to provide `AutoView` a set of component to render for different
+data types.
+
+One common pattern is to replace views by replacing the Component Repository with another, for instance
+shifting from a single column layout to a dual column layout, or from a Card layout to a Table layout.
+
+The `ComponentsRepo` class provides function to create, clone, modify or apply aspects (wrap) on the Components Repository.
 
 ## The ComponentsRepo Class
 
@@ -129,7 +139,7 @@ Predicates are functions defined when registering a component, defining when to 
 
 The Predicate signature is
 
-```
+```typescript
 export type Predicate = (node: CoreSchemaMetaSchema) => boolean;
 ```
 
@@ -139,7 +149,7 @@ Where
 
 ### Example — selecting Slider component for numbers with min & max constraints
 
-```
+```typescript
 myRepo.register(
     'number',
     {
@@ -168,7 +178,7 @@ The clone function allows to deep copy a repo including all the components. Repo
 
 Once cloning a repository, any additional action on the cloned repository do not affect the base repository, including adding wrappers (`addWrapper`), removing components (`remove`) or replacing components (`replace` and `replaceAll`).
 
-```
+```typescript
 clone(name: string, getNodeType?: GetNode)
 ```
 
@@ -176,7 +186,7 @@ clone(name: string, getNodeType?: GetNode)
 
 Cloning the `myRepo` defined above
 
-```
+```typescript
 const myRepoClone = myRepo.clone('myRepoClone');
 ```
 
@@ -186,7 +196,7 @@ const myRepoClone = myRepo.clone('myRepoClone');
 
 `addWrapper` is very useful when combined with `clone` as it allows extending a base repository
 
-```
+```typescript
 addWrapper(fn: WrapperFunction, rules?: IncludeExcludeRules)
 
 export type WrapperFunction = (
@@ -208,20 +218,22 @@ Where
   - Returns: the wrapped component
 - `rules`: `include` and `exclude` rules for what types to wrap, by the component name as defined when registering the component
 
-### Example — wrapping all components with adding a title
+### Example - wrapping all components with adding a title
 
-```
-myRepoClone.addWrapper((item: JSX.Element, props: AutoViewProps): JSX.Element => (
+```jsx
+myRepoClone.addWrapper(
+  (item: JSX.Element, props: AutoViewProps): JSX.Element => (
     <>
-        <h3>{props.schema.title}</h3>
-        {item}
+      <h3>{props.schema.title}</h3>
+      {item}
     </>
-));
+  )
+);
 ```
 
-### Example — wrapping all components with a table cell
+### Example - wrapping all components with a table cell
 
-```
+```jsx
 myRepoClone.addWrapper(
   (item: JSX.Element, props: AutoViewProps): JSX.Element => <td>{item}<td/>
 );
@@ -229,33 +241,33 @@ myRepoClone.addWrapper(
 
 ### Example — wrapping only 'number-input' component
 
-```
+```jsx
 myRepo.addWrapper(
-    (item, props) => (
-        <>
-            <h3>{props.schema.title}</h3>
-            {item}
-        </>
-    ),
-    {
-        include: ['number-input']
-    }
+  (item, props) => (
+    <>
+      <h3>{props.schema.title}</h3>
+      {item}
+    </>
+  ),
+  {
+    include: ['number-input']
+  }
 );
 ```
 
 ### Example — wrapping all components except 'number-input'
 
-```
+```jsx
 myRepo.addWrapper(
-    (item, props) => (
-        <>
-            <h3>{props.schema.title}</h3>
-            {item}
-        </>
-    ),
-    {
-        exclude: ['number-input']
-    }
+  (item, props) => (
+    <>
+      <h3>{props.schema.title}</h3>
+      {item}
+    </>
+  ),
+  {
+    exclude: ['number-input']
+  }
 );
 ```
 
@@ -265,14 +277,11 @@ Removes previously registered component from the component repository by compone
 
 ### Example - remove a component from the repo
 
-```
-myRepo.register(
-    'string',
-    {
-        name: 'string-component',
-        component: SomeComponent
-    }
-);
+```typescript
+myRepo.register('string', {
+  name: 'string-component',
+  component: SomeComponent
+});
 //...
 myRepo.remove('string-component');
 ```
@@ -283,24 +292,18 @@ Replace a previously registered component by component name.
 
 `replace` ensures that the new component will have the same index (order) as the old one. It is important because by default `<AutoView />` picks the last registered component in `ComponentsRepo`.
 
-### Example — replacing a single component
+### Example - replacing a single component
 
-```
-myRepo.register(
-    'number',
-    {
-        name: 'number-input',
-        component: OldComponent
-    }
-);
+```typescript
+myRepo.register('number', {
+  name: 'number-input',
+  component: OldComponent
+});
 
-repo.replace(
-    'MyNumberComponent',
-    oldRecord => ({
-        ...oldRecord,
-        component: NewComponent
-    })
-);
+repo.replace('MyNumberComponent', oldRecord => ({
+  ...oldRecord,
+  component: NewComponent
+}));
 ```
 
 ## replaceAll
@@ -309,20 +312,20 @@ Replace all enables replacing multiple existing components with a given componen
 
 Similar to `addWrapper`, `replaceAll` method allows defining `include` and `exclude` options (array of component names).
 
-### Example — replacing multiple components
+### Example - replacing multiple components
 
-```
+```typescript
 repo.replaceAll(
-    record => {
-        const OriginalComponent = record.component;
-        return {
-            ...record,
-            component: (props) => <OriginalComponent {...doSomethingWithProps(props)} />
-        };
-    },
-    {
-        include: ['number-input', 'text-input']
-    }
+  record => {
+    const OriginalComponent = record.component;
+    return {
+      ...record,
+      component: props => <OriginalComponent {...doSomethingWithProps(props)} />
+    };
+  },
+  {
+    include: ['number-input', 'text-input']
+  }
 );
 ```
 
