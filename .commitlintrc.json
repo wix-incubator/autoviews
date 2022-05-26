@@ -1,7 +1,13 @@
 {
   "extends": ["@commitlint/config-conventional"],
   "rules": {
-    "subject-case": [2, "always", ["lower-case", "sentence-case"]],
-    "body-max-line-length": [2, "always", "Infinity"]
+    "subject-case": [
+      2,
+      "always",
+      ["lower-case", "sentence-case", "pascal-case", "start-case"]
+    ],
+    "header-max-length": [2, "always", "Infinity"],
+    "body-max-line-length": [2, "always", "Infinity"],
+    "footer-max-line-length": [2, "always", "Infinity"]
   }
 }
