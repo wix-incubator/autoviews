@@ -1,7 +1,0 @@
-# TODO: Blank issues are allowed while project is in setup phase.
-# TODO: Disable it as soon as project will be published.
-blank_issues_enabled: true
-contact_links:
-  - name: 🙏 Support Question
-    url: https://github.com/wix-incubator/autoviews/discussions/new?category=q-a
-    about: Please ask and answer questions here.
