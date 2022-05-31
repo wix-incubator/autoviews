@@ -7,14 +7,15 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
     module.exports = {
         title: 'AutoViews',
         tagline: 'Render stuff automatically, based on JSONSchema',
-        url: 'https://localhost:3000',
+        url: 'https://wix-incubator.github.io/autoviews',
         baseUrl: '/',
         onBrokenLinks: 'throw',
         onBrokenMarkdownLinks: 'warn',
         favicon: 'img/favicon.ico',
         organizationName: 'wix-incubator', // Usually your GitHub org/user name.
-        projectName: 'auto-views-docs', // Usually your repo name.
-
+        projectName: 'autoviews', // Usually your repo name.
+        deploymentBranch: 'gh-pages',
+        trailingSlash: false,
         presets: [
             [
                 '@docusaurus/preset-classic',
