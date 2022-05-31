@@ -21,7 +21,6 @@ import {showcaseHomepage} from '@site/src/examples/showcase';
 
 <Demo {...showcaseHomepage()} />
 
-
 ## The Elements of AutoViews
 
 ‘AutoViews’ renders UI by combining 4 elements

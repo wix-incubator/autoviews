@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
     module.exports = {
         title: 'AutoViews',
         tagline: 'Render stuff automatically, based on JSONSchema',
-        url: 'https://wix-incubator.github.io/autoviews',
+        url: 'https://wix-incubator.github.io',
         baseUrl: '/autoviews/',
         onBrokenLinks: 'throw',
         onBrokenMarkdownLinks: 'warn',
@@ -25,7 +25,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
                         sidebarPath: require.resolve('./sidebars.js'),
                         // Please change this to your repo.
                         editUrl:
-                            'https://github.com/wix-incubator/autoviews/tree/master/packages/docs'
+                            'https://github.com/wix-incubator/autoviews/tree/master/packages/website'
                     },
                     // blog: {
                     //   showReadingTime: true,
@@ -65,7 +65,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
                             type: 'doc',
                             docId: 'index',
                             position: 'left',
-                            label: 'Docs'
+                            label: 'Documentation'
                         },
                         {
                             type: 'doc',

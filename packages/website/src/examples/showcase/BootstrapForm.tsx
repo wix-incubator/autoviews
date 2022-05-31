@@ -14,7 +14,9 @@ import {
 import {Button, Form} from 'react-bootstrap';
 
 export const BootstrapForm = (props: AutoViewProps) => {
-    const itemUISchema = extractItemUISchema(props.uiSchema ?? createUISchema());
+    const itemUISchema = extractItemUISchema(
+        props.uiSchema ?? createUISchema()
+    );
     const UISchemaAcessor = createUISchemaAccessor(
         itemUISchema,
         '',
@@ -26,14 +28,16 @@ export const BootstrapForm = (props: AutoViewProps) => {
     const groupNames = groups.map(({name}) => name).concat([UNGROUPED]);
     return (
         <Form>
-            {groupNames.map((name) => {
+            {groupNames.map(name => {
                 const fields = getPropertiesByGroupName(
                     groups,
                     name,
                     allProperties
-                ).filter((field) => allProperties.includes(field));
+                ).filter(field => allProperties.includes(field));
 
-                if (!fields.length) {return null;}
+                if (!fields.length) {
+                    return null;
+                }
 
                 return (
                     <Form.Group
@@ -63,7 +67,7 @@ export const BootstrapText = (props: AutoViewProps) => {
         <Form.Control
             value={props.data || ''}
             placeholder={props.schema.title || props.field}
-            onChange={changeEventHandler(props, (e) => e.target.value)}
+            onChange={changeEventHandler(props, e => e.target.value)}
         />
     );
 };
@@ -74,7 +78,7 @@ export const BootstrapNumber = (props: AutoViewProps) => {
             type="number"
             value={props.data || ''}
             placeholder={props.schema.title || props.field}
-            onChange={changeEventHandler(props, (e) => e.target.value)}
+            onChange={changeEventHandler(props, e => e.target.value)}
         />
     );
 };
@@ -83,7 +87,7 @@ export const BootstrapSwitch = (props: AutoViewProps) => {
     return (
         <Form.Check
             checked={props.data ?? false}
-            onChange={changeEventHandler(props, (e) => e.target.checked)}
+            onChange={changeEventHandler(props, e => e.target.checked)}
             type="switch"
             label={props.schema.title}
         />
