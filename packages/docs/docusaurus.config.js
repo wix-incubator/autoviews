@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         title: 'AutoViews',
         tagline: 'Render stuff automatically, based on JSONSchema',
         url: 'https://wix-incubator.github.io/autoviews',
-        baseUrl: '/',
+        baseUrl: '/autoviews/',
         onBrokenLinks: 'throw',
         onBrokenMarkdownLinks: 'warn',
         favicon: 'img/favicon.ico',
