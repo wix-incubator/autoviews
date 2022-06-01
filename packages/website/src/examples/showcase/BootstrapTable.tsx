@@ -12,9 +12,10 @@ import {Table} from 'react-bootstrap';
 export const BootstrapTable = (props: AutoViewProps) => {
     const headers = orderFields(
         Object.keys((props.schema.items as any).properties),
-        getHints(extractItemUISchema(props.uiSchema ?? createUISchema()), '').order
+        getHints(extractItemUISchema(props.uiSchema ?? createUISchema()), '')
+            .order
     ).map(
-        (field) => (props.schema?.items as any).properties[field].title
+        field => (props.schema?.items as any).properties[field].title
     ) as string[];
 
     return (

@@ -20,15 +20,20 @@ import {
 } from '@mui/material';
 
 export const MUITable = (props: AutoViewProps) => {
-    const uiHints = getHints(extractItemUISchema(props.uiSchema ?? createUISchema()), '');
+    const uiHints = getHints(
+        extractItemUISchema(props.uiSchema ?? createUISchema()),
+        ''
+    );
     const headers = filter(
         orderFields(
             Object.keys((props.schema.items as any).properties),
             uiHints.order
         ),
-        undefined, undefined, uiHints.hidden
+        undefined,
+        undefined,
+        uiHints.hidden
     ).map(
-        (field) => (props.schema?.items as any).properties[field].title
+        field => (props.schema?.items as any).properties[field].title
     ) as string[];
 
     return (

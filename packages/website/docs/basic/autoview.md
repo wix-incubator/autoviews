@@ -1,6 +1,17 @@
 # The AutoView Component
 
-export const REQUIRED = () => <span style={{backgroundColor:"#00a4db",color:"white", borderRadius:"10px", padding: "0 10px"}}>Required</span>;
+export const REQUIRED = () => (
+  <span
+    style={{
+      backgroundColor: '#00a4db',
+      color: 'white',
+      borderRadius: '10px',
+      padding: '0 10px'
+    }}
+  >
+    Required
+  </span>
+);
 
 The `AutoView` React component is the main component of the AutoViews library.
 `AutoView` automatically render `data` that conforms to the given `JSONSchema` using the React components
