@@ -1,7 +1,7 @@
 # Active documentation:
 
-- [Source](https://github.com/wix-incubator/autoviews/tree/master/packages/docs)
-- [Website](https://fuzzy-succotash-c88bb0c6.pages.github.io/)
+- [Source](https://github.com/wix-incubator/autoviews/tree/master/packages/website)
+- [Website](https://wix-incubator.github.io/autoviews/)
 
 # **FOLLOWING DOC IS DEPRECATED:**
 

@@ -5,6 +5,8 @@ esm
 umd
 dts
 build
+/docs
+
 
 # IDEs
 .idea
