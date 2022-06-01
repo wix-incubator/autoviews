@@ -263,5 +263,86 @@ export function runBaseAccessorContract(
                 ).not.toBeUndefined();
             });
         });
+
+        describe('js types', () => {
+            const uiSchema: UISchema = {
+                hints: {},
+                components: {
+                    [REPO_NAME_PLACEHOLDER]: {
+                        [DEFAULT_PATH]: {
+                            name: COMPONENT_NAME_PLACEHOLDER,
+                            options: {
+                                foo: 'bar', flag: false, count: 5, items: [], baz: () => ({abc: 'xyz'})
+                            }
+                        }
+                    }
+                }
+            };
+
+            beforeEach(() => {
+                uiSchemaEntity = getAccessor(uiSchema);
+            });
+
+            it('should preserve json types', () => {
+                const {
+                    options: {
+                        foo, flag, count, items
+                    }
+                } = uiSchemaEntity.getComponentOptions(
+                    REPO_NAME_PLACEHOLDER
+                )!;
+
+                expect(foo).toBe('bar');
+                expect(flag).toBeFalsy();
+                expect(count).toBe(5);
+                expect(items).toEqual([]);
+            });
+
+            it('should preserve non-json types', () => {
+                const {options} = uiSchemaEntity.getComponentOptions(
+                    REPO_NAME_PLACEHOLDER
+                )!;
+
+                expect(options.baz).toEqual(expect.any(Function));
+                expect(options.baz()).toEqual({abc: 'xyz'});
+            });
+        });
+
+        describe('mutability', () => {
+            const uiSchema: UISchema = {
+                hints: {},
+                components: {
+                    [REPO_NAME_PLACEHOLDER]: {
+                        [DEFAULT_PATH]: {
+                            name: COMPONENT_NAME_PLACEHOLDER,
+                            options: {
+                                foo: 'bar'
+                            }
+                        }
+                    }
+                }
+            };
+
+            beforeEach(() => {
+                uiSchemaEntity = getAccessor(uiSchema);
+            });
+
+            it('should mutate uiSchema object', () => {
+                uiSchemaEntity.setComponentOptions(
+                    REPO_NAME_PLACEHOLDER,
+                    () => ({
+                        name: COMPONENT_NAME_PLACEHOLDER,
+                        options: {foo: 'abc'}
+                    })
+                );
+
+                const {options} = uiSchemaEntity.getComponentOptions(
+                    REPO_NAME_PLACEHOLDER
+                )!;
+
+                expect(options.foo).toBe('abc');
+                expect(uiSchema.components[REPO_NAME_PLACEHOLDER][DEFAULT_PATH].options.foo).toBe('abc');
+            });
+        });
     });
 }

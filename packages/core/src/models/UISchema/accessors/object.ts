@@ -70,8 +70,6 @@ export class ObjectAccessor extends BaseAccessor
 
     public setGroups(iterator: (groups: UIGroup[]) => UIGroup[]) {
         ensureUIHints(this.uiSchemaClone.hints, this.path);
-        this.uiSchemaClone.hints[this.path] =
-            this.uiSchemaClone.hints[this.path] || {};
         const {uiGroups = []} = this.uiSchemaClone.hints[this.path];
         this.uiSchemaClone.hints[this.path].uiGroups = iterator(uiGroups);
         return this;
