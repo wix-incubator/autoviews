@@ -1,13 +1,13 @@
-name: Test Website build
+name: Website Build
 
 on:
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   test-deploy:
-    name: Test Website build
+    name: test build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
