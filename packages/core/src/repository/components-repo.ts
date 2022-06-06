@@ -16,7 +16,11 @@ export interface ComponentsRepoStorage<P> {
     [type: string]: Array<ComponentRepoRecord<P>>;
 }
 
-export type Predicate = (node: CoreSchemaMetaSchema, ...rest: any[]) => boolean;
+export type Predicate = (
+    node: CoreSchemaMetaSchema,
+    props?: AutoViewProps,
+    ...rest: any[]
+) => boolean;
 
 export interface IncludeExcludeRules {
     include?: string[];
@@ -167,7 +171,7 @@ export class ComponentsRepo {
         }
     }
 
-    public getMatched(node: CoreSchemaMetaSchema) {
+    public getMatched(node: CoreSchemaMetaSchema, props?: AutoViewProps) {
         const type = this.getNodeType(node);
 
         if (typeof type !== 'string') {
@@ -176,7 +180,9 @@ export class ComponentsRepo {
         const registered = this.getByType(type) || [];
         // noinspection JSUnusedLocalSymbols
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        return registered.filter(({predicate = n => true}) => predicate(node));
+        return registered.filter(({predicate = n => true}) =>
+            predicate(node, props)
+        );
     }
 
     public registerCollection(

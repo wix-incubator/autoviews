@@ -31,14 +31,15 @@ for rendering. To switch layouts, [replacing a component repository](/docs/entit
 | `compoennts[name: string] [pointer: string].name`    | `string`                 |               | The name of the component to use at the above location, which has to be available in the above component repository                                                  |
 | `compoennts[name: string] [pointer: string].options` | `any`                    |               | Options to pass to the component at the above location                                                                                                               |
 
-## the `components` UI hint
+## the `components` overrides
 
 The `components` field in `UISchema` is responsible for component overrides -
 defining which component `<AutoView/>` should choose for a given field and what `options` this component should get.
 
 By default, `<AutoView/>` picks last component record registered in [the components repository](docs/entities/components-repo#registering-multiple-components-per-jsonschema-data-type) for each type.
 When registering two (or more) components for a specific type, the last one will be used by default.
-The `components` UI hint defines that for a specific [JSONPointer](https://tools.ietf.org/html/rfc6901) in the data `JSONSchema`
+
+The `components` overrides defines that for a specific [JSONPointer](https://tools.ietf.org/html/rfc6901) in the data `JSONSchema`
 a component with specific `name` should be chosen.
 
 ### the getComponentOptions utility
@@ -60,7 +61,7 @@ export const myFunctionalComponent = props => {
 
 ### Example - component override and options
 
-In this example we show how to use the `components` UI Hints to render texts using one of three text components
+In this example we show how to use the `components` overrides to render texts using one of three text components
 
 1. A styled text component, which gets the styles from the component options
 2. A header text component
