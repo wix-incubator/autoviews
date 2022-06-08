@@ -130,22 +130,37 @@ myRepo.register('user', {
 Multiple components can be registered for the same data type. When registering multiple components, by default, the last registered component will be selected.
 
 Registering multiple components allows selecting components using predicates or [UISchema](/docs/entities/ui-schema).
+
 Predicates are used when the condition is computed on the JSONSchema, such as `maxLength`, `maximum` or `required`. A concrete example is selecting the Slider component when a number has `maximum` and `minimum` constraints.
+
 `UISchema` is used when we want to select a specific component or pass properties to the component on a specific JSONSchema path (`JSONPointer`).
 
 ## Predicates
 
-Predicates are functions defined when registering a component, defining when to use the component based on the JSONSchema.
+Predicates are functions defined when registering a component, defining when to use the component based on the JSONSchema and Component's props.
+
+If predicates returns `true` **and** the current component is the **latest** registred component, it will be used by `AutoViews` (conidering there is no override in [UISchema.components](/docs/entities/ui-schema#the-components-overrides)).
+
+The idea of Predicates is to target special cases only, when you registring components for the same type multiple times.
+
+:::caution
+If you register component without predicate after the one with predicate, component without predicate will be choosen (because it is latest), even if predicate returns `true`.
+:::
 
 The Predicate signature is
 
 ```typescript
-export type Predicate = (node: CoreSchemaMetaSchema) => boolean;
+export type Predicate = (
+  node: CoreSchemaMetaSchema,
+  props?: AutoViewProps,
+  ...rest: any[]
+) => boolean;
 ```
 
 Where
 
 - node: is the JSONSchema node the component is considered for
+- props: is the same `AutoViewProps` object which current component has
 
 ### Example — selecting Slider component for numbers with min & max constraints
 

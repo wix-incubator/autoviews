@@ -93,7 +93,7 @@ class AutoViewLogic extends React.Component<AutoViewLogicProps> {
         if (!type) {
             throw new Error(`type is not set "${schemaPointer}"`);
         }
-        const matches = components.getMatched(schema);
+        const matches = components.getMatched(schema, this.props);
         const dataOrDefault =
             data === undefined || data === null ? schema.default : data;
 

@@ -1417,4 +1417,53 @@ describe('AutoView', () => {
             expect(input).toHaveAttribute('readonly');
         });
     });
+
+    describe('predicate with props', () => {
+        it('should omit component with false predicate and pick with true', () => {
+            const components = new ComponentsRepo('test')
+                .register('object', {name: 'MyObject', component: AutoFields})
+                .register('string', {
+                    name: 'MyString-1',
+                    component: props => (
+                        <span data-automation-id={`${props.schemaPointer}-1`} />
+                    )
+                })
+                .register('string', {
+                    name: 'MyString-2',
+                    component: props => (
+                        <span data-automation-id={`${props.schemaPointer}-2`} />
+                    ),
+                    predicate: (node, props) =>
+                        props?.schemaPointer === '/properties/a'
+                })
+                .register('string', {
+                    name: 'MyString-3',
+                    component: props => (
+                        <span data-automation-id={`${props.schemaPointer}-3`} />
+                    ),
+                    predicate: (node, props) =>
+                        Boolean(props?.metadata?.alwaysFalse)
+                });
+
+            const schema: CoreSchemaMetaSchema = {
+                type: 'object',
+                properties: {
+                    a: {type: 'string'}
+                }
+            };
+
+            render(
+                <RepositoryProvider components={components}>
+                    <AutoView
+                        schema={schema}
+                        metadata={{alwaysFalse: false}}
+                    />
+                </RepositoryProvider>
+            );
+
+            const input = screen.getByTestId('/properties/a-2');
+
+            expect(input).toBeInTheDocument();
+        });
+    });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ComponentsRepo} from '../src';
+import {ComponentsRepo, Predicate} from '../src';
 import {CoreSchemaMetaSchema} from '../src/models';
 
 describe('ComponentsRepo', () => {
@@ -116,6 +116,35 @@ describe('ComponentsRepo', () => {
                 {
                     name: 'component2',
                     predicate: hasMinMax,
+                    component: component2
+                }
+            ]);
+        });
+
+        it('should pass props to predicate', () => {
+            const component1 = () => <span>component1</span>;
+            const component2 = () => <span>component2</span>;
+            const hasSpecialField: Predicate = (n, p) =>
+                Boolean(p?.metadata?.mySpecialField);
+            const repo = new ComponentsRepo('testRepo')
+                .register('number', {
+                    name: 'component1',
+                    predicate: hasSpecialField,
+                    component: component1
+                })
+                .register('number', {
+                    name: 'component2',
+                    component: component2
+                });
+
+            const result = repo.getMatched(
+                {type: 'number'},
+                {metadata: {mySpecialField: false}, schema: {type: 'number'}}
+            );
+
+            expect(result).toEqual([
+                {
+                    name: 'component2',
                     component: component2
                 }
             ]);
