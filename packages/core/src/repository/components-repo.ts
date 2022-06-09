@@ -38,7 +38,6 @@ export interface ComponentRepoRecord<P> {
     name: string;
     component: React.ComponentType<P>;
     predicate?: Predicate;
-    defaultOptions?: any;
 }
 
 export type ReplaceComponentRepoRecordFn = (
