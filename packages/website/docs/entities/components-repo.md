@@ -66,7 +66,6 @@ export interface ComponentRepoRecord<P> {
     name: string;
     component: React.ComponentType<P>;
     predicate?: Predicate;
-    defaultOptions?: any;
 }
 ```
 
@@ -77,7 +76,6 @@ Where
   - `name`: the name of component within the repository, for later reference
   - `component`: the actual component
   - `predicate`: a predicate computed on the schema field, if to use the component for that schema member
-  - `defaultOptions`: option to pass to the component as props. **TBD**
 
 ## The getNodeType constructor parameter
 
