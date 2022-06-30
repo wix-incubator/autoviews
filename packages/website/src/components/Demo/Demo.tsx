@@ -17,7 +17,7 @@ export interface DemoProps {
 }
 
 const initialDeps = {
-    '@autoviews/core': '^1.0.0'
+    '@autoviews/core': 'latest'
 };
 
 export function Demo(props: DemoProps) {
