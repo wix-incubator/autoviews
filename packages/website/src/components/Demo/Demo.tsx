@@ -21,10 +21,10 @@ const initialDeps = {
 };
 
 export function Demo(props: DemoProps) {
-    const {isDarkTheme} = useColorMode();
+    const {colorMode} = useColorMode();
     return (
         <Sandpack
-            theme={isDarkTheme ? 'dark' : 'light'}
+            theme={colorMode}
             template="react-ts"
             customSetup={{
                 files: props.files,
