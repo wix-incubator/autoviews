@@ -1,6 +1,6 @@
 {
   "name": "@autoviews/website",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -16,7 +16,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@autoviews/core": "*",
+    "@autoviews/core": "^3.0.1",
     "@codesandbox/sandpack-react": "^0.19.3",
     "@docusaurus/core": "^2.0.0-beta.21",
     "@docusaurus/module-type-aliases": "^2.0.0-beta.21",
