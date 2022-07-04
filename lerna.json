@@ -6,9 +6,9 @@
   "command": {
     "version": {
       "allowBranch": ["master"],
-      "noPrivate": true,
       "conventionalCommits": true,
-      "createRelease": "github"
+      "createRelease": "github",
+      "message": "chore(release): publish [skip ci]"
     }
   }
 }
