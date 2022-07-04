@@ -19,8 +19,7 @@
     "test": "run-s lint test:jest",
     "test:jest": "is-ci && jest --maxWorkers=7 || jest --maxWorkers=50%",
     "test:watch": "jest --watch --runInBand",
-    "test:clear": "jest --clearCache",
-    "release": "semantic-release -e semantic-release-monorepo"
+    "test:clear": "jest --clearCache"
   },
   "dependencies": {
     "ajv": "6.12.6",
