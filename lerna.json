@@ -3,7 +3,7 @@
   "npmClient": "yarn",
   "useWorkspaces": true,
   "version": "independent",
-  "commands": {
+  "command": {
     "version": {
       "allowBranch": ["master"],
       "noPrivate": true,
