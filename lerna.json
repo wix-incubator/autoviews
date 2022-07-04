@@ -2,5 +2,13 @@
   "packages": ["packages/*"],
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "version": "0.0.0"
+  "version": "independent",
+  "commands": {
+    "version": {
+      "allowBranch": ["master"],
+      "noPrivate": true,
+      "conventionalCommits": true,
+      "createRelease": "github"
+    }
+  }
 }
