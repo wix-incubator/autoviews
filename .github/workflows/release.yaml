@@ -21,6 +21,10 @@ jobs:
           node-version: '*'
           cache: yarn
 
+      - name: 🔑 Setup NPM
+        run: |
+          npm set "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}"
+
       - name: 📦 Install Packages
         run: yarn install --frozen-lockfile
 
@@ -31,5 +35,4 @@ jobs:
       - name: 🚀 Release
         run: yarn release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
