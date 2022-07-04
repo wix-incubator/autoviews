@@ -32,6 +32,11 @@ jobs:
       - name: ⚙️ Build Packages
         run: yarn workspace @autoviews/core build
 
+      - name: 👤 Setup Identity
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor}}@users.noreply.github.com"
+
       - name: 🚀 Release
         run: yarn release
         env:
