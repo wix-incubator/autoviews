@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 3.0.2 (2022-07-04)
+
+
+### Bug Fixes
+
+* try using --no-private from lerna.json ([a7ffbd0](https://github.com/wix-incubator/autoviews/commit/a7ffbd05252ee6b2a542cba2c19ef165ef38ef95))
+
+
+
+
+
 ## 3.0.1 (2022-07-04)
 
 **Note:** Version bump only for package @autoviews/core

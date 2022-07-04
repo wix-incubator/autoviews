@@ -1,6 +1,6 @@
 {
   "name": "@autoviews/core",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "TODO",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
