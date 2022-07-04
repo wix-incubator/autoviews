@@ -5,6 +5,7 @@
   "version": "independent",
   "command": {
     "version": {
+      "private": false,
       "allowBranch": ["master"],
       "conventionalCommits": true,
       "createRelease": "github",
