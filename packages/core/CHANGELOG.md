@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 3.0.3 (2022-07-05)
+
+
+### Bug Fixes
+
+* **release:** attempt of using only publish as it calls version under the hood ([9a9339f](https://github.com/wix-incubator/autoviews/commit/9a9339fd9016bb97a1b95b110f10001433196518))
+
+
+
+
+
 ## 3.0.2 (2022-07-04)
 
 ### Bug Fixes
