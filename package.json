@@ -10,7 +10,7 @@
     "build": "lerna run build --stream --parallel",
     "test": "lerna run test --stream --parallel",
     "clear": "lerna run clear --stream --parallel",
-    "release": "lerna version -y && lerna publish from-git -y",
+    "release": "lerna publish -y",
     "lint": "lerna run lint --stream --parallel",
     "format": "prettier --write --ignore-path .gitignore ."
   },
