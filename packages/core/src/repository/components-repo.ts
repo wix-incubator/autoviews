@@ -11,9 +11,7 @@ export interface ComponentsRepoCollection {
 }
 
 export interface ComponentsRepoStorage<P> {
-    // FIXME: symbol as index type will be fixed within TypeScript 4.4.0
-    // https://github.com/microsoft/TypeScript/pull/44512
-    [type: string]: Array<ComponentRepoRecord<P>>;
+    [type: string | symbol]: Array<ComponentRepoRecord<P>>;
 }
 
 export type Predicate = (
@@ -97,9 +95,7 @@ export class ComponentsRepo {
 
         const registered = this.getByType(type) || [];
         registered.push(record);
-        // FIXME: symbol as index type will be fixed within TypeScript 4.4.0
-        // https://github.com/microsoft/TypeScript/pull/44512
-        this.byType[type as string] = registered;
+        this.byType[type] = registered;
         this.byName.set(record.name, record);
         return this;
     }
@@ -148,9 +144,7 @@ export class ComponentsRepo {
     }
 
     public getByType(type: string | symbol) {
-        // FIXME: symbol as index type will be fixed within TypeScript 4.4.0
-        // https://github.com/microsoft/TypeScript/pull/44512
-        return this.byType[type as string];
+        return this.byType[type];
     }
 
     public getNames() {
