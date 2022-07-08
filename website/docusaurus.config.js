@@ -25,7 +25,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
                         sidebarPath: require.resolve('./sidebars.js'),
                         // Please change this to your repo.
                         editUrl:
-                            'https://github.com/wix-incubator/autoviews/tree/master/packages/website'
+                            'https://github.com/wix-incubator/autoviews/tree/master/website'
                     },
                     // blog: {
                     //   showReadingTime: true,

@@ -2,7 +2,7 @@ name: Website Deploy
 
 defaults:
   run:
-    working-directory: packages/website
+    working-directory: website
 
 on:
   push:
