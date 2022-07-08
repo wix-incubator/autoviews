@@ -1,16 +1,20 @@
-name: Website Deploy
+name: Website
 
 on:
   push:
     branches:
       - master
+    paths:
+      - website
+      - package.json
+      - yarn.lock
   pull_request:
     branches:
       - master
 
 defaults:
   run:
-    working-directory: packages/website
+    working-directory: website
 
 jobs:
   deploy:
