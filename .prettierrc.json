@@ -14,7 +14,7 @@
       }
     },
     {
-      "files": "*.md",
+      "files": "website/**/*.md",
       "options": {
         "parser": "mdx"
       }

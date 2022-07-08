@@ -3,16 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 3.0.3 (2022-07-05)
+## 3.0.11 (2022-07-08)
 
+**Note:** Version bump only for package @autoviews/core
+
+## 3.0.10 (2022-07-08)
+
+**Note:** Version bump only for package @autoviews/core
+
+## 3.0.9 (2022-07-06)
+
+**Note:** Version bump only for package @autoviews/core
+
+## 3.0.8 (2022-07-05)
+
+**Note:** Version bump only for package @autoviews/core
+
+## 3.0.7 (2022-07-05)
+
+**Note:** Version bump only for package @autoviews/core
+
+## 3.0.6 (2022-07-05)
+
+**Note:** Version bump only for package @autoviews/core
+
+## 3.0.5 (2022-07-05)
+
+**Note:** Version bump only for package @autoviews/core
+
+## 3.0.4 (2022-07-05)
+
+**Note:** Version bump only for package @autoviews/core
+
+## 3.0.3 (2022-07-05)
 
 ### Bug Fixes
 
-* **release:** attempt of using only publish as it calls version under the hood ([9a9339f](https://github.com/wix-incubator/autoviews/commit/9a9339fd9016bb97a1b95b110f10001433196518))
-
-
-
-
+- **release:** attempt of using only publish as it calls version under the hood ([9a9339f](https://github.com/wix-incubator/autoviews/commit/9a9339fd9016bb97a1b95b110f10001433196518))
 
 ## 3.0.2 (2022-07-04)
 

@@ -10,8 +10,8 @@
     "build": "lerna run build --stream --parallel",
     "test": "lerna run test --stream --parallel",
     "clear": "lerna run clear --stream --parallel",
-    "release": "lerna publish -y",
     "lint": "lerna run lint --stream --parallel",
+    "release": "lerna publish -y",
     "format": "prettier --write --ignore-path .gitignore ."
   },
   "devDependencies": {
