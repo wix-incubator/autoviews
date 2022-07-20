@@ -75,7 +75,7 @@ export const AutoHeaders = (props: AutoHeadersProps) => {
         /**
          * Depends on AutoHeadersProps['useAsValue']
          * decide what to use as string value:
-         * either shcema property name, or schema `title`.
+         * either schema property name, or schema `title`.
          */
         ({field, originalSchema}) => {
             if (props.useAsValue === 'fieldName') {
