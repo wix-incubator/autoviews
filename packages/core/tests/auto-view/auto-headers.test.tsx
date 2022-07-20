@@ -3,6 +3,7 @@ import React from 'react';
 
 import {
     AutoHeaders,
+    AutoHeadersProps,
     AutoItems,
     AutoView,
     ComponentsRepo,
@@ -17,67 +18,72 @@ describe('AutoHeaders', () => {
         items: {
             type: 'object',
             properties: {
-                foo: {type: 'string'},
-                bar: {type: 'string'},
-                baz: {type: 'number'}
+                foo: {type: 'string', title: 'Foo'},
+                bar: {type: 'string', title: 'Bar'},
+                baz: {type: 'number', title: 'Baz'}
             },
             additionalProperties: {type: 'string'}
         }
     };
 
-    const arrayRepo = new ComponentsRepo('table')
-        .register('string', {
-            name: uniqueString('string'),
-            component: props => (
-                <span
-                    data-automation-id={getAutomationId(
-                        props.pointer,
-                        'SPAN_STRING'
-                    )}
-                >
-                    {props.data}
-                </span>
-            )
-        })
-        .register('array', {
-            name: uniqueString('array'),
-            component: props => {
-                return (
-                    <div
+    const getArrayRepo = (
+        useAsValue: AutoHeadersProps['useAsValue'] = 'fieldName'
+    ) => {
+        return new ComponentsRepo('table')
+            .register('string', {
+                name: uniqueString('string'),
+                component: props => (
+                    <span
                         data-automation-id={getAutomationId(
                             props.pointer,
-                            'ROOT'
+                            'SPAN_STRING'
                         )}
                     >
-                        <AutoHeaders
-                            {...props}
-                            path="/items"
-                        >
-                            {headersProps => (
-                                <AutoItems
-                                    {...headersProps}
-                                    render={(item, {pointer}) => (
-                                        <span
-                                            key={pointer}
-                                            data-automation-id={getAutomationId(
-                                                pointer,
-                                                'HEADER_CELL'
-                                            )}
-                                        >
-                                            {item}
-                                        </span>
-                                    )}
-                                />
+                        {props.data}
+                    </span>
+                )
+            })
+            .register('array', {
+                name: uniqueString('array'),
+                component: props => {
+                    return (
+                        <div
+                            data-automation-id={getAutomationId(
+                                props.pointer,
+                                'ROOT'
                             )}
-                        </AutoHeaders>
-                    </div>
-                );
-            }
-        });
+                        >
+                            <AutoHeaders
+                                {...props}
+                                useAsValue={useAsValue}
+                                path="/items"
+                            >
+                                {headersProps => (
+                                    <AutoItems
+                                        {...headersProps}
+                                        render={(item, {pointer}) => (
+                                            <span
+                                                key={pointer}
+                                                data-automation-id={getAutomationId(
+                                                    pointer,
+                                                    'HEADER_CELL'
+                                                )}
+                                            >
+                                                {item}
+                                            </span>
+                                        )}
+                                    />
+                                )}
+                            </AutoHeaders>
+                        </div>
+                    );
+                }
+            });
+    };
 
     it('should render object fields as data', () => {
         render(
-            <RepositoryProvider components={arrayRepo}>
+            <RepositoryProvider components={getArrayRepo()}>
                 <AutoView schema={testSchema} />
             </RepositoryProvider>
         );
@@ -87,9 +93,21 @@ describe('AutoHeaders', () => {
         expect(screen.getByTestId('/2#HEADER_CELL')).toHaveTextContent('baz');
     });
 
+    it('should render schema title as data', () => {
+        render(
+            <RepositoryProvider components={getArrayRepo('title')}>
+                <AutoView schema={testSchema} />
+            </RepositoryProvider>
+        );
+
+        expect(screen.getByTestId('/0#HEADER_CELL')).toHaveTextContent('Foo');
+        expect(screen.getByTestId('/1#HEADER_CELL')).toHaveTextContent('Bar');
+        expect(screen.getByTestId('/2#HEADER_CELL')).toHaveTextContent('Baz');
+    });
+
     it('should render only `pick`ed fields', () => {
         render(
-            <RepositoryProvider components={arrayRepo}>
+            <RepositoryProvider components={getArrayRepo()}>
                 <AutoView
                     pick={['baz']}
                     schema={testSchema}
@@ -107,7 +125,7 @@ describe('AutoHeaders', () => {
 
     it('should not render `omit`ed fields', () => {
         render(
-            <RepositoryProvider components={arrayRepo}>
+            <RepositoryProvider components={getArrayRepo()}>
                 <AutoView
                     omit={['foo', 'bar']}
                     schema={testSchema}
@@ -125,7 +143,7 @@ describe('AutoHeaders', () => {
 
     it('should render extra fields', () => {
         render(
-            <RepositoryProvider components={arrayRepo}>
+            <RepositoryProvider components={getArrayRepo()}>
                 <AutoView
                     schema={testSchema}
                     data={[{extra: 'data'}]}
@@ -141,7 +159,7 @@ describe('AutoHeaders', () => {
     describe('UISchema', () => {
         it('should order fields', () => {
             render(
-                <RepositoryProvider components={arrayRepo}>
+                <RepositoryProvider components={getArrayRepo()}>
                     <AutoView
                         schema={testSchema}
                         uiSchema={{
@@ -168,7 +186,7 @@ describe('AutoHeaders', () => {
 
         it('should hide fields', () => {
             render(
-                <RepositoryProvider components={arrayRepo}>
+                <RepositoryProvider components={getArrayRepo()}>
                     <AutoView
                         schema={testSchema}
                         uiSchema={{

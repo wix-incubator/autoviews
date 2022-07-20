@@ -1,13 +1,19 @@
 import {get} from 'json-pointer';
 
-import {objectSchemaAsArray, ObjectSchemaAsArrayRules} from '../utils';
+import {
+    objectSchemaAsArray,
+    objectSchemaAsArrayMapFn,
+    ObjectSchemaAsArrayRules
+} from '../utils';
 import {JSONPointer} from '../repository';
+import {CoreSchemaMetaSchema} from '../models';
 
 import {getHints} from './utils';
 import {AutoViewProps} from './auto-view';
 
 export interface AutoHeadersProps extends AutoViewProps {
     children: (props: AutoViewProps) => JSX.Element;
+    useAsValue?: 'fieldName' | 'title';
     path?: JSONPointer;
 }
 
@@ -31,7 +37,10 @@ const ensureObjectData = (data: any): Record<string, any> => {
 
 export const AutoHeaders = (props: AutoHeadersProps) => {
     const schemaPath = props.path ?? '';
-    const sourceObjectSchema = get(props.schema, schemaPath);
+    const sourceObjectSchema = get(
+        props.schema,
+        schemaPath
+    ) as CoreSchemaMetaSchema;
 
     if (sourceObjectSchema?.type !== 'object') {
         throw new Error(
@@ -61,7 +70,19 @@ export const AutoHeaders = (props: AutoHeadersProps) => {
         sourceObjectSchema,
         allPossibleFields,
         rules,
-        field => field
+        objectSchemaAsArrayMapFn
+    ).map(
+        /**
+         * Depends on AutoHeadersProps['useAsValue']
+         * decide what to use as string value:
+         * either shcema property name, or schema `title`.
+         */
+        ({field, originalSchema}) => {
+            if (props.useAsValue === 'fieldName') {
+                return field;
+            }
+            return originalSchema?.title ?? field;
+        }
     );
 
     const schema: AutoViewProps['schema'] = {
