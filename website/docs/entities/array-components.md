@@ -103,66 +103,50 @@ new ComponentsRepo('ArrayRepo')
   });
 ```
 
-### Example - rending an HTML Table with headers
+### Example - rending an HTML Table with headers (AutoHeaders)
 
-To render a table with headers, we need to extend the example above with logic to extract
-the field titles from the `JSONSchema`, filter and order the fields as specified in the `UISchema`.
+While rendering an array of objects as a table, displaying a proper header based on `JSONSchema` is tricky. First, you must extract the `title` from each node or the object's field name.
 
-This involves a bit of low level `AutoViews` apis -
+Moreover, it is needed to consider all structural rules applied for that schema, like [`UIHints`](/docs/entities/ui-schema#the-hints-ui-hint) or `pick` and `omit` [properties](/docs/basic/autoview#properties-of-the-autoview-component).
 
-- `extractItemUISchema` - extracts the `UISchama` for the items of an array
-- `createUISchema` - creates a default `UISchama`
-- `getHints` - returns the `hints` from the `UISchema`
-- `orderFields` - orders the field names from the `JSONSchema.items` using the `order` hint
+It was inconvenient to do it manually, even though we provided utils to extract `UIHints` and order fields according to rules. So we are introducing the `AutoHeaders` component.
 
-once we have the ordered headers `string[]`, we render the headers as `thead`.
+#### AutoHeaders
+
+To render a table with a header, you can find the `AutoHeaders` helpful component.
+
+This component requires you to path [`AutoViewProps`](/docs/basic/autoview#properties-of-the-autoview-component) and an optional:
+
+- `path`: the `JSONPointer` to object schema relative to its `props.schema`; if your schema type is `array`, then you might want to path `/items`. The default value is root: `''`.
+- `useAsValue`: possible values are `field` or `title`; by using it, you define what should be used as header value, either object's property name or schema's `title` field value.
+
+The `children` type is `(props: AutoViewProps) => JSX.Element;`.
+A function that would get a new `AutoViewProps` as an argument and would contain `data` as an `string[]` and a new `JSONSchema` for an array of strings.
 
 ```jsx
-import {
-    AutoViewProps,
-    AutoItems,
-    AutoFields,
-    orderFields,
-    getHints,
-    extractItemUISchema,
-    createUISchema
-} from "@autoviews/core";
-
-new ComponentsRepo("ArrayRepo")
-    .register("array", {
-        name: "tableComponent",
-        component: (props) => {
-            const headers = orderFields(
-                Object.keys((props.schema.items as any).properties),
-                getHints(extractItemUISchema(props.uiSchema ?? createUISchema()), "").order
-            ).map(
-                (field) => (props.schema?.items as any).properties[field].title
-            ) as string[];
-
-            return (
-                <table>
-                    <thead>
-                        <tr>
-                            {headers.map((header, i) => (
-                                <td key={i}>{header}</td>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <AutoItems {...props}/>
-                    </tbody>
-                </table>
-            )
-        }
-    })
-    .register("object", {
-        name: "tableRowComponent",
-        component: props => (
-            <tr>
-                <AutoFields {...props} render={
-                    (node) => <td>node</td>
-                }/>
-            </tr>
-        )
-    })
+// Having this schema
+const schema: CoreSchemaMetaSchema = {
+  type: 'object',
+  properties: {
+    foo: {type: 'string', title: 'Foo'},
+    bar: {type: 'string', title: 'Bar'},
+    baz: {type: 'number', title: 'Baz'}
+}
+//...
+<AutoHeaders schema={schema}>
+    {props => {
+        /*
+         * The new `props.data` would be `['Foo', 'Bar', 'Baz']`.
+         * And the new `props.schema` would complement this data
+        */
+        return <AutoItems {...props} />
+    }}
+</AutoHeaders>
 ```
+
+Let's look at full example of table with header.
+
+import {Demo} from '@site/src/components';
+import * as demo from '@site/src/examples/table-with-header';
+
+<Demo {...demo} />
