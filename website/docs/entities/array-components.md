@@ -110,8 +110,8 @@ the field titles from the `JSONSchema`, filter and order the fields as specified
 
 This involves a bit of low level `AutoViews` apis -
 
-- `extractItemUISchema` - extracts the `UISchama` for the items of an array
-- `createUISchema` - creates a default `UISchama`
+- `extractItemUISchema` - extracts the `UISchema` for the items of an array
+- `createUISchema` - creates a default `UISchema`
 - `getHints` - returns the `hints` from the `UISchema`
 - `orderFields` - orders the field names from the `JSONSchema.items` using the `order` hint
 
