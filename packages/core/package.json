@@ -27,8 +27,8 @@
     "json-pointer": "0.6.2"
   },
   "peerDependencies": {
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react": ">=16.14.0",
+    "react-dom": ">=16.14.0"
   },
   "publishConfig": {
     "access": "public"
