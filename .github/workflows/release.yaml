@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+      - alpha
+      - beta
+      - next
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -38,15 +41,7 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor}}@users.noreply.github.com"
 
-      - name: 🎓 Graduation
-        continue-on-error: true
-        id: graduation
-        run: yarn release --create-release github --conventional-graduate
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: 🚀 Release
-        if: ${{ steps.graduation.outcome == 'failure'  }}
         run: yarn release --create-release github
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
