@@ -1,6 +1,6 @@
 {
   "name": "@autoviews/core",
-  "version": "3.0.26",
+  "version": "4.0.0-alpha.0",
   "description": "TODO",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -27,8 +27,8 @@
     "json-pointer": "0.6.2"
   },
   "peerDependencies": {
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react": ">=16.14.0",
+    "react-dom": ">=16.14.0"
   },
   "publishConfig": {
     "access": "public"

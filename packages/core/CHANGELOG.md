@@ -3,125 +3,75 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-alpha.0](https://github.com/wix-incubator/autoviews/compare/@autoviews/core@3.0.22...@autoviews/core@4.0.0-alpha.0) (2022-10-25)
+
+### chore
+
+- **package.json:** use wide React peer dependency ([1c33b76](https://github.com/wix-incubator/autoviews/commit/1c33b767eb5cf2cb5142f60fbca078b9bb0b32b9))
+
+### BREAKING CHANGES
+
+- **package.json:** Wide react version
+
 ## 3.0.26 (2022-10-31)
 
 **Note:** Version bump only for package @autoviews/core
-
-
-
-
 
 ## 3.0.25 (2022-10-31)
 
 **Note:** Version bump only for package @autoviews/core
 
-
-
-
-
 ## 3.0.24 (2022-10-31)
 
 **Note:** Version bump only for package @autoviews/core
-
-
-
-
 
 ## 3.0.23 (2022-10-25)
 
 **Note:** Version bump only for package @autoviews/core
 
-
-
-
-
 ## 3.0.22 (2022-08-22)
 
 **Note:** Version bump only for package @autoviews/core
-
-
-
-
 
 ## 3.0.21 (2022-08-18)
 
 **Note:** Version bump only for package @autoviews/core
 
-
-
-
-
 ## 3.0.20 (2022-08-18)
 
 **Note:** Version bump only for package @autoviews/core
-
-
-
-
 
 ## 3.0.19 (2022-07-21)
 
 **Note:** Version bump only for package @autoviews/core
 
-
-
-
-
 ## 3.0.18 (2022-07-21)
 
 **Note:** Version bump only for package @autoviews/core
-
-
-
-
 
 ## 3.0.17 (2022-07-20)
 
 **Note:** Version bump only for package @autoviews/core
 
-
-
-
-
 ## 3.0.16 (2022-07-20)
 
 **Note:** Version bump only for package @autoviews/core
-
-
-
-
 
 ## 3.0.15 (2022-07-11)
 
 **Note:** Version bump only for package @autoviews/core
 
-
-
-
-
 ## 3.0.14 (2022-07-11)
 
 **Note:** Version bump only for package @autoviews/core
-
-
-
-
 
 ## 3.0.13 (2022-07-08)
 
 **Note:** Version bump only for package @autoviews/core
 
-
-
-
-
 ## 3.0.12 (2022-07-08)
 
 **Note:** Version bump only for package @autoviews/core
-
-
-
-
 
 ## 3.0.11 (2022-07-08)
 
