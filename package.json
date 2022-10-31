@@ -2,8 +2,7 @@
   "name": "@autoviews/root",
   "private": true,
   "workspaces": [
-    "packages/*",
-    "website"
+    "packages/*"
   ],
   "scripts": {
     "commit": "cz",
