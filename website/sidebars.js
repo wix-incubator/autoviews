@@ -69,7 +69,8 @@ module.exports = {
                 'examples/showcase',
                 'examples/onclick',
                 'examples/switch-repo',
-                'examples/table-with-header'
+                'examples/table-with-header',
+                'examples/layout'
             ]
         }
     ]

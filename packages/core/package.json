@@ -37,5 +37,8 @@
     "dist"
   ],
   "author": "AutoViews Team (https://github.com/wix-incubator/autoviews)",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@wixc3/react-board": "^2.1.3"
+  }
 }
