@@ -80,14 +80,3 @@ export default function App() {
 ## Quick start example
 
 [Full Example - Quick Start](/docs/examples/basic)
-
-## legacy to remove
-
-_ProTip: use one of [predefined repos](https://TODO), you can extend it for your needs later_.
-
-```tsx
-import {Demo} from '@site/src/components';
-import * as demo from '@site/src/examples/quickstart';
-
-<Demo {...demo} />;
-```

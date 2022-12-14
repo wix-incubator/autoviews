@@ -48,6 +48,6 @@ import {showcaseHomepage} from '@site/src/examples/showcase';
 
 4. **Your UI Schema**
 
-   The UI Schema adds another layer of hints that can be used by components to fine tune the rendered UI. UI Schema includes field ordering, grouping, component selection, field hiding and auto focus hints.
+   The UI Schema adds another layer of hints that can be used by components to fine tune the rendered UI. UI Schema includes field ordering/layouting, grouping, component selection, field hiding and auto focus hints.
 
    More about [the UI Schema](./docs/entities/ui-schema)
