@@ -29,7 +29,7 @@ export function getComponentOptions(
 }
 
 const stringifyRow = (arr: string[]) => `"${arr.join(' ')}"` + '\n';
-export function orderToTemplateAreas(order: UIHints['order']) {
+export function orderToTemplateAreas(order: UIHints['order']): string {
     if (!order) return '';
 
     if (isOrderFlat(order)) {
@@ -40,7 +40,7 @@ export function orderToTemplateAreas(order: UIHints['order']) {
         ...order.map(row => (typeof row === 'string' ? 1 : row.length))
     );
 
-    const result = order.reduce((acc, r) => {
+    const result = order.reduce<string>((acc, r) => {
         if (typeof r === 'string') {
             return acc + stringifyRow(new Array(columnsCount).fill(r));
         }
