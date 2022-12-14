@@ -123,3 +123,13 @@ export function getDefaultHints(): UIHints {
         uiGroups: []
     };
 }
+
+export function isOrderFlat(order: UIHints['order']): order is string[] {
+    if (!order) return false;
+    return order.every(item => typeof item === 'string');
+}
+
+export function flatUnique(order: UIHints['order']): string[] {
+    if (!order) return [];
+    return [...new Set(order.flat())];
+}

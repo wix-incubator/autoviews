@@ -423,6 +423,45 @@ describe('uiSchema', () => {
                 );
             });
 
+            it('should order with layout-order definition', () => {
+                const initial = createUISchema();
+                const changed = createUISchemaAccessor(initial, '')
+                    .setHints(() => ({
+                        order: [
+                            ['second', 'third', 'third'],
+                            ['.', 'first', 'first']
+                        ]
+                    }))
+                    .get();
+
+                render(
+                    <RepositoryProvider components={repo}>
+                        <AutoView
+                            schema={objectSchema}
+                            uiSchema={changed}
+                            data={{first: '', second: '', third: ''}}
+                        />
+                    </RepositoryProvider>
+                );
+
+                const fieldset = screen.getByTestId('#FIELDSET');
+                const textboxes = within(fieldset).getAllByRole('textbox');
+                const [second, third, first] = Array.from(textboxes);
+
+                expect(first).toHaveAttribute(
+                    'data-automation-id',
+                    '/first#NATIVE_TEXT_INPUT'
+                );
+                expect(second).toHaveAttribute(
+                    'data-automation-id',
+                    '/second#NATIVE_TEXT_INPUT'
+                );
+                expect(third).toHaveAttribute(
+                    'data-automation-id',
+                    '/third#NATIVE_TEXT_INPUT'
+                );
+            });
+
             it('should order fields in array of objects', () => {
                 const initial = createUISchema();
                 const changed = createUISchemaAccessor(initial, '/items')
@@ -491,7 +530,7 @@ describe('uiSchema', () => {
                 );
             });
 
-            it(`should not throw if order contains field which uiSchema doesn't have`, () => {
+            it(`should not throw if order contains field which JSONSchema doesn't have`, () => {
                 const initial = createUISchema();
                 const changed = createUISchemaAccessor(initial, '')
                     .setHints(() => ({order: ['unknown']}))

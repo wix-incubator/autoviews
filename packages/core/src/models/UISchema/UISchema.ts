@@ -12,7 +12,7 @@ export type AccessorType =
     | 'object';
 
 export interface UIHints {
-    order?: string[];
+    order?: (string | string[])[];
     hidden?: string[];
     uiGroups?: UIGroup[];
     autoFocus?: JSONPointer;

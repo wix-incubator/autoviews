@@ -6,7 +6,7 @@ import {
     ObjectSchemaAsArrayRules
 } from '../utils';
 import {JSONPointer} from '../repository';
-import {CoreSchemaMetaSchema} from '../models';
+import {CoreSchemaMetaSchema, flatUnique} from '../models';
 
 import {getHints} from './utils';
 import {AutoViewProps} from './auto-view';
@@ -61,7 +61,7 @@ export const AutoHeaders = (props: AutoHeadersProps) => {
     );
 
     const rules: ObjectSchemaAsArrayRules = {
-        order,
+        order: flatUnique(order),
         pick: props.pick,
         omit: props.omit ?? hidden
     };
