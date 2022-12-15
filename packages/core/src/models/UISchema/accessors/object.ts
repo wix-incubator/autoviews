@@ -1,5 +1,6 @@
 import {
     ComponentOptions,
+    Order,
     UIGroup,
     UIHintsOverrides,
     UISchema
@@ -27,8 +28,8 @@ export interface ObjectAccessorInterface extends BaseAccessorInterface {
     getGroupPosition(groupName: string): number;
     isPropertyInGroup(groupName: string, prop: string): boolean;
 
-    setOrder(iterator: (order: string[]) => string[]): this;
-    getOrder(): string[] | undefined;
+    setOrder(iterator: (order: Order) => Order): this;
+    getOrder(): Order | undefined;
     addPropertyToOrder(propertyName: string, position?: number): this;
     removePropertyFromOrder(propertyName: string): this;
     setPropertyPositionInOrder(propertyName: string, position: number): this;
@@ -202,7 +203,7 @@ export class ObjectAccessor
         return targetGroup ? targetGroup.fields.indexOf(property) >= 0 : false;
     }
 
-    public setOrder(iterator: (order: string[]) => string[]) {
+    public setOrder(iterator: (order: Order) => Order) {
         ensureUIHints(this.uiSchemaClone.hints, this.path);
         const hints = this.getHints();
         const {order = []} = hints;

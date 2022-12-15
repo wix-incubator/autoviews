@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "login": {
+      "type": "string"
+    },
+    "age": {
+      "type": "number"
+    },
+    "active": {
+      "type": "boolean"
+    }
+  }
+}

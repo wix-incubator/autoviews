@@ -11,8 +11,9 @@ export type AccessorType =
     | 'array'
     | 'object';
 
+export type Order = Array<string | string[]>;
 export interface UIHints {
-    order?: string[];
+    order?: Order;
     hidden?: string[];
     uiGroups?: UIGroup[];
     autoFocus?: JSONPointer;

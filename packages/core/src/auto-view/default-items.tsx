@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {allFields, buildJsonPointer, filterAndOrderFields} from '../utils';
-import {CoreSchemaMetaSchema} from '../models';
+import {CoreSchemaMetaSchema, flatUnique} from '../models';
 
 import {AutoView, AutoViewProps} from './auto-view';
 import {getHints} from './utils';
@@ -35,7 +35,7 @@ export function autoFieldsProps(
         ), // if schema has additionalProperties, take fields from `data`
         pick,
         omit ?? hidden,
-        order
+        flatUnique(order)
     );
 
     return fields.map(field => ({

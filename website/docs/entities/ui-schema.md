@@ -14,22 +14,22 @@ for rendering. To switch layouts, [replacing a component repository](/docs/entit
 
 ## Properties of `UISchema`
 
-| Name                                                 | Type                     | Default Value | Description                                                                                                                                                          |
-| ---------------------------------------------------- | ------------------------ | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `hints`                                              | `UIHintsOverrides`       | `{}`          | Hints to modify                                                                                                                                                      |
-| `hints[pointer:string]`                              | `UIHints`                |               | Hints to modify                                                                                                                                                      |
-| `hints[pointer:string] .order`                       | `string[]`               |               | Defines the desired order of the fields to be rendered for an `object`. It is up to [the object component](/docs/entities/object-components) to use the order hints. |
-| `hints[pointer:string] .hidden`                      | `string[]`               |               | Defines which fields should be hidden. It is up to [the object component](/docs/entities/object-components) to use the hidden hints.                                 |
-| `hints[pointer:string] .uiGroups`                    | `UIGroup[]`              |               | Defines field groups. It is up to [the object component](/docs/entities/object-components) to support field groups.                                                  |
-| `hints[pointer:string] .uiGroups.name`               | `string`                 |               | Defines the name of a fields group.                                                                                                                                  |
-| `hints[pointer:string] .uiGroups.title`              | `string`                 |               | Defines the title of a fields group.                                                                                                                                 |
-| `hints[pointer:string] .uiGroups.fields`             | `string[]`               |               | Defines which `object` fields are included in the group.                                                                                                             |
-| `hints[pointer:string] .autoFocus`                   | `JSONPointer`            |               | Defines which component should be focused when first rendering the form. It is up to the components to implement support for Autofocus.                              |
-| `components`                                         | `RepoPointersCollection` | `{}`          | Defines component overrides and component options                                                                                                                    |
-| `components[name: string]`                           | `RepoPointers`           |               | The name of the Components Repository to apply the component hints to.                                                                                               |
-| `compoennts[name: string] [pointer: string]`         | `ComponentOptions`       |               | The location in the JSONSchema using JSONPointer to apply the component override                                                                                     |
-| `compoennts[name: string] [pointer: string].name`    | `string`                 |               | The name of the component to use at the above location, which has to be available in the above component repository                                                  |
-| `compoennts[name: string] [pointer: string].options` | `any`                    |               | Options to pass to the component at the above location                                                                                                               |
+| Name                                                 | Type                     | Default Value | Description                                                                                                                                                                        |
+| ---------------------------------------------------- | ------------------------ | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `hints`                                              | `UIHintsOverrides`       | `{}`          | Hints to modify                                                                                                                                                                    |
+| `hints[pointer:string]`                              | `UIHints`                |               | Hints to modify                                                                                                                                                                    |
+| `hints[pointer:string] .order`                       | `(string/string[])[]`    |               | Defines the desired order and/or layout of the fields to be rendered for an `object`. It is up to [the object component](/docs/entities/object-components) to use the order hints. |
+| `hints[pointer:string] .hidden`                      | `string[]`               |               | Defines which fields should be hidden. It is up to [the object component](/docs/entities/object-components) to use the hidden hints.                                               |
+| `hints[pointer:string] .uiGroups`                    | `UIGroup[]`              |               | Defines field groups. It is up to [the object component](/docs/entities/object-components) to support field groups.                                                                |
+| `hints[pointer:string] .uiGroups.name`               | `string`                 |               | Defines the name of a fields group.                                                                                                                                                |
+| `hints[pointer:string] .uiGroups.title`              | `string`                 |               | Defines the title of a fields group.                                                                                                                                               |
+| `hints[pointer:string] .uiGroups.fields`             | `string[]`               |               | Defines which `object` fields are included in the group.                                                                                                                           |
+| `hints[pointer:string] .autoFocus`                   | `JSONPointer`            |               | Defines which component should be focused when first rendering the form. It is up to the components to implement support for Autofocus.                                            |
+| `components`                                         | `RepoPointersCollection` | `{}`          | Defines component overrides and component options                                                                                                                                  |
+| `components[name: string]`                           | `RepoPointers`           |               | The name of the Components Repository to apply the component hints to.                                                                                                             |
+| `compoennts[name: string] [pointer: string]`         | `ComponentOptions`       |               | The location in the JSONSchema using JSONPointer to apply the component override                                                                                                   |
+| `compoennts[name: string] [pointer: string].name`    | `string`                 |               | The name of the component to use at the above location, which has to be available in the above component repository                                                                |
+| `compoennts[name: string] [pointer: string].options` | `any`                    |               | Options to pass to the component at the above location                                                                                                                             |
 
 ## the `components` overrides
 
@@ -165,7 +165,7 @@ The Hints can be applied in twp ways -
 
 1. without ui groups
 
-- `order` defines fields to be rendered in a specific order
+- `order` defines fields to be rendered in a specific order, it is also possible to provide 2d array of strings in `order` and use `orderToTemplateAreas` utility for nice use within CSS Grid: [example](/docs/examples/layout)
 - `hidden` defines fields to be hidden
 - `autofocus` defines a field to be autofocused
 
