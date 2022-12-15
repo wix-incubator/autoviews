@@ -3,37 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 4.0.3 (2022-11-04)
+## 4.0.4 (2022-12-15)
 
 **Note:** Version bump only for package @autoviews/core
 
+## 4.0.3 (2022-11-04)
 
-
-
+**Note:** Version bump only for package @autoviews/core
 
 ## 4.0.2 (2022-10-31)
 
 **Note:** Version bump only for package @autoviews/core
 
-
-
-
-
 ## 4.0.1 (2022-10-31)
 
 **Note:** Version bump only for package @autoviews/core
 
-
-
-
-
 # 4.0.0 (2022-10-31)
 
 **Note:** Version bump only for package @autoviews/core
-
-
-
-
 
 # [4.0.0-alpha.0](https://github.com/wix-incubator/autoviews/compare/@autoviews/core@3.0.22...@autoviews/core@4.0.0-alpha.0) (2022-10-25)
 
