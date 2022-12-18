@@ -5,7 +5,7 @@ import * as demo from '@site/src/examples/layout';
 
 It is possible to define and persist layout settings using `order` field in [UIHints](/docs/entities/ui-schema#the-hints-ui-hint).
 
-By default order is an array of strings, simply defining order of fields in the object type. Here is [basic documentations](/docs/entities/ui-schema#the-hints-ui-hint) on order.
+By default [order](/docs/entitiesui-schema#example---the-order-and-hidden-hints) is an array of strings, simply defining order of fields in the object type.
 
 However order could be also a mix of strings and strings arrays. Like `['field-1', ['field-2', 'field-4'], 'field-3']`. It is very neat to convert that type of defining the `order` into CSS Grid definitions, specifically `grid-template-areas` and then, when rendering children it becomes easy to set `grid-area` style with the current field name.
 

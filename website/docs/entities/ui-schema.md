@@ -161,7 +161,7 @@ The instructions, or hints, are field ordering, field hiding, grouping or autofo
 
 The `hints` UI hint defines that for a specific `JSONPointer` in the data `JSONSchema` specific instructions should be applied.
 
-The Hints can be applied in twp ways -
+The Hints can be applied in two ways -
 
 1. without ui groups
 
