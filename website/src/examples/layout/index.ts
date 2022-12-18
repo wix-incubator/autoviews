@@ -4,9 +4,11 @@ import schema from './schema.json?raw-loader';
 import repo from './repo.tsx?raw-loader';
 import app from './app.tsx?raw-loader';
 import data from './data.ts?raw-loader';
+import UISchema from './UISchema.ts?raw-loader';
 
 export const files: DemoFiles = {
     '/App.tsx': app,
+    '/UISchema.js': UISchema,
     '/repo.tsx': repo,
     '/schema.json': schema,
     '/data.js': data
