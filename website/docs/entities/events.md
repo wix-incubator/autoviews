@@ -18,7 +18,7 @@ This event, besides `schemaPointer` and `pointer` provides `data` field.
 
 AutoViews provides utilities that can create `AutoEventHandler` that contains `JSONPatch`.
 
-In this example we are using `changeEventHandler` untility to construct `onChange` with `JSONPatch`
+In this example we are using `changeEventHandler` utility to construct `onChange` with `JSONPatch`
 
 ```js
 import {changeEventHandler} from '@autoviews/core';
