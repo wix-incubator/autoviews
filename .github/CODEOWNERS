@@ -3,3 +3,6 @@
 
 # configs
 .github @denysdovhan
+
+# Hack for Dependabot - do not assign any reviewer automatically
+yarn.lock
