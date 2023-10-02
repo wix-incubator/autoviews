@@ -4,7 +4,8 @@ updates:
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: 'monthly'
+      interval: 'daily'
+    open-pull-requests-limit: 25
 
   # Maintain dependencies for npm
   - package-ecosystem: 'npm'
@@ -16,9 +17,3 @@ updates:
       # Ignore major updates for npm packages
       - dependency-name: '*'
         update-types: ['version-update:semver-major']
-  # Maintain dependencies for GitHub Actions
-  - package-ecosystem: 'github-actions'
-    directory: '/'
-    schedule:
-      interval: 'daily'
-    open-pull-requests-limit: 25
