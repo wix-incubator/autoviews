@@ -2083,9 +2083,9 @@
     pretty-format "^29.0.0"
 
 "@types/json-pointer@^1.0.31":
-  version "1.0.32"
-  resolved "https://registry.yarnpkg.com/@types/json-pointer/-/json-pointer-1.0.32.tgz#590d959c768c32b6325bd245331de53875a9c956"
-  integrity sha512-8zQyTa5Ot59/yI6yYZ+xA4RK70vlgJ8JdZEfPq1LobU2PGd2j4ss5vj3eTRUtAgeO/xLkhlR9ORaeW5Kan+aBw==
+  version "1.0.33"
+  resolved "https://registry.yarnpkg.com/@types/json-pointer/-/json-pointer-1.0.33.tgz#aab6dffaf5ad922b97df5fee13cad9b5fb0a7b19"
+  integrity sha512-kPe5iIDL4ewtKy/hNH91VwHi6+z0MtitJM/KPFzbbRpR8fLXXcmj3cRLJz0vEJZyzNsl1gu7LBzWJG9KHf9mVw==
 
 "@types/json-schema@^7.0.9":
   version "7.0.11"
