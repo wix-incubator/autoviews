@@ -2283,17 +2283,17 @@
   resolved "https://registry.yarnpkg.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz#756641adb587851b5ccb3e095daf27ae581c8406"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
-"@wixc3/board-core@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@wixc3/board-core/-/board-core-2.4.0.tgz#cfa30dc99d4fe92e62de14568a57387f0faac6a0"
-  integrity sha512-dtnz0MrY8ZC79g4nNPnEUWnUVrB2opw3/NTANExTvmYNaQgM6MGLfcnTeBqZ3pS0T1UXm2HvPlKo4my5NfWiLg==
+"@wixc3/board-core@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@wixc3/board-core/-/board-core-2.4.1.tgz#0a1f6f097e13148972d6b0a2f026cdb348f8e6c5"
+  integrity sha512-ARqNpMTLToWk3ToZANFEjsuq1tPXyPchAuwWjw10mubQHXpXXWjNoqXBF++1H0dW8Fef2+0Km2R/UQiU8FWVQw==
 
 "@wixc3/react-board@^2.1.3":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@wixc3/react-board/-/react-board-2.4.0.tgz#fb6633e6cf382f492bb91dee1c4c9ccb554d661b"
-  integrity sha512-qtkcWHoihrZ9UQohhHn8lpw3kPComawjQqMYO+bM8lw5pm8XOoG+DRhKhGp/D7Ef4Wwc7crcmpEuZDOJE3eW6w==
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@wixc3/react-board/-/react-board-2.4.1.tgz#208f4c1ae5aaa98760d7d8c500e8d9f41a48e9ef"
+  integrity sha512-oF+z9L5Mpt7Miq6xIIwrSgYsA853d72FhpPStCwbKyvXn4y3oiLDgUrGYFGWqWzXE0/VBUjyV50TbFS2f7DHrg==
   dependencies:
-    "@wixc3/board-core" "^2.4.0"
+    "@wixc3/board-core" "^2.4.1"
 
 "@yarnpkg/lockfile@^1.1.0":
   version "1.1.0"
