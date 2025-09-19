@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.0.13 (2025-09-19)
+
+**Note:** Version bump only for package @autoviews/core
+
 ## 4.0.12 (2023-10-02)
 
 **Note:** Version bump only for package @autoviews/core
