@@ -20,14 +20,15 @@ jobs:
       - name: ⬇️ Checkout Repo
         uses: actions/checkout@v5
 
-      - name: 📦 Enable Corepack
-        run: corepack enable
-
       - name: ⬢ Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: '*'
-          cache: yarn
+          node-version-file: '.nvmrc'
+
+      - name: 📦 Enable Corepack and install dependencies
+        run: |
+          corepack enable
+          yarn install --immutable
 
       - name: 🔑 Setup NPM
         run: |
