@@ -22,11 +22,14 @@ jobs:
       - name: ⬢ Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: '*'
-          cache: yarn
+          node-version-file: '.nvmrc'
+          check-latest: true
+          package-manager-cache: false
 
-      - name: 📦 Install Packages
-        run: yarn install --frozen-lockfile
+      - name: 📦 Enable Corepack and install dependencies
+        run: |
+          corepack enable
+          yarn install --immutable
 
       - name: 🧪 Run Tests
         run: yarn test
