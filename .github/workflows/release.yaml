@@ -26,6 +26,9 @@ jobs:
           node-version: '*'
           cache: yarn
 
+      - name: 📦 Enable Corepack
+        run: corepack enable
+
       - name: 🔑 Setup NPM
         run: |
           npm set "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}"
