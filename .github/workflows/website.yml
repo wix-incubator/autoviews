@@ -29,6 +29,8 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version-file: '.nvmrc'
+          check-latest: true
+          package-manager-cache: false
 
       - name: 📦 Enable Corepack and install dependencies
         run: |
