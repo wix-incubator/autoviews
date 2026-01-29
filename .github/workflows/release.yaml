@@ -23,15 +23,18 @@ jobs:
       - name: ⬢ Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '*'
-          cache: yarn
+          node-version-file: '.nvmrc'
+          check-latest: true
+          package-manager-cache: false
 
       - name: 🔑 Setup NPM
         run: |
           npm set "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}"
 
-      - name: 📦 Install Packages
-        run: yarn install --frozen-lockfile
+      - name: 📦 Enable Corepack and install dependencies
+        run: |
+          corepack enable
+          yarn install --immutable
 
       - name: ⚙️ Build Packages
         run: yarn build
